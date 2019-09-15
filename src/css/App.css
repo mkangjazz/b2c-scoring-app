@@ -1,0 +1,320 @@
+@import-normalize;
+
+html,
+body,
+.wrapper {
+}
+
+html {
+	background-color: #fff;
+}
+
+body {
+	font-family: 'PT Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	display: block;
+	margin: 0 auto;
+	max-width: 800px;
+}
+
+strong {
+	font-weight: bold;
+}
+
+ul {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	color: #333;
+	font-weight: bold;
+	margin: 0;
+	padding: 20px 10px;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+
+canvas {
+	border: 1px solid #ccc;
+	display: block;
+	margin: 0 auto;
+}
+
+.nav-game-selection {
+	border-left: 10px solid #fff;
+	border-right: 10px solid #fff;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.nav-game-selection a {
+	background-color: #333;
+	box-sizing: border-box;
+	display: block;
+	text-decoration: none;
+	position: relative;
+	width: 100%;
+}
+
+.nav-game-selection a:first-child {
+	border-bottom: 10px solid #fff;
+}
+
+.nav-game-selection img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.list-panel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list-tiles,
+.list-panel {
+	border-top: 1px solid #ccc;
+}
+
+.list-tiles li,
+.list-panel li {
+	border-bottom: 1px solid #ccc;
+}
+
+.list-tiles button,
+.list-panel a {
+	background-color: #fff;
+	border: none;
+	color: inherit;
+	display: block;
+	font-size: 15px;
+	margin: 0;
+	max-width: 100%;
+	padding: 10px 0 10px 10px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.list-tiles button:active,
+.list-panel a:active {
+	background-color: #f8f8f8;
+}
+
+.list-tiles button {
+	width: 100%;
+}
+
+.list-tiles span,
+.list-panel span {
+	display: inline-block;
+	font-size: inherit;
+	margin: 0 10px 0 0;
+	text-align: right;
+	vertical-align: middle;
+	width: 30px;
+}
+
+.list-tiles img,
+.list-panel img {
+	display: inline-block;
+	height: 30px;
+	margin: 0;
+	vertical-align: middle;
+	width: 30px;
+}
+
+.list-panel.game-list img {
+	height: 110px;
+	margin: 0 15px 0 0;
+	width: 110px;
+}
+
+.list-panel img + img {
+	margin-left: 0;
+}
+
+.list-panel a:after {
+	content:"";
+	border-right: 2px solid #999;
+	border-top: 2px solid #999;
+	display: block;
+	height: 10px;
+	margin: -5px 0 0;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: rotate(45deg);
+	width: 10px;
+}
+
+header {
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+header h1 {
+	padding: 20px 0;
+	text-align: center;
+}
+
+.link-back {
+	color: inherit;
+	left: 10px;
+	margin: -.5em 0 0;
+	position: absolute;
+	top: 50%;
+	text-decoration: none;
+}
+
+.link-back:before {
+	content:"";
+	display: inline-block;
+	border-left: 2px solid #666;
+	border-top: 2px solid #666;
+	height: 10px;
+	transform: rotate(-45deg);
+	width: 10px;
+}
+
+
+
+
+.button-tile {
+	background-color: #eee;
+	border: 1px solid #333;
+	display: inline-block;
+	height: 0px;
+	margin: 0 0 10px;
+	padding: 100% 0 0;
+	position: relative;
+	width: 100%;
+}
+
+.button-tile span {
+	font-size: 14px;
+	font-weight: bold;
+	left: 0;
+	margin: -.5em 0 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 50%;
+}
+
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.city-score-table th {
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.city-score-table td {
+	border-top: 1px solid #ccc;
+	vertical-align: top;
+}
+
+.city-grid {
+	font-size: 0;
+	margin: 0 0 48px;
+	padding: 0;
+	position: relative;
+}
+
+.city-grid li {
+	background-color: #f5f5f5;
+	border: 2px solid #fff;
+	box-sizing: border-box;
+	display: inline-block;
+	font-size: 16px;
+	position: relative;
+}
+
+.city-grid li button {
+	background: none;
+	border: none;
+	bottom: 0;
+	display: block;
+	height: 100%;
+	font-size: 14px;
+	left: 0;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+    width: 100%;
+}
+
+.city-grid.four-by-four li {
+	padding: 25% 0 0;
+	width: 25%;
+}
+
+
+
+
+.modal-wrapper {
+    align-items: center;
+    background-color: rgba(0,0,0, .8);
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+    left: 0;
+	position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999;
+}
+
+.modal {
+	background-color: #fff;
+	max-width: 600px;
+	padding: 32px;
+	width: 75%;
+}
+
+
+
+@media screen and (min-width: 768px){
+	.nav-game-selection {
+		text-align: justify;
+		white-space: nowrap;
+	}
+
+	.nav-game-selection a {
+		border-bottom: none;
+		border-top: none;
+		font-size: 0;
+		display: inline-block;
+		vertical-align: middle;
+		width: 50%;
+	}
+	.nav-game-selection a:first-child {
+		border-bottom: none;
+	}
+}
