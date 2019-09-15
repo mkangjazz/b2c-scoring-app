@@ -1,6 +1,6 @@
 import utility from './utility';
 
-var calculateScore = function (cities){
+var calculateScore = function(cities){
 
     function numTiles(tiles, tileType){
         var genericType = utility.specificToGenericToken(tileType);
@@ -79,10 +79,6 @@ var calculateScore = function (cities){
         return count;
     }
 
-    function shopGroups(){
-
-    }
-
     function setCounts(){
         cities.map(city => {
             city["score"]["numParks"] = numTiles(city.tiles, "park");
@@ -95,17 +91,14 @@ var calculateScore = function (cities){
             city["score"]["uniqueTaverns"] = uniqueTaverns(city.tiles);
             city["score"]["housesNextToFactories"] = housesNextToFactories(city.tiles);
             city["score"]["officesNextToTaverns"] = officesNextToTaverns(city.tiles);
-            // city["score"]["parkGroups"] = '';
-            // city["score"]["shopGroups"] = shopGroups(city.tiles);
         });
     }
-
 
     function totalScoreFactories(cities, city){
         // var count = getTileCount(city, 'factory');
         // var multiplier;
 
-        console.log(cities, city);
+        // console.log(cities, city);
 
         // if(calculateTileLeaderStatus(city, 'factory') === 'first'){
         //     multiplier = 4;
@@ -290,6 +283,65 @@ var calculateScore = function (cities){
         return score;
     }
 
+    function totalScoreShops(city){
+        var score = 0;
+
+        var shops = city.tiles.filter(obj => obj["type"] === "shop");
+        var soloShops = [];
+        var shopsThatTouchAShop = [];
+        var shopGroups = [];
+        
+// for checking shop rows... should check all the way down or up the row/col
+// given one spot, check surrounding for adjacent
+// if one exists, continue down that row to gather all
+// show all the options? choose the most optimal one?
+// and then remove itself from the adjacentShops list for no double counting?
+
+        for(var i=0; i < shops.length; i++){
+            (function(index){
+                var shopGroup = [];
+                var adjacentTiles = utility.getAdjacentTiles(city.tiles, shops[index], false),
+                    adjacentShops = adjacentTiles.filter(obj => obj["type"] === 'shop');
+
+                if(adjacentShops.length > 0){
+                    shopsThatTouchAShop.push(shops[index].number);
+                } else {
+                    soloShops.push(shops[index].number);
+                }
+            }(i));
+        }
+
+        // 2 / 5 / 10 / 16
+        // shops score when connected in a straight line (row or column)
+        // 5 points for two connected
+        // 10 points for three connected in a straight line
+        // 16 points for four connected shops in a straight line
+        
+        // if lines of shops cross (L or T), each tile can only be counted for one of the sets        
+        // score each set of shops separately
+        
+        // get all connected stores (not omni, only row/col)
+        //     figure out which scoring is optimal
+        //         longest row up to 4 / 3 / 2
+        //         before making any other rows/cols
+                
+        console.log(shopsThatTouchAShop, soloShops);
+
+        function soloShopScore(num){
+            var score = 0;
+
+            score = num * 2;
+
+            return score;
+        }
+
+        score += soloShopScore(soloShops.length);
+
+        return score;
+    }
+
+
+
     function setTotals(){
         cities.map(city => {
             city["score"]["factoryMultiplier"] = 0;
@@ -298,7 +350,7 @@ var calculateScore = function (cities){
             city["score"]["totalScoreOffices"] = totalScoreOffices(city);
             city["score"]["totalScoreHouses"] = totalScoreHouses(city);
             city["score"]["totalScoreFactories"] = totalScoreFactories(cities, city);
-            city["score"]["totalScoreShops"] = 0;
+            city["score"]["totalScoreShops"] = totalScoreShops(city);
             city["score"]["totalScoreTaverns"] = 0;
         });
     }
