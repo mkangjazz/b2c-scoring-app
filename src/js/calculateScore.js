@@ -285,47 +285,118 @@ var calculateScore = function(cities){
 
     function totalScoreShops(city){
         var score = 0;
-
         var shops = city.tiles.filter(obj => obj["type"] === "shop");
-        var soloShops = [];
         var shopsThatTouchAShop = [];
         var shopGroups = [];
-        
-// for checking shop rows... should check all the way down or up the row/col
-// given one spot, check surrounding for adjacent
-// if one exists, continue down that row to gather all
-// show all the options? choose the most optimal one?
-// and then remove itself from the adjacentShops list for no double counting?
+        var shopGroupsHorizontal = [];
+        var shopGroupsVertical = [];
+        var groupedShopGroups = [];
+        var groupedShopGroupsHorizontal = [];
+        var groupedShopGroupsVertical = [];
+        var soloShops = [];
 
-        for(var i=0; i < shops.length; i++){
-            (function(index){
-                var shopGroup = [];
-                var adjacentTiles = utility.getAdjacentTiles(city.tiles, shops[index], false),
-                    adjacentShops = adjacentTiles.filter(obj => obj["type"] === 'shop');
+        function groupAdjacentShops(index, arr){
+            var shopGroup = [];
+            var shopGroupHorizontal = [];
+            var shopGroupVertical = [];
+            var adjacentTiles = utility.getAdjacentTiles(arr, arr[index], false),
+                adjacentShops = adjacentTiles.filter(obj => obj["type"] === 'shop'),
+                adjacentShopsHorizontal = adjacentShops.filter(obj => obj["y"] === arr[index]["y"]),
+                adjacentShopsVertical = adjacentShops.filter(obj => obj["x"] === arr[index]["x"]);
 
-                if(adjacentShops.length > 0){
-                    shopsThatTouchAShop.push(shops[index].number);
-                } else {
-                    soloShops.push(shops[index].number);
+            if(adjacentShops.length > 0){
+                shopsThatTouchAShop.push(arr[index].number);
+
+                if(adjacentShopsHorizontal.length > 0){
+                    shopGroupHorizontal.push(arr[index].number);
+                    adjacentShopsHorizontal.map(obj => shopGroupHorizontal.push(obj.number));
+                    shopGroupsHorizontal.push(shopGroupHorizontal);            
                 }
-            }(i));
+                
+                if(adjacentShopsVertical.length > 0){
+                    shopGroupVertical.push(arr[index].number);
+                    adjacentShopsVertical.map(obj => shopGroupVertical.push(obj.number));
+                    shopGroupsVertical.push(shopGroupVertical);
+                }
+
+                if(shopGroup.length > 0){
+                    shopGroups.push(shopGroup);
+                }
+            } else {
+                soloShops.push(shops[index].number);
+            }
+
+            return;
         }
 
-        // 2 / 5 / 10 / 16
-        // shops score when connected in a straight line (row or column)
-        // 5 points for two connected
-        // 10 points for three connected in a straight line
-        // 16 points for four connected shops in a straight line
-        
-        // if lines of shops cross (L or T), each tile can only be counted for one of the sets        
-        // score each set of shops separately
-        
-        // get all connected stores (not omni, only row/col)
-        //     figure out which scoring is optimal
-        //         longest row up to 4 / 3 / 2
-        //         before making any other rows/cols
-                
-        console.log(shopsThatTouchAShop, soloShops);
+        function groupArray(arr){
+            var grouping;
+
+            function reducer(accumulator, currentValue){
+                if(accumulator.some(v => currentValue.indexOf(v) >= 0)){
+                    for(var i = 0; i < currentValue.length; i++){
+                        (function(index){
+                            if(!(accumulator.includes(currentValue[index]))){
+                                accumulator.push(currentValue[index]);
+                            }
+                        }(i));
+                    }
+                }
+
+                return accumulator;
+            }
+
+            grouping = arr.reduce(reducer, arr[0]);
+
+            return grouping;
+        }
+
+        function removeGroupedShops(arrayA, arrayB){
+            var filteredArray = [];
+            var flatGrouping = arrayB.reduce(function(accumulator, currentValue) {
+                return accumulator.concat(currentValue);
+            }, []);
+
+            arrayA.forEach((subArray) => {
+                if(!flatGrouping.includes(subArray[0])){
+                    filteredArray.push(subArray);
+                }
+            });
+
+            return filteredArray;
+        }
+
+        for(var i=0; i < shops.length; i++){
+            groupAdjacentShops(i, shops);
+        }
+
+        function cleanUpGroups(){
+            console.log("clean up shop groups");
+
+            while(shopGroupsHorizontal.length > 0){
+                groupedShopGroupsHorizontal.push(groupArray(shopGroupsHorizontal));
+                shopGroupsHorizontal = removeGroupedShops(shopGroupsHorizontal, groupedShopGroupsHorizontal);
+            }
+    
+            while(shopGroupsVertical.length > 0){
+                groupedShopGroupsVertical.push(groupArray(shopGroupsVertical));
+                shopGroupsVertical = removeGroupedShops(shopGroupsVertical, groupedShopGroupsVertical);
+            }
+        }
+
+        function reGroup(){
+            // optimization theory
+                // the fewer the groups, the higher the score
+                // because that implies each group has a higher number of shops
+            // starting from a list of shopsTouchingShops
+            // figure out the available groupings
+            // vertically and horizontally
+
+            cleanUpGroups();
+
+            // console.log(shopGroupsHorizontal, shopGroupsVertical);
+            console.log(groupedShopGroupsHorizontal, groupedShopGroupsVertical);
+        }
 
         function soloShopScore(num){
             var score = 0;
