@@ -30,52 +30,57 @@ var utility = (function(){
     }
   }
 
-  function getAdjacentTiles(tiles, tile, isOmniDirectional){
+  function getAdjacentTiles(tiles, tile, isOmniDirectional, direction){
     var adjacentTiles = [];
+    var adjacentTileObj = {};
 
-    var n = tiles.find(
+    adjacentTileObj.n = tiles.find(
       obj => (obj["x"] === tile["x"] && obj["y"] === tile["y"] - 1)
     );
 
-    var e = tiles.find(
+    adjacentTileObj.e = tiles.find(
       obj => (obj["x"] === tile["x"]+1 && obj["y"] === tile["y"])
     );
 
-    var s = tiles.find(
+    adjacentTileObj.s = tiles.find(
       obj => (obj["x"] === tile["x"] && obj["y"] === tile["y"] + 1)
     );
 
-    var w = tiles.find(
+    adjacentTileObj.w = tiles.find(
       obj => (obj["x"] === tile["x"] - 1 && obj["y"] === tile["y"])
     );
 
-    adjacentTiles.push(n);
-    adjacentTiles.push(e);
-    adjacentTiles.push(s);
-    adjacentTiles.push(w);
+    adjacentTiles.push(adjacentTileObj.n);
+    adjacentTiles.push(adjacentTileObj.e);
+    adjacentTiles.push(adjacentTileObj.s);
+    adjacentTiles.push(adjacentTileObj.w);
 
     if(isOmniDirectional){
-      var ne = tiles.find(
+      adjacentTileObj.ne = tiles.find(
         obj => (obj["x"] === tile["x"] + 1 && obj["y"] === tile["y"] - 1)
       );
   
-      var nw = tiles.find(
+      adjacentTileObj.nw = tiles.find(
         obj => (obj["x"] === tile["x"] - 1 && obj["y"] === tile["y"] - 1)
       );
   
-      var se = tiles.find(
+      adjacentTileObj.se = tiles.find(
         obj => (obj["x"] === tile["x"] + 1 && obj["y"] === tile["y"] + 1)
       );
   
-      var sw = tiles.find(
+      adjacentTileObj.sw = tiles.find(
         obj => (obj["x"] === tile["x"] - 1 && obj["y"] === tile["y"] + 1)
       );
 
-      adjacentTiles.push(ne);
-      adjacentTiles.push(nw);
-      adjacentTiles.push(se);
-      adjacentTiles.push(sw);
+      adjacentTiles.push(adjacentTileObj.ne);
+      adjacentTiles.push(adjacentTileObj.nw);
+      adjacentTiles.push(adjacentTileObj.se);
+      adjacentTiles.push(adjacentTileObj.sw);
     }
+
+    if (direction) {
+      return adjacentTileObj[direction];
+   }
     
     adjacentTiles = adjacentTiles.filter(Boolean);
 
