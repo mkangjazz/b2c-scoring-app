@@ -286,20 +286,164 @@ var calculateScore = function(cities){
     function totalScoreShops(city){
         var score = 0;
         var shops = city.tiles.filter(obj => obj["type"] === "shop");
+        
+        var info = {
+            soloShops: [],
+            horizontalShopGroups: [],
+            verticalShopGroups: [],
+        };
 
-        // getAdjacentTiles(tiles, tile, isOmniDirectional, direction)
+        function getSoloShops() {
+            for (let i = 0; i < shops.length; i++) {
+                const adjacentTiles = utility.getAdjacentTiles(city.tiles, shops[i], false);
+                const adjacentShops = adjacentTiles.filter(obj => obj.type === 'shop');
 
-        // store all HORIZONTAL arrays of shops touching shops
-            // need to aggregate objects?
-        // store all VERTICAL arrays of shops touching shops
-        // track occurrences (e.g. 1 array of size 4, 2 arrays of size 2)
+                if (adjacentShops.length === 0) {
+                    info.soloShops.push(shops[i]);
+                }
+            }
+        }
+
+        function getHorizontalShopGroups() {
+            for (let i = 0; i < shops.length; i++) {
+
+                if (info.soloShops.some(obj => obj.number === shops[i].number)) {
+                    continue;
+                }
+
+                const arr = [];
+                const eastAdjacentShop = utility.getAdjacentTiles(city.tiles, shops[i], false, 'e');
+                const westAdjacentShop = utility.getAdjacentTiles(city.tiles, shops[i], false, 'w');
+                
+                arr.push(shops[i]);
+
+                if (eastAdjacentShop) {
+                    if (eastAdjacentShop.type === 'shop') {
+                        arr.push(eastAdjacentShop);
+                    }
+                }
+
+                if (westAdjacentShop) {
+                    if (westAdjacentShop.type === 'shop') {
+                        arr.push(westAdjacentShop);
+                    }
+                }
+
+                if (arr.length > 1) {
+                    info.horizontalShopGroups.push(arr);
+                }
+            }
+        }
+
+        function getVerticalShopGroups() {
+            for (let i = 0; i < shops.length; i++) {
+
+                if (info.soloShops.some(obj => obj.number === shops[i].number)) {
+                    continue;
+                }
+
+                const arr = [];
+                const northAdjacentShop = utility.getAdjacentTiles(city.tiles, shops[i], false, 'n');
+                const southAdjacentShop = utility.getAdjacentTiles(city.tiles, shops[i], false, 's');
+
+                arr.push(shops[i]);
+
+                if (northAdjacentShop) {
+                    if (northAdjacentShop.type === 'shop') {
+                        arr.push(northAdjacentShop);
+                    }
+                }
+
+                if (southAdjacentShop) {
+                    if (southAdjacentShop.type === 'shop') {
+                        arr.push(southAdjacentShop);
+                    }
+                }
+
+                if (arr.length > 1) {
+                    info.verticalShopGroups.push(arr);
+                }
+            }
+        }
+
+        // function makeParkGroups(tiles){
+        //     var parks = tiles.filter(obj => obj["type"] === "park");
+        //     var parkGroups = [];
+        //     var groupedParkGroups = [];
+        //     var soloParks = [];
+            
+        //     for(var i=0; i < parks.length; i++){
+        //         (function(index){
+        //             var parkGroup = [];
+        //             var adjacentTiles = utility.getAdjacentTiles(tiles, parks[index], true),
+        //                 adjacentParks = adjacentTiles.filter(obj => obj["type"] === 'park');
+    
+        //             if(adjacentParks.length > 0){
+        //                 parkGroup.push(parks[index].number);
+        //                 adjacentParks.map(obj => parkGroup.push(obj.number));
+    
+        //                 if(parkGroup.length > 0){
+        //                     parkGroups.push(parkGroup);
+        //                 }                        
+        //             } else {
+        //                 soloParks.push(parks[index].number);
+        //             }
+        //         }(i));
+        //     }
+    
+        //     function groupArray(arr){
+        //         var grouping;
+    
+        //         function reducer(accumulator, currentValue){
+        //             if(accumulator.some(v => currentValue.indexOf(v) >= 0)){
+        //                 for(var i = 0; i < currentValue.length; i++){
+        //                     (function(index){
+        //                         if(!(accumulator.includes(currentValue[index]))){
+        //                             accumulator.push(currentValue[index]);
+        //                         }
+        //                     }(i));
+        //                 }
+        //             }
+    
+        //             return accumulator;
+        //         }
+    
+        //         grouping = arr.reduce(reducer, arr[0]);
+    
+        //         return grouping;
+        //     }
+    
+        //     function removeGroupedParks(arrayA, arrayB){
+        //         var filteredArray = [];
+        //         var flatGrouping = arrayB.reduce(function(accumulator, currentValue) {
+        //             return accumulator.concat(currentValue);
+        //         }, []);
+    
+        //         arrayA.forEach((subArray) => {
+        //             if(!flatGrouping.includes(subArray[0])){
+        //                 filteredArray.push(subArray);
+        //             } else {
+        //             }
+        //         });
+    
+        //         return filteredArray;
+        //     }
+    
+        //     while(parkGroups.length > 0){
+        //         groupedParkGroups.push(groupArray(parkGroups));
+        //         parkGroups = removeGroupedParks(parkGroups, groupedParkGroups);
+        //     }
+    
+        //     return {
+        //         groups: groupedParkGroups,
+        //         solo: soloParks
+        //     }
+        // }
 
         // loop
-            // programmatically choose which array to start with (H or V, length desc)
-            // track length of current array (global)
-            // remove counted shop from all arrays, H and V
-
-        
+        // programmatically choose which array to start with (H or V, length desc)
+        // track length of current array (global)
+        // remove counted shop from all arrays, H and V
 
         function soloShopScore(num){
             var score = 0;
@@ -309,7 +453,13 @@ var calculateScore = function(cities){
             return score;
         }
 
-        score += soloShopScore(soloShops.length);
+        getSoloShops();
+        getHorizontalShopGroups();
+        getVerticalShopGroups();
+
+        console.log(info);
+
+        // score += soloShopScore(soloShops.length);
 
         return score;
     }

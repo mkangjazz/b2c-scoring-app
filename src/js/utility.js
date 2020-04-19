@@ -80,7 +80,7 @@ var utility = (function(){
 
     if (direction) {
       return adjacentTileObj[direction];
-   }
+    }
     
     adjacentTiles = adjacentTiles.filter(Boolean);
 
