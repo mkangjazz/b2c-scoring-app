@@ -283,11 +283,7 @@ var calculateScore = function(cities){
         return score;
     }
 
-    function totalScoreShops(city){
-        if (city.token !== 'st-louis-arch') {
-            return;
-        }
-
+    function totalScoreShops(city) {
         var score = 0;
         var shops = city.tiles.filter(obj => obj["type"] === "shop");
         var finalGroups = [];
@@ -316,10 +312,6 @@ var calculateScore = function(cities){
         function updateFinalGroups() {
             if (snapshot.largestGroup.length > 0) {
                 finalGroups.push(snapshot.largestGroup);
-            }
-
-            if (shouldLoop === false) {
-                finalSolos = snapshot.soloShops;
             }
         }
 
@@ -357,6 +349,7 @@ var calculateScore = function(cities){
             function getLargestShopGroup() {
                 if (!hasHorizontalGroups() && !hasVerticalGroups()) {
                     shouldLoop = false;
+
                     return [];
                 }
     
@@ -410,13 +403,19 @@ var calculateScore = function(cities){
                         const westAdjacentTile = utility.getAdjacentTiles(city.tiles, snapshot.shops[i], false, 'w');
 
                         if (eastAdjacentTile) {
-                            if (eastAdjacentTile.type === 'shop') {
+                            if (
+                                eastAdjacentTile.type === 'shop' &&
+                                snapshot.shops.indexOf(eastAdjacentTile) !== -1
+                            ) {
                                 doesTouch = true;
                             }
                         }
         
                         if (westAdjacentTile) {
-                            if (westAdjacentTile.type === 'shop') {
+                            if (
+                                westAdjacentTile.type === 'shop' &&
+                                snapshot.shops.indexOf(westAdjacentTile) !== -1
+                            ) {
                                 doesTouch = true;
                             }
                         }
@@ -455,13 +454,19 @@ var calculateScore = function(cities){
                         const southAdjacentTile = utility.getAdjacentTiles(city.tiles, snapshot.shops[i], false, 's');
 
                         if (northAdjacentTile) {
-                            if (northAdjacentTile.type === 'shop') {
+                            if (
+                                northAdjacentTile.type === 'shop' &&
+                                snapshot.shops.indexOf(northAdjacentTile) !== -1
+                            ) {
                                 doesTouch = true;
                             }
                         }
         
                         if (southAdjacentTile) {
-                            if (southAdjacentTile.type === 'shop') {
+                            if (
+                                southAdjacentTile.type === 'shop' &&
+                                snapshot.shops.indexOf(southAdjacentTile) !== -1
+                            ) {
                                 doesTouch = true;
                             }
                         }
@@ -508,24 +513,50 @@ var calculateScore = function(cities){
             removeCountedShopsFromSnapshot();
         } while (shouldLoop);
 
-        console.log('snapshot', snapshot);
-        console.log('finalGroups', finalGroups);
-        console.log('finalSolos', finalSolos);
+        finalSolos = snapshot.shops;
 
-        function soloShopScore(num){
+        if (city.token === "st-louis-arch") {
+            console.log('snapshot', snapshot);
+            console.log('finalGroups', finalGroups);
+            console.log('finalSolos', finalSolos);
+        }
+
+        function scoreShopGroups() {
             var score = 0;
 
-            score = num * 2;
+            for (let i = 0; i < finalGroups.length; i++) {
+                switch (finalGroups[i].length) {
+                    case 2:
+                        score += 5;
+                        break;
+                    case 3:
+                        score += 10;
+                        break;
+                    case 4:
+                        score += 16;
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             return score;
         }
 
-        // score += soloShopScore(soloShops.length);
+        function scoreSoloShops() {
+            var score = finalSolos.length * 2;
 
-        return score;
+            return score;
+        }
+
+        score += scoreShopGroups();
+        score += scoreSoloShops();
+
+        return {
+            score: score,
+            groups: finalGroups,
+        }
     }
-
-
 
     function setTotals(){
         cities.map(city => {
@@ -535,7 +566,8 @@ var calculateScore = function(cities){
             city["score"]["totalScoreOffices"] = totalScoreOffices(city);
             city["score"]["totalScoreHouses"] = totalScoreHouses(city);
             city["score"]["totalScoreFactories"] = totalScoreFactories(cities, city);
-            city["score"]["totalScoreShops"] = totalScoreShops(city);
+            city["score"]["totalScoreShops"] = totalScoreShops(city).score;
+            city["score"]["shopGroups"] = totalScoreShops(city).groups;
             city["score"]["totalScoreTaverns"] = 0;
         });
     }

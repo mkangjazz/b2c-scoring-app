@@ -23,11 +23,11 @@ function City(props) {
 		);
 	}
 
-	function renderParkGroups(arr){
+	function renderGroups(arr){
 		var groups = arr.map((group, index) => {
 			return (
-				<p key={group}>
-					{`Group of ${group.length} parks`}
+				<p key={`${group}-${index}`}>
+					{`Group of ${group.length}`}
 				</p>
 			);
 		});
@@ -104,7 +104,7 @@ function City(props) {
 								<p>{score.numParks}</p>
 							</td>
 							<td>
-								{score.parkGroups.length > 0 ? renderParkGroups(score.parkGroups) : "" }
+								{score.parkGroups.length > 0 ? renderGroups(score.parkGroups) : "" }
 							</td>
 							<td>
 								<p>{score.totalScoreParks}</p>
@@ -118,7 +118,7 @@ function City(props) {
 								<p>{score.numShops}</p>
 							</td>
 							<td>
-								<p>{score.shopGroups}</p>
+								{score.shopGroups.length > 0 ? renderGroups(score.shopGroups) : "" }
 							</td>
 							<td>
 								<p>{score.totalScoreShops}</p>
