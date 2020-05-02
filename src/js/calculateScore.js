@@ -120,7 +120,7 @@ var calculateScore = function(cities){
             groupScore = 0,
             soloScore = 0;
 
-        var shopGroups = makeParkGroups(tiles);
+        var parkGroups = makeParkGroups(tiles);
 
         function makeParkGroups(tiles){
             var parks = tiles.filter(obj => obj["type"] === "park");
@@ -220,13 +220,13 @@ var calculateScore = function(cities){
             return score;
         }
 
-        soloScore = scoreSoloParks(shopGroups.solo);
-        groupScore = scoreGroupParks(shopGroups.groups);
+        soloScore = scoreSoloParks(parkGroups.solo);
+        groupScore = scoreGroupParks(parkGroups.groups);
         score = soloScore + groupScore;
 
         return {
             score: score,
-            groups: shopGroups.groups
+            groups: parkGroups.groups
         }
     }
 
@@ -290,36 +290,61 @@ var calculateScore = function(cities){
 
         var score = 0;
         var shops = city.tiles.filter(obj => obj["type"] === "shop");
-        
-        var shopGroups = {
-            soloShops: function(){
+        var finalGroupings = [];
+
+        var snapShot = {
+            shops: shops,
+            soloShops: [],
+            horizontalGroups: [],
+            verticalGroups: [],
+        };
+
+        function removeCountedShops() {
+            // return a mutated array
+            // removing the tiles that were counted in a group
+            // from the gameboard overall
+        }
+
+        function getLargestShopGroup() {
+            var group;
+
+            // parse through "current state" shop groups
+            // from where?
+            // return the largest group as an array
+
+            return group;
+        }
+
+        function updateSnapshotGroups(tiles) {
+            function getSoloShops() {
                 const arr = [];
 
-                for (let i = 0; i < shops.length; i++) {
-                    const adjacentTiles = utility.getAdjacentTiles(city.tiles, shops[i], false);
+                for (let i = 0; i < tiles.length; i++) {
+                    const adjacentTiles = utility.getAdjacentTiles(city.tiles, tiles[i], false);
                     const adjacentShops = adjacentTiles.filter(obj => obj.type === 'shop');
     
                     if (adjacentShops.length === 0) {
-                        arr.push(shops[i]);
+                        arr.push(tiles[i]);
                     }
                 }
 
                 return arr;
-            },
-            horizontalShopGroups: function(){
+            }
+
+            function getHorizontalShops() {
                 const arr = [];
                 const shopsThatTouchAShopHorizontally = [];
 
                 function getShopsThatTouchAShopHorizontally() {
-                    for (let i = 0; i < shops.length; i++) {
+                    for (let i = 0; i < tiles.length; i++) {
                         let doesTouch = false;
 
-                        if (shopGroups.soloShops().some(obj => obj.number === shops[i].number)) {
-                            continue;
-                        }
+                        // if (newSnapshot.soloShops.some(obj => obj.number === tiles[i].number)) {
+                        //     continue;
+                        // }
 
-                        const eastAdjacentTile = utility.getAdjacentTiles(city.tiles, shops[i], false, 'e');
-                        const westAdjacentTile = utility.getAdjacentTiles(city.tiles, shops[i], false, 'w');
+                        const eastAdjacentTile = utility.getAdjacentTiles(city.tiles, tiles[i], false, 'e');
+                        const westAdjacentTile = utility.getAdjacentTiles(city.tiles, tiles[i], false, 'w');
 
                         if (eastAdjacentTile) {
                             if (eastAdjacentTile.type === 'shop') {
@@ -334,7 +359,7 @@ var calculateScore = function(cities){
                         }
                     
                         if (doesTouch) {
-                            shopsThatTouchAShopHorizontally.push(shops[i]);
+                            shopsThatTouchAShopHorizontally.push(tiles[i]);
                         }
                     }
                 }
@@ -343,7 +368,9 @@ var calculateScore = function(cities){
                     for (let i = 0; i < 4; i++) {
                         const group = shopsThatTouchAShopHorizontally.filter(obj => obj.y === i);
 
-                        arr.push(group);
+                        if (group.length > 1) {
+                            arr.push(group);
+                        }
                     }
                 }
 
@@ -351,21 +378,22 @@ var calculateScore = function(cities){
                 sortShopsIntoGroups();
 
                 return arr;
-            },
-            verticalShopGroups: function(){
+            }
+            
+            function getVerticalShops() {
                 const arr = [];
                 const shopsThatTouchAShopVertically = [];
 
                 function getShopsThatTouchAShopVertically() {
-                    for (let i = 0; i < shops.length; i++) {
+                    for (let i = 0; i < tiles.length; i++) {
                         let doesTouch = false;
 
-                        if (shopGroups.soloShops().some(obj => obj.number === shops[i].number)) {
-                            continue;
-                        }
+                        // if (newSnapshot.soloShops.some(obj => obj.number === tiles[i].number)) {
+                        //     continue;
+                        // }
 
-                        const northAdjacentTile = utility.getAdjacentTiles(city.tiles, shops[i], false, 'n');
-                        const southAdjacentTile = utility.getAdjacentTiles(city.tiles, shops[i], false, 's');
+                        const northAdjacentTile = utility.getAdjacentTiles(city.tiles, tiles[i], false, 'n');
+                        const southAdjacentTile = utility.getAdjacentTiles(city.tiles, tiles[i], false, 's');
 
                         if (northAdjacentTile) {
                             if (northAdjacentTile.type === 'shop') {
@@ -380,16 +408,18 @@ var calculateScore = function(cities){
                         }
                     
                         if (doesTouch) {
-                            shopsThatTouchAShopVertically.push(shops[i]);
+                            shopsThatTouchAShopVertically.push(tiles[i]);
                         }
                     }
                 }
 
-                function sortShopsIntoGroups() {                   
+                function sortShopsIntoGroups() {
                     for (let i = 0; i < 4; i++) {
                         const group = shopsThatTouchAShopVertically.filter(obj => obj.x === i);
 
-                        arr.push(group);
+                        if (group.length > 1) {
+                            arr.push(group);
+                        }
                     }
                 }
 
@@ -397,13 +427,41 @@ var calculateScore = function(cities){
                 sortShopsIntoGroups();
 
                 return arr;
-            },
-        };
+            }
 
-        // loop
+            var newSnapshot = {
+                soloShops: getSoloShops(),
+                horizontalGroups: getHorizontalShops(),
+                verticalGroups: getVerticalShops(),
+            };
+
+            for (var key in newSnapshot) {
+                if (newSnapshot.hasOwnProperty(key)) {
+                    snapShot[key] = newSnapshot[key];
+                }
+            }
+        }
+
         // programmatically choose which array to start with (H or V, length desc)
         // track length of current array (global)
         // remove counted shop from all arrays, H and V
+
+        // call this until there are no shop tiles left
+        // 2 get largest array by comparison
+        // 3 add array to the 'main score'
+        // 4 remove counted shops from snapShot
+
+        // while (snapShot.shops.length > 0 ) {
+        //     // updateSnapshotGroups();
+        //     // var largestShopGroup = getLargestShopGroup();
+        //     // finalGroupings.push(largestShopGroup);
+        //         // add this group to the finalGroupings
+        //         // removeCountedShops(); should all be from getLargestShopGroup
+        // }
+        
+        updateSnapshotGroups(snapShot.shops);
+
+        console.log('snapShot', snapShot);
 
         function soloShopScore(num){
             var score = 0;
@@ -412,18 +470,6 @@ var calculateScore = function(cities){
 
             return score;
         }
-
-        
-
-        console.log(
-            'solo', shopGroups.soloShops(),
-        );
-        console.log(
-            'horiz', shopGroups.horizontalShopGroups(),
-        );
-        console.log(
-            'vert', shopGroups.verticalShopGroups(),
-        );
 
         // score += soloShopScore(soloShops.length);
 
