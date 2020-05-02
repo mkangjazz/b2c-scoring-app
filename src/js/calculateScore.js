@@ -290,8 +290,7 @@ var calculateScore = function(cities){
 
         var score = 0;
         var shops = city.tiles.filter(obj => obj["type"] === "shop");
-        var finalGroupings = [];
-
+        var finalGroups = [];
         var snapShot = {
             shops: shops,
             soloShops: [],
@@ -306,13 +305,56 @@ var calculateScore = function(cities){
         }
 
         function getLargestShopGroup() {
-            var group;
+            function compare(b, a) {
+                return a.length - b.length;
+            }
+            function hasHorizontalGroups() {
+                return snapShot.horizontalGroups.length > 0 ? true : false;
+            }
 
-            // parse through "current state" shop groups
-            // from where?
-            // return the largest group as an array
+            function hasVerticalGroups() {
+                return snapShot.verticalGroups.length > 0 ? true : false;
+            }
 
-            return group;
+            function sortHorizontalByLengthHighToLow() {
+                snapShot.horizontalGroups.sort(compare);
+            }
+
+            function sortVerticalByLengthHighToLow() {
+                snapShot.verticalGroups.sort(compare);
+            }
+
+            function getLongestHorizontalGroup() {
+                sortHorizontalByLengthHighToLow();
+                return snapShot.horizontalGroups[0];
+            }
+
+            function getLongestVerticalGroup() {
+                sortVerticalByLengthHighToLow();
+                return snapShot.verticalGroups[0];
+            }
+
+            if (!hasHorizontalGroups() && !hasVerticalGroups()) {
+                return [];
+            }
+
+            if (!hasHorizontalGroups()) {
+                return getLongestVerticalGroup();
+            }
+
+            if (!hasVerticalGroups()) {
+                return getLongestHorizontalGroup();
+            }
+
+            if (hasHorizontalGroups() && hasVerticalGroups()) {
+                sortHorizontalByLengthHighToLow();
+                sortVerticalByLengthHighToLow();
+
+                var arr = [getLongestHorizontalGroup(), getLongestVerticalGroup()];
+                arr.sort(compare);
+
+                return arr[0];
+            }
         }
 
         function updateSnapshotGroups(tiles) {
@@ -451,6 +493,13 @@ var calculateScore = function(cities){
         // 3 add array to the 'main score'
         // 4 remove counted shops from snapShot
 
+        updateSnapshotGroups(snapShot.shops);
+        var largestShopGroup = getLargestShopGroup();
+
+        console.log('snapShot', snapShot);
+        console.log('largestShopGroup', largestShopGroup);
+        
+
         // while (snapShot.shops.length > 0 ) {
         //     // updateSnapshotGroups();
         //     // var largestShopGroup = getLargestShopGroup();
@@ -458,10 +507,6 @@ var calculateScore = function(cities){
         //         // add this group to the finalGroupings
         //         // removeCountedShops(); should all be from getLargestShopGroup
         // }
-        
-        updateSnapshotGroups(snapShot.shops);
-
-        console.log('snapShot', snapShot);
 
         function soloShopScore(num){
             var score = 0;
