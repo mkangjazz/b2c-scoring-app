@@ -65,7 +65,7 @@ var betweenTwoCitiesSetup = (function(){
 			"uniqueTaverns": 0,
 			"parkGroups": [],
 			"shopGroups": [],
-			"factoryMultiplier": 0,
+			"factoryMultiplier": 2,
 			"officesNextToTaverns": 0,
 			"housesNextToFactories": 0,
 			"totalScoreParks": 0,

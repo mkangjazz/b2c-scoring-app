@@ -247,7 +247,7 @@ var calculateScore = function(cities){
             addIncompleteGroupScore(count);
         }
     
-        score = score + city.score.officesNextToTaverns;
+        score = Number(score + city.score.officesNextToTaverns);
 
         return score;
     }
@@ -558,7 +558,7 @@ var calculateScore = function(cities){
             });
 
             leaderBoard.firstHasThisManyFactories = arr[0];
-            leaderBoard.secondHasThisManyFactories = arr[1];
+            leaderBoard.secondHasThisManyFactories = arr[1] || 0;
 
             return arr[0];
         }
@@ -569,7 +569,7 @@ var calculateScore = function(cities){
             const firstPlaceArray = leaderBoard[leaderBoard.firstHasThisManyFactories];
             const secondPlaceArray = leaderBoard[leaderBoard.secondHasThisManyFactories];
 
-            // default case 
+            // default case
             city["score"]["factoryMultiplier"] = 2;
 
             if (firstPlaceArray.indexOf(city.token) !== -1) {
@@ -580,29 +580,18 @@ var calculateScore = function(cities){
                 city["score"]["factoryMultiplier"] = 3;
             }
         });
-
-        console.log('sortCitiesByFactoryCount', cities);
     }
 
-    function totalScoreFactories() {
-        // first place
-        // second place
-        // everyone else
+    function totalScoreFactories(city) {
+        var score = 0;
+        var multiplier = city.score.factoryMultiplier;
+        var factories = city.score.numFactories;
 
-        // Factories (16 buildings + 8 duplex)
-            // a tile is worth 4, 3, or 2, determined by majority
-            // In the city (or cities, if tied) with the most factory tiles compared to other cities, each factory
-            // tile scores 4 points. In the city or cities with the second most factory tiles, each factory tile
-            // scores 3 points. In all other cities, each factory tile scores 2 points.
-            // Cities A and B each have five factories (4 points per factory), City C has three factories (3 points per
-            // factory), City D has two factories and City E has one factory (each city receives 2 points per factory), and
-            // City F has zero factories (0 points).
+        score = multiplier * factories;
 
-        // return count * multiplier;
-        // return {
-        //     score: score,
-        //     bonus: bonus
-        // }
+        return {
+            score: score,
+        }
     }
 
     function setTotals(){
@@ -611,7 +600,7 @@ var calculateScore = function(cities){
             city["score"]["totalScoreParks"] = totalScoreParks(city.tiles).score;
             city["score"]["totalScoreOffices"] = totalScoreOffices(city);
             city["score"]["totalScoreHouses"] = totalScoreHouses(city);
-            // city["score"]["totalScoreFactories"] = totalScoreFactories(cities, city);
+            city["score"]["totalScoreFactories"] = totalScoreFactories(city).score;
             city["score"]["totalScoreShops"] = totalScoreShops(city).score;
             city["score"]["shopGroups"] = totalScoreShops(city).groups;
             city["score"]["totalScoreTaverns"] = 0;
@@ -625,9 +614,9 @@ var calculateScore = function(cities){
             city["score"]["totalScoreParks"],
             city["score"]["totalScoreOffices"],
             city["score"]["totalScoreHouses"],
-            // city["score"]["totalScoreFactories"],
+            city["score"]["totalScoreFactories"],
             city["score"]["totalScoreShops"],
-            city["score"]["totalScoreTaverns"]
+            city["score"]["totalScoreTaverns"],
         ];
 
         score = scores.reduce((a, b) => a + b, 0);
@@ -645,6 +634,8 @@ var calculateScore = function(cities){
     sortCitiesByFactoryCount();
     setTotals();
     setTotal();
+
+    console.log(cities);
 };
 
 export default calculateScore;
