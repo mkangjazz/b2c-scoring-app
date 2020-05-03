@@ -1,0 +1,11 @@
+.image-game-cover {
+	display: block;
+	height: auto;
+	max-width: 125px;
+	width: 100%;
+} 
+
+.image-city-token {
+    height: auto;
+    width: 4em;
+}

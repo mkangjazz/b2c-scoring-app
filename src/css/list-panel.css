@@ -1,0 +1,45 @@
+.list-panel {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-tiles,
+.list-panel {
+    border-top: 1px solid #ccc;
+}
+
+.list-tiles li,
+.list-panel li {
+    border-bottom: 1px solid #ccc;
+}
+
+.list-tiles button,
+.list-panel a {
+    align-items: center;
+    background-color: #fff;
+    border: none;
+    color: inherit;
+    display: flex;
+    font-size: 15px;
+    margin: 0;
+    max-width: 100%;
+    padding: 10px 0 10px 10px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+}
+
+.list-panel a:after {
+    content:"";
+    border-right: 2px solid #999;
+    border-top: 2px solid #999;
+    display: block;
+    height: 10px;
+    margin: -6px 0 0;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: rotate(45deg);
+    width: 10px;
+}

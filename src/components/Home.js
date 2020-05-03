@@ -1,27 +1,25 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import original from '../img/original.jpg';
-import capitals from '../img/capitals.jpg';
 
 function Home() {
 	return (
 		<div>
 			<header>
 				<h1>
-					Choose Game
+					Choose Version
 				</h1>
 			</header>
-			<nav className="nav-game-selection">
+			<nav>
 				<ul className="list-panel">
 					<li>
 						<Link to="/between-two-cities/">
-							<img alt="Original" src={original} />
+							<img className="image-game-cover" alt="Original Game Art" src="img/original.jpg" />
 							<h2>Original</h2>
 						</Link>
 					</li>
 					<li>
 						<Link to="/capitals/">
-							<img alt="Capitals" src={capitals} />
+							<img className="image-game-cover" alt="Capitals Expansion Game Art" src="/img/capitals.jpg" />
 							<h2>Capitals</h2>
 						</Link>
 					</li>

@@ -1,0 +1,62 @@
+html,
+body {
+	font-family: 'PT Sans', sans-serif;
+	font-size: 18px;
+}
+
+
+strong {
+	font-weight: bold;
+}
+
+ul {
+	margin: 0;
+}
+
+h1,
+h2,
+h3 {
+	color: #333;
+	font-weight: bold;
+	margin: 0;
+	padding: 20px 10px;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+h3 {
+	font-size: 16px;
+}
+
+.total-score {
+    font-size: 2em;
+    margin-left: auto;
+    margin-right: 1em;
+    text-align: right;
+}
+
+.link-back {
+	color: inherit;
+	left: 10px;
+	margin: -.5em 0 0;
+	position: absolute;
+	top: 50%;
+	text-decoration: none;
+}
+
+.link-back:before {
+	content:"";
+	display: inline-block;
+	border-left: 2px solid #666;
+	border-top: 2px solid #666;
+	height: 10px;
+    margin-right: .25em;
+	transform: rotate(-45deg);
+	width: 10px;
+}
