@@ -57,32 +57,6 @@ canvas {
 	margin: 0 auto;
 }
 
-.nav-game-selection {
-	border-left: 10px solid #fff;
-	border-right: 10px solid #fff;
-	box-sizing: border-box;
-	margin: 0 auto;
-}
-
-.nav-game-selection a {
-	background-color: #333;
-	box-sizing: border-box;
-	display: block;
-	text-decoration: none;
-	position: relative;
-	width: 100%;
-}
-
-.nav-game-selection a:first-child {
-	border-bottom: 10px solid #fff;
-}
-
-.nav-game-selection img {
-	display: block;
-	height: auto;
-	width: 100%;
-}
-
 .list-panel {
   list-style: none;
   margin: 0;
@@ -298,23 +272,3 @@ table {
 	width: 75%;
 }
 
-
-
-@media screen and (min-width: 768px){
-	.nav-game-selection {
-		text-align: justify;
-		white-space: nowrap;
-	}
-
-	.nav-game-selection a {
-		border-bottom: none;
-		border-top: none;
-		font-size: 0;
-		display: inline-block;
-		vertical-align: middle;
-		width: 50%;
-	}
-	.nav-game-selection a:first-child {
-		border-bottom: none;
-	}
-}

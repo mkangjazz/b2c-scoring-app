@@ -11,6 +11,7 @@ import CitySummary from "./components/CitySummary";
 import Home from "./components/Home";
 
 import './css/App.css';
+import './css/nav-game-selection.css';
 
 class App extends Component {
 	constructor(props) {
