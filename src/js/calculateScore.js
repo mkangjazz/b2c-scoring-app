@@ -94,27 +94,6 @@ var calculateScore = function(cities){
         });
     }
 
-    function totalScoreFactories(cities, city){
-        // var count = getTileCount(city, 'factory');
-        // var multiplier;
-
-        // console.log(cities, city);
-
-        // if(calculateTileLeaderStatus(city, 'factory') === 'first'){
-        //     multiplier = 4;
-        // } else if(calculateTileLeaderStatus(city, 'factory') === 'second'){
-        //     multiplier = 3;
-        // } else {
-        //     multiplier = 2;
-        // }
-
-        // return count * multiplier;
-        // return {
-        //     score: score,
-        //     bonus: bonus
-        // }
-    }
-
     function totalScoreParks(tiles){
         var score = 0,
             groupScore = 0,
@@ -515,12 +494,6 @@ var calculateScore = function(cities){
 
         finalSolos = snapshot.shops;
 
-        if (city.token === "st-louis-arch") {
-            console.log('snapshot', snapshot);
-            console.log('finalGroups', finalGroups);
-            console.log('finalSolos', finalSolos);
-        }
-
         function scoreShopGroups() {
             var score = 0;
 
@@ -558,14 +531,87 @@ var calculateScore = function(cities){
         }
     }
 
+    function sortCitiesByFactoryCount() {
+        var leaderBoard = {};
+
+        cities.map(city => {
+            const score = String(city["score"]["numFactories"]);
+
+            if (!leaderBoard.hasOwnProperty(score)) {
+                leaderBoard[score] = [];
+            }
+
+            leaderBoard[score].push(city.token);
+        });
+
+        function sortFactoryCounts() {
+            var arr = [];
+
+            for (var key in leaderBoard) {
+                if (leaderBoard.hasOwnProperty(key)) {
+                    arr.push(key);
+                }
+            }
+
+            arr.sort((b, a) => {
+                return a - b;
+            });
+
+            leaderBoard.firstHasThisManyFactories = arr[0];
+            leaderBoard.secondHasThisManyFactories = arr[1];
+
+            return arr[0];
+        }
+
+        sortFactoryCounts();
+
+        cities.map(city => {
+            const firstPlaceArray = leaderBoard[leaderBoard.firstHasThisManyFactories];
+            const secondPlaceArray = leaderBoard[leaderBoard.secondHasThisManyFactories];
+
+            // default case 
+            city["score"]["factoryMultiplier"] = 2;
+
+            if (firstPlaceArray.indexOf(city.token) !== -1) {
+                city["score"]["factoryMultiplier"] = 4;
+            }
+            
+            if (secondPlaceArray.indexOf(city.token) !== -1) {
+                city["score"]["factoryMultiplier"] = 3;
+            }
+        });
+
+        console.log('sortCitiesByFactoryCount', cities);
+    }
+
+    function totalScoreFactories() {
+        // first place
+        // second place
+        // everyone else
+
+        // Factories (16 buildings + 8 duplex)
+            // a tile is worth 4, 3, or 2, determined by majority
+            // In the city (or cities, if tied) with the most factory tiles compared to other cities, each factory
+            // tile scores 4 points. In the city or cities with the second most factory tiles, each factory tile
+            // scores 3 points. In all other cities, each factory tile scores 2 points.
+            // Cities A and B each have five factories (4 points per factory), City C has three factories (3 points per
+            // factory), City D has two factories and City E has one factory (each city receives 2 points per factory), and
+            // City F has zero factories (0 points).
+
+        // return count * multiplier;
+        // return {
+        //     score: score,
+        //     bonus: bonus
+        // }
+    }
+
     function setTotals(){
         cities.map(city => {
-            city["score"]["factoryMultiplier"] = 0;
             city["score"]["parkGroups"] = totalScoreParks(city.tiles).groups;
             city["score"]["totalScoreParks"] = totalScoreParks(city.tiles).score;
             city["score"]["totalScoreOffices"] = totalScoreOffices(city);
             city["score"]["totalScoreHouses"] = totalScoreHouses(city);
-            city["score"]["totalScoreFactories"] = totalScoreFactories(cities, city);
+            // city["score"]["totalScoreFactories"] = totalScoreFactories(cities, city);
             city["score"]["totalScoreShops"] = totalScoreShops(city).score;
             city["score"]["shopGroups"] = totalScoreShops(city).groups;
             city["score"]["totalScoreTaverns"] = 0;
@@ -579,7 +625,7 @@ var calculateScore = function(cities){
             city["score"]["totalScoreParks"],
             city["score"]["totalScoreOffices"],
             city["score"]["totalScoreHouses"],
-            city["score"]["totalScoreFactories"],
+            // city["score"]["totalScoreFactories"],
             city["score"]["totalScoreShops"],
             city["score"]["totalScoreTaverns"]
         ];
@@ -594,8 +640,9 @@ var calculateScore = function(cities){
             city["score"]["total"] = totalScore(city);
         });
     }
-    
+
     setCounts();
+    sortCitiesByFactoryCount();
     setTotals();
     setTotal();
 };
