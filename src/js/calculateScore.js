@@ -629,7 +629,7 @@ var calculateScore = function(cities){
 
     function setTotal(){
         cities.map(city => {
-            city["score"]["total"] = totalScore(city);
+            city["score"]["totalScore"] = totalScore(city);
         });
     }
 

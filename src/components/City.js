@@ -42,7 +42,7 @@ function City(props) {
 	function drawScores(score, game){
 		return (
 			<div>
-				<strong>City Total: {score.total}</strong>
+				<strong>City Total: {score.totalScore}</strong>
 				<table className="city-score-table">
 					<thead>
 						<tr>
@@ -61,7 +61,7 @@ function City(props) {
 								<p>{score.numFactories}</p>
 							</td>
 							<td>
-								<p>{score.factoryBonus }</p>
+								<p>{score.factoryMultiplier }</p>
 							</td>
 							<td>
 								<p>{score.totalScoreFactories}</p>

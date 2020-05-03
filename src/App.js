@@ -80,7 +80,7 @@ class App extends Component {
 
 	renderCitySummaries(cities){
 		var cityListItems = cities.map((city)=>{
-			return <CitySummary token={city.token} name={city.name} key={city.token} />
+			return <CitySummary score={city.score} token={city.token} name={city.name} key={city.token} />
 		});
 
 		return cityListItems;
