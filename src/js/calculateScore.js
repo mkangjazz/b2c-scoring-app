@@ -637,8 +637,6 @@ var calculateScore = function(cities){
     sortCitiesByFactoryCount();
     setTotals();
     setTotal();
-
-    console.log(cities);
 };
 
 export default calculateScore;
