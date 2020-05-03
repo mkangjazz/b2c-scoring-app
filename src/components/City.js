@@ -61,7 +61,7 @@ function City(props) {
 								<p>{score.numFactories}</p>
 							</td>
 							<td>
-								<p>{score.factoryMultiplier}</p>
+								<p>{score.factoryBonus }</p>
 							</td>
 							<td>
 								<p>{score.totalScoreFactories}</p>

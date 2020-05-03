@@ -571,13 +571,16 @@ var calculateScore = function(cities){
 
             // default case
             city["score"]["factoryMultiplier"] = 2;
+            city["score"]["factoryBonus"] = '';
 
             if (firstPlaceArray.indexOf(city.token) !== -1) {
                 city["score"]["factoryMultiplier"] = 4;
+                city["score"]["factoryBonus"] = 'Most Factories';
             }
             
             if (secondPlaceArray.indexOf(city.token) !== -1) {
                 city["score"]["factoryMultiplier"] = 3;
+                city["score"]["factoryBonus"] = 'Second Most Factories';
             }
         });
     }
