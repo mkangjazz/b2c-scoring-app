@@ -43,18 +43,12 @@ function City(props) {
 		return (
 			<div>
 				<table className="city-score-table">
-					<colgroup>
-						<col className='tile' />
-						<col className='number' />
-						<col className='bonus' />
-						<col className='score' />
-					</colgroup>
 					<thead>
 						<tr>
 							<th>Tile</th>
 							<th>#</th>
 							<th>Bonus</th>
-							<th>Score</th>
+							<th>Pts</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -106,7 +100,7 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
-								<img alt="Park icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
 								Park
 							</td>
 							<td>
@@ -121,7 +115,7 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
-								<img alt="Shop icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
 								Shop
 							</td>
 							<td>
@@ -151,10 +145,6 @@ function City(props) {
 						</tr>
 					</tbody>
 				</table>
-				<h2 className="city-total-score">
-					<strong>{score.totalScore}</strong>
-					<small>City Total</small>
-				</h2>
 			</div>
 		);
 	}
@@ -167,7 +157,7 @@ function City(props) {
 				</Link>
 				<h1>
 					<img className="image-city-token" src={`/img/token-${cityData.token}.gif`} />
-					{cityData.name}
+					{cityData.name} : {cityData.score.totalScore} pts
 				</h1>
 			</header>
 			
