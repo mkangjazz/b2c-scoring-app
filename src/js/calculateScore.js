@@ -12,12 +12,10 @@ var calculateScore = function(cities){
     function nonHouseTypes(tiles){
         var typesFound = [];
 
-        for(var i=0; i < tiles.length; i++){
-            (function(index){
-                if( !(typesFound.includes(tiles[index]["type"])) && tiles[index]["type"] !== 'house' ){
-                    typesFound.push(tiles[index]["type"]);
-                }
-            }(i));
+        for (let i = 0; i < tiles.length; i++) {    
+            if( !(typesFound.includes(tiles[i]["type"])) && tiles[i]["type"] !== 'house' ){
+                typesFound.push(tiles[i]["type"]);
+            }
         }
 
         return typesFound.filter(x => x).length;
@@ -26,12 +24,10 @@ var calculateScore = function(cities){
     function uniqueTaverns(tiles){
         var tavernTypesFound = [];
 
-        for(var i=0; i < tiles.length; i++){
-            (function(index){
-                if( !(tavernTypesFound.includes(tiles[index]["typeSpecial"])) && (tiles[index]["type"] === 'tavern') ){
-                    tavernTypesFound.push(tiles[index]["typeSpecial"]);
-                }
-            }(i));
+        for (let i = 0; i < tiles.length; i++) {
+            if( !(tavernTypesFound.includes(tiles[i]["typeSpecial"])) && (tiles[i]["type"] === 'tavern') ){
+                tavernTypesFound.push(tiles[i]["typeSpecial"]);
+            }
         }
 
         return (tavernTypesFound.filter(x => x).length);
@@ -41,18 +37,17 @@ var calculateScore = function(cities){
         var houseTiles = tiles.filter(obj => obj["type"] === 'house');
         var count = 0;
         
-        for(var i=0; i < houseTiles.length; i++){
-            (function(index){
-                var adjacentTiles = utility.getAdjacentTiles(tiles, houseTiles[index], true);
+        for(let i = 0; i < houseTiles.length; i++) {
+            
+            var adjacentTiles = utility.getAdjacentTiles(tiles, houseTiles[i], true);
+            
+            if(adjacentTiles.length > 0){
+                var adjacentFactories = adjacentTiles.filter(obj => obj["type"] === 'factory');
                 
-                if(adjacentTiles.length > 0){
-                    var adjacentFactories = adjacentTiles.filter(obj => obj["type"] === 'factory');
-                    
-                    if(adjacentFactories.length > 0){
-                        count++;
-                    }
+                if(adjacentFactories.length > 0){
+                    count++;
                 }
-            }(i));
+            }
         }
 
         return count;
@@ -62,18 +57,16 @@ var calculateScore = function(cities){
         var offices = tiles.filter(obj => obj["type"] === 'office');
         var count = [];
 
-        for(var i=0; i < offices.length; i++){
-            (function(index){
-                var adjacentTiles = utility.getAdjacentTiles(tiles, offices[index], true);
+        for(let i = 0; i < offices.length; i++) {
+            var adjacentTiles = utility.getAdjacentTiles(tiles, offices[i], true);
+            
+            if(adjacentTiles.length > 0){
+                var adjacentFactories = adjacentTiles.filter(obj => obj["type"] === 'tavern');
                 
-                if(adjacentTiles.length > 0){
-                    var adjacentFactories = adjacentTiles.filter(obj => obj["type"] === 'tavern');
-                    
-                    if(adjacentFactories.length > 0){
-                        count++;
-                    }
+                if(adjacentFactories.length > 0){
+                    count++;
                 }
-            }(i));
+            }
         }
 
         return count;
@@ -91,6 +84,8 @@ var calculateScore = function(cities){
             city["score"]["uniqueTaverns"] = uniqueTaverns(city.tiles);
             city["score"]["housesNextToFactories"] = housesNextToFactories(city.tiles);
             city["score"]["officesNextToTaverns"] = officesNextToTaverns(city.tiles);
+
+            return false;
         });
     }
 
@@ -107,23 +102,24 @@ var calculateScore = function(cities){
             var groupedParkGroups = [];
             var soloParks = [];
             
-            for(var i=0; i < parks.length; i++){
-                (function(index){
-                    var parkGroup = [];
-                    var adjacentTiles = utility.getAdjacentTiles(tiles, parks[index], true),
-                        adjacentParks = adjacentTiles.filter(obj => obj["type"] === 'park');
-    
-                    if(adjacentParks.length > 0){
-                        parkGroup.push(parks[index].number);
-                        adjacentParks.map(obj => parkGroup.push(obj.number));
-    
-                        if(parkGroup.length > 0){
-                            parkGroups.push(parkGroup);
-                        }                        
-                    } else {
-                        soloParks.push(parks[index].number);
+            for(let i = 0; i < parks.length; i++) {
+                var parkGroup = [];
+                var adjacentTiles = utility.getAdjacentTiles(tiles, parks[i], true);
+                var adjacentParks = adjacentTiles.filter(obj => obj["type"] === 'park');
+
+                if(adjacentParks.length > 0){
+                    parkGroup.push(parks[i].number);
+
+                    for (let j = 0; j < adjacentParks.length; j++) {
+                        parkGroup.push(adjacentParks[j].number);
                     }
-                }(i));
+
+                    if(parkGroup.length > 0){
+                        parkGroups.push(parkGroup);
+                    }                        
+                } else {
+                    soloParks.push(parks[i].number);
+                }
             }
     
             function groupArray(arr){
@@ -131,12 +127,10 @@ var calculateScore = function(cities){
     
                 function reducer(accumulator, currentValue){
                     if(accumulator.some(v => currentValue.indexOf(v) >= 0)){
-                        for(var i = 0; i < currentValue.length; i++){
-                            (function(index){
-                                if(!(accumulator.includes(currentValue[index]))){
-                                    accumulator.push(currentValue[index]);
-                                }
-                            }(i));
+                        for(let i = 0; i < currentValue.length; i++){
+                            if(!(accumulator.includes(currentValue[i]))){
+                                accumulator.push(currentValue[i]);
+                            }
                         }
                     }
     
@@ -254,8 +248,7 @@ var calculateScore = function(cities){
 
     function totalScoreHouses(city){
         var score = 0;
-        var count = city.score.numHouses;
-                
+
         score = score + city.score.housesNextToFactories;
         score = score + ((city.score.numHouses - city.score.housesNextToFactories) * city.score.nonHouseTypes);
 
@@ -542,6 +535,8 @@ var calculateScore = function(cities){
             }
 
             leaderBoard[score].push(city.token);
+
+            return false;
         });
 
         function sortFactoryCounts() {
@@ -582,6 +577,8 @@ var calculateScore = function(cities){
                 city["score"]["factoryMultiplier"] = 3;
                 city["score"]["factoryBonus"] = 'Second Most Factories';
             }
+
+            return false;
         });
     }
 
@@ -607,6 +604,8 @@ var calculateScore = function(cities){
             city["score"]["totalScoreShops"] = totalScoreShops(city).score;
             city["score"]["shopGroups"] = totalScoreShops(city).groups;
             city["score"]["totalScoreTaverns"] = 0;
+
+            return false;
         });
     }
 
@@ -630,6 +629,8 @@ var calculateScore = function(cities){
     function setTotal(){
         cities.map(city => {
             city["score"]["totalScore"] = totalScore(city);
+
+            return false;
         });
     }
 

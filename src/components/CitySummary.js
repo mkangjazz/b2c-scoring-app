@@ -5,7 +5,7 @@ function CitySummary(props){
 	return (
 		<li>
 			<Link to={{pathname: "/city/", search: `?token=${props.token}&game=b2c`}}>
-				<img className="image-city-token" src={`/img/token-${props.token}.gif`} />
+				<img alt={`${props.token} icon`} className="image-city-token" src={`/img/token-${props.token}.gif`} />
 				<h3>
 					{props.name}
 				</h3>
