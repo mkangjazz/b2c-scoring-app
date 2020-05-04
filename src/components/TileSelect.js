@@ -9,7 +9,7 @@ function TileSelect(props){
 		});
 
 		return (
-			<ul>
+			<ul className='list-panel list-tiles'>
 				{tileListItems}
 			</ul>
 		);
@@ -17,20 +17,16 @@ function TileSelect(props){
 
 	return (
 		<div className="modal-wrapper">
-			<div className="overlay"></div>
 			<div className="modal">
-				<header>
-					<h1>
-						Choose Tile
-					</h1>
-				</header>
-				<h3>Base</h3>
-				{renderTiles(props.tiles)}
-				
-				conditional render: 
-				<h3>Civic</h3>
-				{/* Tile selection modal or other interface with list...? */}
-				{/* button onclick? */}
+				<div className="modal-content">
+					<button className='close-modal' type='button'>Close</button>
+					<header>
+						<h1>
+							Choose Tile
+						</h1>
+					</header>
+					{renderTiles(props.tiles)}
+				</div>
 			</div>
 		</div>
 	);

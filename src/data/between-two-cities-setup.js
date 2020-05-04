@@ -18,10 +18,10 @@ var betweenTwoCitiesSetup = (function(){
 		'office',
 		'park',
 		'shop',
-		'tavern-(bed)',
-		'tavern-(drink)',
-		'tavern-(food)',
-		'tavern-(music)',
+		'tavern-bed',
+		'tavern-drink',
+		'tavern-food',
+		'tavern-music',
 	];
 	
 	function convertNumberToCoordinates(number){

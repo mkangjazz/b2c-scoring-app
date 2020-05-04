@@ -54,7 +54,7 @@ function City(props) {
 					<tbody>
 						<tr>
 							<td>
-								<img alt="Factory icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
 								Factory
 							</td>
 							<td>
@@ -69,7 +69,7 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
-								<img alt="Office icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
 								Office
 							</td>
 							<td>
@@ -130,7 +130,7 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
-								<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-music.gif" />
+								<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
 								Tavern
 							</td>
 							<td>
@@ -157,7 +157,7 @@ function City(props) {
 				</Link>
 				<h1>
 					<img className="image-city-token" src={`/img/token-${cityData.token}.gif`} />
-					{cityData.name} : {cityData.score.totalScore} pts
+					{cityData.name}: {cityData.score.totalScore} pts
 				</h1>
 			</header>
 			

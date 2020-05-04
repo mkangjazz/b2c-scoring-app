@@ -29,7 +29,8 @@ header .image-city-token {
 	margin: 0;
 	position: absolute;
 	top: .5em;
-	text-decoration: none;
+    text-decoration: none;
+    z-index: 2;
 }
 
 .link-back:before {

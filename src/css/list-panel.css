@@ -4,21 +4,20 @@
     padding: 0;
 }
 
-.list-tiles,
 .list-panel {
     border-top: 1px solid #ccc;
 }
 
-.list-tiles li,
 .list-panel li {
     border-bottom: 1px solid #ccc;
 }
 
-.list-tiles button,
-.list-panel a {
+.list-panel a,
+.list-panel button {
     align-items: center;
     background-color: #fff;
     border: none;
+    box-sizing: border-box;
     color: inherit;
     display: flex;
     font-size: 15px;
@@ -28,9 +27,11 @@
     position: relative;
     text-align: left;
     text-decoration: none;
+    width: 100%;
 }
 
-.list-panel a:after {
+.list-panel a:after,
+.list-panel button:after {
     content:"";
     border-right: 2px solid #999;
     border-top: 2px solid #999;
