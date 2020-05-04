@@ -38,13 +38,13 @@ class App extends Component {
 	}
   
   showSelectTileModal(e){
-    var number = e.target.getAttribute("data-number");
-    var city = e.target.getAttribute("data-city");
+    var number = e.currentTarget.getAttribute("data-number");
+    var city = e.currentTarget.getAttribute("data-city");
 
     this.setState({
       tileToUpdate: {
         city: city,
-        number: number
+        number: number,
       },
       isSelectTileModalVisible: true
     });
@@ -58,22 +58,17 @@ class App extends Component {
   }
 
   chooseTile(e){
-    var tileType = e.target.getAttribute("data-tile-token");
-    var tileTypeSpecial = e.target.getAttribute("data-tile-type-special");
+    var tileType = e.currentTarget.getAttribute("data-tile-token");
+    var tileTypeSpecial = e.currentTarget.getAttribute("data-tile-type-special");
     var tileCityToken = this.state.tileToUpdate.city;
     var tileNumber = this.state.tileToUpdate.number;
 
     this.updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber);
-
-    this.setState({
-      isSelectTileModalVisible: false,
-      cities: betweenTwoCitiesSetup.cities,
-      tileToUpdate: null,
-    });
   }
 
   updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber){
-    var targetTile = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken)[0].tiles[tileNumber];
+    var targetCity = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken);
+    var targetTile = targetCity[0].tiles[tileNumber];
     
     targetTile["type"] = tileType;
     targetTile["typeSpecial"] = tileTypeSpecial;
@@ -81,7 +76,9 @@ class App extends Component {
     calculateScore(betweenTwoCitiesSetup.cities);
 
     this.setState({
-      cities: betweenTwoCitiesSetup.cities
+      cities: betweenTwoCitiesSetup.cities,
+      isSelectTileModalVisible: false,
+      tileToUpdate: null,
     });
   }
 
@@ -94,12 +91,11 @@ class App extends Component {
   };
 
 	render() {
-
 		return (
       <div className="wrapper">
         <Router>
             <Route path="/" exact component={Home} />
-            <Route path="/between-two-cities/" render={props => <BetweenTwoCities renderCitySummaries={this.renderCitySummaries} cities={this.state.cities} {...props} />} />
+            <Route path="/original/" render={props => <BetweenTwoCities renderCitySummaries={this.renderCitySummaries} cities={this.state.cities} {...props} />} />
             <Route path="/city" render={props => <City tiles={this.state.tiles} chooseTile={this.chooseTile} isSelectTileModalVisible={this.state.isSelectTileModalVisible} cities={this.state.cities} showSelectTileModal={this.showSelectTileModal}  {...props} />} />
             <Route path="/capitals" component={Capitals} />
         </Router>

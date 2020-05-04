@@ -12,7 +12,7 @@ function Home() {
 			<nav>
 				<ul className="list-panel">
 					<li>
-						<Link to="/between-two-cities/">
+						<Link to="/original/">
 							<img className="image-game-cover" alt="Original Game Art" src="img/original.jpg" />
 							<h2>Original</h2>
 						</Link>

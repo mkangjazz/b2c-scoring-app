@@ -152,7 +152,7 @@ function City(props) {
 	return (
 		<div>
 			<header>
-				<Link to="/between-two-cities" className="link-back">
+				<Link to="/original/" className="link-back">
 					Back
 				</Link>
 				<h1>
