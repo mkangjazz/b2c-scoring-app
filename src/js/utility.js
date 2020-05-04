@@ -95,5 +95,4 @@ var utility = (function(){
   }
 }());
 
-
 export default utility;
