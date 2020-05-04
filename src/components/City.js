@@ -151,6 +151,7 @@ function City(props) {
 					Back
 				</Link>
 				<h1>
+					<img className="image-city-token" src={`/img/token-${cityData.token}.gif`} />
 					{cityData.name}
 				</h1>
 			</header>
