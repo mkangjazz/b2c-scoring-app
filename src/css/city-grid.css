@@ -7,20 +7,27 @@
 
 .city-grid li {
 	background-color: #f5f5f5;
-	border: 2px solid #fff;
+	border: 1px solid #fff;
 	box-sizing: border-box;
 	display: inline-block;
 	font-size: 16px;
 	position: relative;
 }
 
-.city-grid li button {
-	background: #ccc;
+.city-grid.four-by-four li {
+	padding: 25% 0 0;
+	width: 25%;
+}
+
+.city-grid button {
+	background-color: #ccc;
 	border: none;
+	border-radius: 4px;
 	bottom: 0;
+	color: #fff;
 	display: block;
 	height: 100%;
-	font-size: 14px;
+	font-size: 12px;
 	left: 0;
 	position: absolute;
 	right: 0;
@@ -29,29 +36,31 @@
     width: 100%;
 }
 
-.city-grid.four-by-four li {
-	padding: 25% 0 0;
-	width: 25%;
+.city-grid .image-tile-icon {
+	display: block;
+	margin: 0 auto .25em;
 }
 
-.button-tile {
-	background-color: #ccc;
-	border: 1px solid #333;
-	display: inline-block;
-	height: 0px;
-	margin: 0 0 10px;
-	padding: 100% 0 0;
-	position: relative;
-	width: 100%;
+.city-grid .house {
+	background-color: #84472e;
 }
 
-.button-tile span {
-	font-size: 14px;
-	font-weight: bold;
-	left: 0;
-	margin: -.5em 0 0;
-	position: absolute;
-	right: 0;
-	text-align: center;
-	top: 50%;
+.city-grid .office {
+	background-color: #2c6084;
+}
+
+.city-grid .shop {
+	background-color: #e9a346;
+}
+
+.city-grid .factory {
+	background-color: #6e6d70;
+}
+
+.city-grid .park {
+	background-color: #40784a;
+}
+
+.city-grid .tavern {
+	background-color: #962e31;
 }
