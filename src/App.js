@@ -96,7 +96,7 @@ class App extends Component {
         <Router>
             <Route path="/" exact component={Home} />
             <Route path="/original/" render={props => <BetweenTwoCities renderCitySummaries={this.renderCitySummaries} cities={this.state.cities} {...props} />} />
-            <Route path="/city" render={props => <City tiles={this.state.tiles} chooseTile={this.chooseTile} isSelectTileModalVisible={this.state.isSelectTileModalVisible} cities={this.state.cities} showSelectTileModal={this.showSelectTileModal}  {...props} />} />
+            <Route path="/city" render={props => <City tiles={this.state.tiles} chooseTile={this.chooseTile} isSelectTileModalVisible={this.state.isSelectTileModalVisible} cities={this.state.cities} showSelectTileModal={this.showSelectTileModal} hideSelectTileModal={this.hideSelectTileModal} {...props} />} />
             <Route path="/capitals" component={Capitals} />
         </Router>
     </div>

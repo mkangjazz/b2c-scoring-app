@@ -9,7 +9,7 @@ function City(props) {
 	var token = urlParams.get('token');
 	var game = urlParams.get('game');
 	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
-	var gridSize = game === "b2c" ? "four-by-four" : "five-by-five";
+	var gridSize = game === "original" ? "four-by-four" : "five-by-five";
 	
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
@@ -166,7 +166,7 @@ function City(props) {
 			{drawScores(cityData.score)}
 
 			{props.isSelectTileModalVisible === false ? null : 
-				<TileSelect tavernTypes={props.tavernTypes} chooseTile={props.chooseTile} tiles={props.tiles} />
+				<TileSelect hideSelectTileModal={props.hideSelectTileModal} tavernTypes={props.tavernTypes} chooseTile={props.chooseTile} tiles={props.tiles} />
 			}
 		</div>
 	);
