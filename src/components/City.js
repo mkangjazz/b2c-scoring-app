@@ -42,104 +42,119 @@ function City(props) {
 	function drawScores(score, game){
 		return (
 			<div>
-				<strong>City Total: {score.totalScore}</strong>
 				<table className="city-score-table">
+					<colgroup>
+						<col className='tile' />
+						<col className='number' />
+						<col className='bonus' />
+						<col className='score' />
+					</colgroup>
 					<thead>
 						<tr>
 							<th>Tile</th>
-							<th>Count</th>
-							<th>Bonus/Modifier</th>
-							<th>Total</th>
+							<th>#</th>
+							<th>Bonus</th>
+							<th>Score</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<p>Factory</p>
+								<img alt="Factory icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								Factory
 							</td>
 							<td>
-								<p>{score.numFactories}</p>
+								{score.numFactories}
 							</td>
 							<td>
-								<p>{score.factoryMultiplier }</p>
+								x{score.factoryMultiplier }
 							</td>
 							<td>
-								<p>{score.totalScoreFactories}</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<p>Office</p>
-							</td>
-							<td>
-								<p>{score.numOffices}</p>
-							</td>
-							<td>
-								<p>{score.officesNextToTaverns > 0 ? `Offices by Taverns: ${score.officesNextToTaverns}` : ""}</p>
-							</td>
-							<td>
-								<p>{score.totalScoreOffices}</p>
+								{score.totalScoreFactories}
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>House</p>
+								<img alt="Office icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								Office
 							</td>
 							<td>
-								<p>{score.numHouses}</p>
+								{score.numOffices}
 							</td>
 							<td>
-								<p>{score.nonHouseTypes > 0 ? `Non-House Types: ${score.nonHouseTypes}` : ""}</p>
-								<p>{score.housesNextToFactories > 0 ? `Houses next to Factory: ${score.housesNextToFactories}` : ""}</p>
+								{score.officesNextToTaverns > 0 ? `Offices by Taverns: ${score.officesNextToTaverns}` : ""}
 							</td>
 							<td>
-								<p>{score.totalScoreHouses}</p>
+								{score.totalScoreOffices}
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>Park</p>
+								<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								House
 							</td>
 							<td>
-								<p>{score.numParks}</p>
+								{score.numHouses}
+							</td>
+							<td>
+								{score.nonHouseTypes > 0 ? `Non-Houses: ${score.nonHouseTypes}` : ""}
+								{score.housesNextToFactories > 0 ? `Houses next to Factory: ${score.housesNextToFactories}` : ""}
+							</td>
+							<td>
+								{score.totalScoreHouses}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img alt="Park icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								Park
+							</td>
+							<td>
+								{score.numParks}
 							</td>
 							<td>
 								{score.parkGroups.length > 0 ? renderGroups(score.parkGroups) : "" }
 							</td>
 							<td>
-								<p>{score.totalScoreParks}</p>
+								{score.totalScoreParks}
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>Shop</p>
+								<img alt="Shop icon" className="image-tile-icon" src="/img/tile-house.gif" />
+								Shop
 							</td>
 							<td>
-								<p>{score.numShops}</p>
+								{score.numShops}
 							</td>
 							<td>
 								{score.shopGroups.length > 0 ? renderGroups(score.shopGroups) : "" }
 							</td>
 							<td>
-								<p>{score.totalScoreShops}</p>
+								{score.totalScoreShops}
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<p>Tavern</p>
+								<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-music.gif" />
+								Tavern
 							</td>
 							<td>
-								<p>{score.numTaverns}</p>
+								{score.numTaverns}
 							</td>
 							<td>
-								<p>{score.uniqueTaverns > 0 ? `Taverns Types: ${score.uniqueTaverns}` : ""}</p>
+								{score.uniqueTaverns > 0 ? `Taverns Types: ${score.uniqueTaverns}` : ""}
 							</td>
 							<td>
-								<p>{score.totalScoreTaverns}</p>
+								{score.totalScoreTaverns}
 							</td>
 						</tr>
 					</tbody>
 				</table>
+				<h2 className="city-total-score">
+					<strong>{score.totalScore}</strong>
+					<small>City Total</small>
+				</h2>
 			</div>
 		);
 	}

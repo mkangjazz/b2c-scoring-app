@@ -35,28 +35,22 @@ h3 {
 }
 
 .total-score {
-    font-size: 2em;
+    font-size: 1.5em;
     margin-left: auto;
-    margin-right: 1em;
+    margin-right: 2em;
     text-align: right;
 }
 
-.link-back {
-	color: inherit;
-	left: 10px;
-	margin: -.5em 0 0;
-	position: absolute;
-	top: 50%;
-	text-decoration: none;
+.city-total-score {
+	margin: 0 auto;
+    text-align: center;
 }
 
-.link-back:before {
-	content:"";
-	display: inline-block;
-	border-left: 2px solid #666;
-	border-top: 2px solid #666;
-	height: 10px;
-    margin-right: .25em;
-	transform: rotate(-45deg);
-	width: 10px;
+.city-total-score strong {
+	display: block;
+	font-size: 2em;
+}
+
+.city-total-score small {
+	font-size: .75em;
 }

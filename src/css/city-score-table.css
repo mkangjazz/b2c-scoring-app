@@ -1,0 +1,25 @@
+.city-score-table {
+	border-collapse: collapse;
+	font-size: .85em;
+	margin: 0 auto;
+    width: 95%;
+}
+
+.city-score-table .number {
+	text-align: right;
+}
+
+.city-score-table th,
+.city-score-table td {
+	padding: .5em .25em;
+}
+
+.city-score-table th {
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.city-score-table td {
+	border-top: 1px solid #ccc;
+	vertical-align: top;
+}

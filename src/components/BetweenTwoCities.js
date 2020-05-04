@@ -13,9 +13,6 @@ function BetweenTwoCities(props){
 					Original
 				</h1>
 			</header>
-			<h3>
-				Cities
-			</h3>
 			<ul className="list-panel list-cities">
 				{props.renderCitySummaries(props.cities)}
 			</ul>

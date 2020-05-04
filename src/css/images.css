@@ -1,11 +1,19 @@
 .image-game-cover {
 	display: block;
 	height: auto;
-	max-width: 125px;
+	max-width: 90px;
 	width: 100%;
 } 
 
 .image-city-token {
     height: auto;
     width: 3em;
+}
+
+.image-tile-icon {
+    display: inline-block;
+    height: auto;
+    margin-right: .25em;
+    width: 2em;
+    vertical-align: middle;
 }

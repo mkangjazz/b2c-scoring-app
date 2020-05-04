@@ -1,19 +1,46 @@
 header {
 	background-color: #fff;
-	margin: 0 0 2em;
+	margin: 0;
 	padding: 0;
 	position: relative;
 }
 
 header h1 {
     align-items: center;
+    flex-direction: column;
     display: flex;
+    font-size:1em;
+    height: 6em;
     justify-content: center;
-    padding: 20px 0;
+    padding: 0;
     text-align: center;
     width: 100%;
 }
 
-header h1 img {
+header .image-city-token {
+    display: block;
+    margin: 0 auto;
+}
+
+.link-back {
+    color: inherit;
+    font-size: .75em;
+	left: .5em;
+	margin: 0;
+	position: absolute;
+	top: .5em;
+	text-decoration: none;
+}
+
+.link-back:before {
+	content:"";
+	display: inline-block;
+	border-left: 2px solid #666;
+	border-top: 2px solid #666;
+	height: 7px;
     margin-right: .25em;
+    margin-top: -3px;
+    transform: rotate(-45deg);
+    vertical-align: middle;
+	width: 7px;
 }
