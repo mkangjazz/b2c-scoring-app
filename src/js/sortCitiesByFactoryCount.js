@@ -4,11 +4,16 @@ function sortCitiesByFactoryCount(cities) {
     cities.map(city => {
         const score = String(city["score"]["numFactories"]);
 
-        if (!leaderBoard.hasOwnProperty(score)) {
+        if (
+            !leaderBoard.hasOwnProperty(score) &&
+            score !== '0'
+        ) {
             leaderBoard[score] = [];
         }
 
-        leaderBoard[score].push(city.token);
+        if (score !== '0') {
+            leaderBoard[score].push(city.token);
+        }
 
         return false;
     });
@@ -27,9 +32,9 @@ function sortCitiesByFactoryCount(cities) {
         });
 
         leaderBoard.firstHasThisManyFactories = arr[0];
-        leaderBoard.secondHasThisManyFactories = arr[1] || 0;
+        leaderBoard.secondHasThisManyFactories = arr[1];
 
-        return arr[0];
+        return;
     }
 
     sortFactoryCounts();
@@ -42,14 +47,18 @@ function sortCitiesByFactoryCount(cities) {
         city["score"]["factoryMultiplier"] = 2;
         city["score"]["factoryBonus"] = '';
 
-        if (firstPlaceArray.indexOf(city.token) !== -1) {
-            city["score"]["factoryMultiplier"] = 4;
-            city["score"]["factoryBonus"] = 'Most Factories';
+        if (firstPlaceArray) {
+            if (firstPlaceArray.indexOf(city.token) !== -1) {
+                city["score"]["factoryMultiplier"] = 4;
+                city["score"]["factoryBonus"] = 'Most Factories';
+            }
         }
-        
-        if (secondPlaceArray.indexOf(city.token) !== -1) {
-            city["score"]["factoryMultiplier"] = 3;
-            city["score"]["factoryBonus"] = 'Second Most Factories';
+
+        if (secondPlaceArray) {
+            if (secondPlaceArray.indexOf(city.token) !== -1) {
+                city["score"]["factoryMultiplier"] = 3;
+                city["score"]["factoryBonus"] = 'Second Most Factories';
+            }
         }
 
         return false;

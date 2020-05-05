@@ -17,3 +17,10 @@
     width: 2em;
     vertical-align: middle;
 }
+
+.image-medal-icon {
+    display: inline-block;
+    height: auto;
+    width: 1.5em;
+    vertical-align: middle;
+}

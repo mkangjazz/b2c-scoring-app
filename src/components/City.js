@@ -47,7 +47,7 @@ function City(props) {
 						<tr>
 							<th>Tile</th>
 							<th>#</th>
-							<th>Bonus</th>
+							<th>Modifiers</th>
 							<th>Pts</th>
 						</tr>
 					</thead>
@@ -61,7 +61,9 @@ function City(props) {
 								{score.numFactories}
 							</td>
 							<td>
-								x{score.factoryMultiplier }
+								{score.factoryMultiplier === 4 ? <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> : ''}
+								{score.factoryMultiplier === 3 ? <img className='image-medal-icon' alt='Silver medal' src='/img/icon-silver.gif' /> : ''}
+								{score.factoryMultiplier > 2 ? <span>x {score.factoryMultiplier} </span>: ''}
 							</td>
 							<td>
 								{score.totalScoreFactories}
