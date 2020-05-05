@@ -23,6 +23,32 @@ function City(props) {
 		);
 	}
 
+	function renderTavernIcons(groups) {
+		const icons = groups.map((group, index) => 
+			<div key={`group-${index}`}>
+				{group.length === 4 ? '17 | ' : ''}
+				{group.length === 3 ? '09 | ' : ''}
+				{group.length === 2 ? '04 | ' : ''}
+				{group.length === 1 ? '01 | ' : ''}
+
+				{group.map((str,index) => (
+					<img 
+						alt={`${str} icon`}
+						className="image-special-tavern-icon"
+						key={`${str}-${index}`}
+						src={`/img/icon-tavern-${str}.png`}
+					/>
+				))}
+			</div>
+		);
+
+		return (
+			<React.Fragment>
+				{icons}
+			</React.Fragment>
+		);
+	}
+
 	function renderGroups(arr){
 		var groups = arr.map((group, index) => {
 			return (
@@ -139,7 +165,7 @@ function City(props) {
 								{score.numTaverns}
 							</td>
 							<td>
-								{score.uniqueTaverns > 0 ? `Taverns Types: ${score.uniqueTaverns}` : ""}
+								{renderTavernIcons(score.uniqueTaverns)}
 							</td>
 							<td>
 								{score.totalScoreTaverns}

@@ -7,6 +7,7 @@ import totalScoreParks from './totalScoreParks';
 import totalScoreOffices from './totalScoreOffices';
 import totalScoreHouses from './totalScoreHouses';
 import totalScoreShops from './totalScoreShops';
+import totalScoreTaverns from './totalScoreTaverns';
 import sortCitiesByFactoryCount from './sortCitiesByFactoryCount';
 import totalScoreFactories from './totalScoreFactories';
 
@@ -37,7 +38,7 @@ var calculateScore = function(cities) {
             city["score"]["totalScoreFactories"] = totalScoreFactories(city).score;
             city["score"]["totalScoreShops"] = totalScoreShops(city).score;
             city["score"]["shopGroups"] = totalScoreShops(city).groups;
-            city["score"]["totalScoreTaverns"] = 0;
+            city["score"]["totalScoreTaverns"] = totalScoreTaverns(city);
 
             return false;
         });

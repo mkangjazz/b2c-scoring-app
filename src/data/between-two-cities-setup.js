@@ -62,7 +62,7 @@ var betweenTwoCitiesSetup = (function(){
 			"numShops": 0,
 			"numTaverns": 0,
 			"nonHouseTypes": 0,
-			"uniqueTaverns": 0,
+			"uniqueTaverns": [],
 			"parkGroups": [],
 			"shopGroups": [],
 			"factoryMultiplier": 2,

@@ -10,6 +10,14 @@
     width: 3em;
 }
 
+.image-special-tavern-icon {
+    display: inline-block;
+    height: auto;
+    margin-right: .25em;
+    width: 1em;
+    vertical-align: middle;
+}
+
 .image-tile-icon {
     display: inline-block;
     height: auto;
@@ -24,3 +32,4 @@
     width: 1.5em;
     vertical-align: middle;
 }
+
