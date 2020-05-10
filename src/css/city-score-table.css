@@ -11,8 +11,8 @@
 
 .city-score-table th,
 .city-score-table td {
-	vertical-align: middle;
 	padding: .5em .25em;
+    vertical-align: baseline;
 }
 
 .city-score-table th {
@@ -22,4 +22,8 @@
 
 .city-score-table td {
 	border-top: 1px solid #ccc;
+}
+
+.table-tavern-icons td {
+	border-top: none;
 }
