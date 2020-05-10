@@ -12,6 +12,11 @@
     border-bottom: 1px solid #ccc;
 }
 
+.list-panel h2, 
+.list-panel h3 {
+    padding: 20px 10px;
+}
+
 .list-panel a,
 .list-panel button {
     align-items: center;

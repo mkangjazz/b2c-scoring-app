@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
  
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
+import ScoringInstructions from "./ScoringInstructions";
 
 function City(props) {
 	var urlParams = new URLSearchParams(window.location.search);
@@ -198,9 +199,11 @@ function City(props) {
 					</thead>
 					<tbody>
 						<tr>
-							<td className='nowrap'>
-								<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
-								Factory
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
+									Factory
+								</button>
 							</td>
 							<td>
 								{score.numFactories}
@@ -215,9 +218,11 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td className='nowrap'>
-								<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
-								Office
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
+									Office
+								</button>
 							</td>
 							<td>
 								{score.numOffices}
@@ -230,9 +235,11 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td className='nowrap'>
-								<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
-								House
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
+									House
+								</button>
 							</td>
 							<td>
 								{score.numHouses}
@@ -246,9 +253,11 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td className='nowrap'>
-								<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
-								Park
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
+									Park
+								</button>
 							</td>
 							<td>
 								{score.numParks}
@@ -261,9 +270,11 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td className='nowrap'>
-								<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
-								Shop
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
+									Shop
+								</button>
 							</td>
 							<td>
 								{score.numShops}
@@ -276,9 +287,11 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td className='nowrap'>
-								<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
-								Tavern
+							<td>
+								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
+									<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
+									Tavern
+								</button>
 							</td>
 							<td>
 								{score.numTaverns}
@@ -299,11 +312,18 @@ function City(props) {
 	return (
 		<div>
 			<header>
-				<Link to="/original/" className="link-back">
+				<Link 
+					to="/original/" 
+					className="link-back"
+				>
 					Back
 				</Link>
 				<h1>
-					<img alt={`${cityData.token} icon`} className="image-city-token" src={`/img/token-${cityData.token}.gif`} />
+					<img 
+						alt={`${cityData.token} icon`} 
+						className="image-city-token" 
+						src={`/img/token-${cityData.token}.gif`}
+					/>
 					{cityData.name}: {cityData.score.totalScore} pts
 				</h1>
 			</header>
@@ -313,7 +333,15 @@ function City(props) {
 			{drawScores(cityData.score)}
 
 			{props.isSelectTileModalVisible === false ? null : 
-				<TileSelect hideSelectTileModal={props.hideSelectTileModal} tavernTypes={props.tavernTypes} chooseTile={props.chooseTile} tiles={props.tiles} />
+				<TileSelect 
+					hideSelectTileModal={props.hideSelectTileModal}
+					tavernTypes={props.tavernTypes}
+					chooseTile={props.chooseTile}
+					tiles={props.tiles} />
+			}
+
+			{props.isScoringInstructionsModalVisible === false ? null : 
+				<ScoringInstructions hideScoringInstructionsModal={props.hideScoringInstructionsModal}/>
 			}
 		</div>
 	);

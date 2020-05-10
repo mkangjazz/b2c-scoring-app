@@ -26,6 +26,7 @@ class App extends Component {
 		this.state = {
 			cities: betweenTwoCitiesSetup.cities,
       isSelectTileModalVisible: false,
+      isScoringInstructionsModalVisible: false,
 			tavernTypes: betweenTwoCitiesSetup.tavernTypes,
       tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
@@ -36,6 +37,9 @@ class App extends Component {
     this.hideSelectTileModal = this.hideSelectTileModal.bind(this);
     this.chooseTile = this.chooseTile.bind(this);
     this.updateSetupData = this.updateSetupData.bind(this);
+
+    this.showScoringInstructionsModal = this.showScoringInstructionsModal.bind(this);
+    this.hideScoringInstructionsModal = this.hideScoringInstructionsModal.bind(this);
 	}
   
   showSelectTileModal(e){
@@ -91,14 +95,57 @@ class App extends Component {
 		return cityListItems;
   };
 
+  showScoringInstructionsModal(e){
+    this.setState({
+      isScoringInstructionsModalVisible: true
+    });
+  }
+
+  hideScoringInstructionsModal(){
+    this.setState({
+      isScoringInstructionsModalVisible: false
+    });
+  }
+
 	render() {
 		return (
       <div className="wrapper">
         <Router>
-            <Route path="/" exact component={Home} />
-            <Route path="/original/" render={props => <BetweenTwoCities renderCitySummaries={this.renderCitySummaries} cities={this.state.cities} {...props} />} />
-            <Route path="/city" render={props => <City tiles={this.state.tiles} chooseTile={this.chooseTile} isSelectTileModalVisible={this.state.isSelectTileModalVisible} cities={this.state.cities} showSelectTileModal={this.showSelectTileModal} hideSelectTileModal={this.hideSelectTileModal} {...props} />} />
-            <Route path="/capitals" component={Capitals} />
+            <Route
+              path="/"
+              exact component={Home} 
+            />
+            <Route
+              path="/original/"
+              render={props => 
+                <BetweenTwoCities 
+                  renderCitySummaries={this.renderCitySummaries} 
+                  cities={this.state.cities} 
+                  {...props} 
+                />
+              }
+            />
+            <Route
+              path="/city"
+              render={props => 
+                <City
+                  tiles={this.state.tiles}
+                  chooseTile={this.chooseTile} 
+                  isSelectTileModalVisible={this.state.isSelectTileModalVisible}
+                  isScoringInstructionsModalVisible={this.state.isScoringInstructionsModalVisible}
+                  cities={this.state.cities} 
+                  showSelectTileModal={this.showSelectTileModal} 
+                  hideSelectTileModal={this.hideSelectTileModal}
+                  showScoringInstructionsModal={this.showScoringInstructionsModal}
+                  hideScoringInstructionsModal={this.hideScoringInstructionsModal}
+                  // {...props}
+                />
+              }
+            />
+            <Route
+              path="/capitals"
+              component={Capitals}
+            />
         </Router>
     </div>
 		);

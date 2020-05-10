@@ -37,3 +37,10 @@
 .city-score-table table td:last-child {
 	width: 3em;
 }
+
+.city-score-table button {
+	font-size: .85em;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
+}
