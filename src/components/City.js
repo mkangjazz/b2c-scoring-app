@@ -23,24 +23,20 @@ function City(props) {
 		);
 	}
 
-	function renderTavernIcons(groups) {
-		const icons = groups.map((group, index) => 
+	function renderParkGroups(groups) {
+		const icons = groups.map((group, index) =>
 			<tr key={`group-${index}`}>
 				<td>
-				{group.map((str,index) => (
-					<img 
-						alt={`${str} icon`}
-						className="image-special-tavern-icon"
-						key={`${str}-${index}`}
-						src={`/img/icon-tavern-${str}.png`}
-					/>
-				))}
+					{group.length === 2 ? '8' : ''}
+					{group.length === 3 ? '12' : ''}
+					{group.length > 3 ? String(12 + group.length - 3) : ''}
 				</td>
 				<td>
-					{group.length === 4 ? '17' : ''}
-					{group.length === 3 ? '9' : ''}
-					{group.length === 2 ? '4' : ''}
-					{group.length === 1 ? '1' : ''}
+					{group.map((group, index) =>
+						<div key={`group-${index}`} className="css-icon-container">
+							<span className="park"></span>
+						</div>
+					)}
 				</td>
 			</tr>
 		);
@@ -54,20 +50,52 @@ function City(props) {
 		);
 	}
 
-	function renderGroups(arr){
+	function renderTavernIcons(groups) {
+		const icons = groups.map((group, index) => 
+			<tr key={`group-${index}`}>
+				<td>
+					{group.length === 1 ? '1' : ''}
+					{group.length === 2 ? '4' : ''}
+					{group.length === 3 ? '9' : ''}
+					{group.length === 4 ? '17' : ''}
+				</td>
+				<td>
+				{group.map((str,index) => (
+					<img 
+						alt={`${str} icon`}
+						className="image-special-tavern-icon"
+						key={`${str}-${index}`}
+						src={`/img/icon-tavern-${str}.png`}
+					/>
+				))}
+				</td>
+			</tr>
+		);
+
+		return (
+			<table>
+				<tbody>
+					{icons}
+				</tbody>
+			</table>
+		);
+	}
+
+	function renderShopGroups(arr){
 		var groups = arr.map((group, index) => {
 			return (
 				<tr key={`${group}-${index}`}>
 					<td>
-						{group.map((obj, index) => 
-							<div key={`shop-${index}`} className="css-icon-shop">
-								<span></span>
-							</div>
-						)}
+						{group.length === 2 ? '5' : ''}
+						{group.length === 3 ? '10' : ''}
+						{group.length === 4 ? '16' : ''}
 					</td>
 					<td>
-						XX
-						{/* {`Group of ${group.length}`} */}
+						{group.map((obj, index) => 
+							<div key={`shop-${index}`} className="css-icon-container">
+								<span className="shop"></span>
+							</div>
+						)}
 					</td>
 				</tr>
 			);
@@ -152,7 +180,7 @@ function City(props) {
 								{score.numParks}
 							</td>
 							<td>
-								{score.parkGroups.length > 0 ? renderGroups(score.parkGroups) : "" }
+								{score.parkGroups.length > 0 ? renderParkGroups(score.parkGroups) : "" }
 							</td>
 							<td>
 								{score.totalScoreParks}
@@ -167,7 +195,7 @@ function City(props) {
 								{score.numShops}
 							</td>
 							<td>
-								{score.shopGroups.length > 0 ? renderGroups(score.shopGroups) : "" }
+								{score.shopGroups.length > 0 ? renderShopGroups(score.shopGroups) : "" }
 							</td>
 							<td>
 								{score.totalScoreShops}

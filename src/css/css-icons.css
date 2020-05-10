@@ -1,37 +1,48 @@
-.css-icon-shop  {
+.css-icon-container  {
 	border: 1px solid #ccc;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 6px 2px;
+	display: inline-block;
+	font-size: 0;
+    padding: 2px;
+	vertical-align: middle;
 }
 
-.css-icon-shop span {
+.css-icon-container .shop {
 	background-color: #e9a346;
 	display: block;
-	height: 8px;
+	height: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
 	position: relative;
-	transform: rotate(90deg);
-    width: 16px;
+    width: 9px;
 }
 
-.css-icon-shop span:before,
-.css-icon-shop span:after {
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
+.css-icon-container .shop:before,
+.css-icon-container .shop:after {
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	bottom: 0;
 	content: "";
 	height: 0;
-	left: 0;
 	position: absolute;
-	right: 0;
+	top: 0;
 	width: 0;
 }
 
-.css-icon-shop span:before {
-	border-bottom: 5px solid #e9a346;
-	bottom: 100%;
+.css-icon-container .shop:before {
+	border-right: 5px solid #e9a346;
+	right: 100%;
   }
 
-  .css-icon-shop span:after {
-	border-top: 5px solid #e9a346;
-	top: 100%;
-  }
+.css-icon-container .shop:after {
+	border-left: 5px solid #e9a346;
+	left: 100%;
+}
+
+.css-icon-container .park {
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 12px solid #40784a;
+	height: 0;
+	display: inline-block;
+	vertical-align: middle;
+}
