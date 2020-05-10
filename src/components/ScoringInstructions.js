@@ -17,12 +17,19 @@ function ScoringInstructions(props){
 						</h2>
 						<ol>
 							<li>
+								Count number of factories in each city
+							</li>
+							<li>
 								<p>Figure out which city has the most factories</p>
-								<p>Score 4 points per factory for this city (or cities, if tied)</p>
+								<p>
+									Score 4 points per factory for this city (or cities, if tied)
+								</p>
 							</li>
 							<li>
 								<p>Figure out which city has the second most factories</p>
-								<p>Score 4 points per factory for this city (or cities, if tied)</p>
+								<p>
+									Score 3 points per factory for this city (or cities, if tied)
+								</p>
 							</li>
 							<li>
 								<p>
@@ -38,7 +45,7 @@ function ScoringInstructions(props){
 						<ol>
 							<li>
 								<p>
-									Group offices into sets of six, regardless of location or adjacency to each other
+									Group offices into sets of six for each city, regardless of whether they touch one another
 								</p>
 							</li>
 							<li>
@@ -56,7 +63,7 @@ function ScoringInstructions(props){
 							</li>
 							<li>
 								<p>
-									Count how many office tiles touch at least one tavern (multiple offices can touch the same tavern)
+									Count number of office tiles touch at least one tavern (multiple offices can touch the same tavern)
 								</p>
 								<p>
 									Score one bonus point for each of these offices
@@ -68,6 +75,18 @@ function ScoringInstructions(props){
 						<h2>
 							<img alt="House icon" class="image-tile-icon" src="/img/tile-house.gif" />House
 						</h2>
+						<ol>
+							<li>
+								Count number of houses
+							</li>
+							<li>
+								Count number of non-house tiles in the city
+							</li>
+							<li>
+								Count number of houses that touch a factory
+							</li>
+						</ol>
+						{/* <!-- TO DO --> */}
 						<p>a tile is worth 1 per other building type (excluding houses) in the city, but a tile next to a factory is only worth 1</p>
 						<p>
 						Each house tile is worth 1 point for
