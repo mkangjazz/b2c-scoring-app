@@ -13,6 +13,7 @@ import Home from "./components/Home";
 import './css/App.css';
 import './css/city-grid.css';
 import './css/city-score-table.css';
+import './css/css-icons.css';
 import './css/header.css';
 import './css/images.css';
 import './css/list-panel.css';

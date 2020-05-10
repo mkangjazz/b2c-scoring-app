@@ -24,6 +24,11 @@
 	border-top: 1px solid #ccc;
 }
 
-.table-tavern-icons td {
+.city-score-table table {
+    width: 100%;
+}
+
+.city-score-table table td {
 	border-top: none;
+	padding: 0;
 }
