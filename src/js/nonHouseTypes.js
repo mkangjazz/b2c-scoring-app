@@ -1,13 +1,19 @@
 function nonHouseTypes(tiles){
   var typesFound = [];
 
-  for (let i = 0; i < tiles.length; i++) {    
-      if( !(typesFound.includes(tiles[i]["type"])) && tiles[i]["type"] !== 'house' ){
-          typesFound.push(tiles[i]["type"]);
+  for (let i = 0; i < tiles.length; i++) {
+      if(
+        typesFound.indexOf(tiles[i]["type"]) === -1 &&
+        tiles[i]["type"] !== 'house' &&
+        tiles[i]["type"] !== '' &&
+        tiles[i]["type"] !== null &&
+        tiles[i]["type"] !== 'undefined'
+      ) {
+        typesFound.push(tiles[i]["type"]);
       }
   }
 
-  return typesFound.filter(x => x).length;
+  return typesFound;
 }
 
 export default nonHouseTypes;

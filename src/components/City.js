@@ -23,20 +23,92 @@ function City(props) {
 		);
 	}
 
+	function renderNonHouseTypes(nonHouseTypes) {
+		const icons = nonHouseTypes.map((type, index) =>
+			<div key={`group-${index}`} className="css-icon-container noborder">
+				<span className={`${type}`}></span>
+			</div>
+		);
+
+		return (
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							{icons}
+						</td>
+						<td>
+							{`x${nonHouseTypes.length}`}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		);
+	}
+
+	function renderHouseFactoryAdjacencies(housesNextToFactories) {
+		return (
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<div className="css-icon-container">
+								<span className='house'></span>
+							</div>
+							<div className="css-icon-container">
+								<span className='factory'></span>
+							</div>
+							&nbsp;{`x ${housesNextToFactories}`}
+						</td>
+						<td>
+							~1
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		);
+	}
+
+
+	function renderOfficesByTaverns(offices) {
+		return (
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<div className="css-icon-container">
+								<span className="office"></span>
+							</div>
+							<div className="css-icon-container">
+								<span className="tavern"></span>
+							</div>
+							&nbsp;{`x ${offices}`}
+						</td>
+						<td>
+							{`+${offices}`}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		);
+	}
+
 	function renderParkGroups(groups) {
 		const icons = groups.map((group, index) =>
 			<tr key={`group-${index}`}>
 				<td>
-					{group.length === 2 ? '8' : ''}
-					{group.length === 3 ? '12' : ''}
-					{group.length > 3 ? String(12 + group.length - 3) : ''}
+					<div className="css-icon-container">
+						<span className="park"></span>
+					</div>
+					<div className="css-icon-container">
+						<span className="park"></span>
+					</div>
+					&nbsp;{`... ${group.length}`}
 				</td>
 				<td>
-					{group.map((group, index) =>
-						<div key={`group-${index}`} className="css-icon-container">
-							<span className="park"></span>
-						</div>
-					)}
+					{group.length === 2 ? '+8' : ''}
+					{group.length === 3 ? '+12' : ''}
+					{group.length > 3 ? `+${String(12 + group.length - 3)}` : ''}
 				</td>
 			</tr>
 		);
@@ -54,20 +126,20 @@ function City(props) {
 		const icons = groups.map((group, index) => 
 			<tr key={`group-${index}`}>
 				<td>
-					{group.length === 1 ? '1' : ''}
-					{group.length === 2 ? '4' : ''}
-					{group.length === 3 ? '9' : ''}
-					{group.length === 4 ? '17' : ''}
+					{group.map((str,index) => (
+						<img 
+							alt={`${str} icon`}
+							className="image-special-tavern-icon"
+							key={`${str}-${index}`}
+							src={`/img/icon-tavern-${str}.png`}
+						/>
+					))}
 				</td>
 				<td>
-				{group.map((str,index) => (
-					<img 
-						alt={`${str} icon`}
-						className="image-special-tavern-icon"
-						key={`${str}-${index}`}
-						src={`/img/icon-tavern-${str}.png`}
-					/>
-				))}
+					{group.length === 1 ? '+1' : ''}
+					{group.length === 2 ? '+4' : ''}
+					{group.length === 3 ? '+9' : ''}
+					{group.length === 4 ? '+17' : ''}
 				</td>
 			</tr>
 		);
@@ -86,16 +158,18 @@ function City(props) {
 			return (
 				<tr key={`${group}-${index}`}>
 					<td>
-						{group.length === 2 ? '5' : ''}
-						{group.length === 3 ? '10' : ''}
-						{group.length === 4 ? '16' : ''}
+						<div className="css-icon-container">
+							<span className="shop"></span>
+						</div>
+						<div className="css-icon-container">
+							<span className="shop"></span>
+						</div>
+						&nbsp;{`... ${group.length}`}
 					</td>
 					<td>
-						{group.map((obj, index) => 
-							<div key={`shop-${index}`} className="css-icon-container">
-								<span className="shop"></span>
-							</div>
-						)}
+						{group.length === 2 ? '+5' : ''}
+						{group.length === 3 ? '+10' : ''}
+						{group.length === 4 ? '+16' : ''}
 					</td>
 				</tr>
 			);
@@ -119,12 +193,12 @@ function City(props) {
 							<th>Tile</th>
 							<th>#</th>
 							<th>Modifiers</th>
-							<th>Pts</th>
+							<th>Total</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
 								Factory
 							</td>
@@ -141,7 +215,7 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
 								Office
 							</td>
@@ -149,14 +223,14 @@ function City(props) {
 								{score.numOffices}
 							</td>
 							<td>
-								{score.officesNextToTaverns > 0 ? `Offices by Taverns: ${score.officesNextToTaverns}` : ""}
+								{score.officesNextToTaverns > 0 ? renderOfficesByTaverns(score.officesNextToTaverns) : ""}
 							</td>
 							<td>
 								{score.totalScoreOffices}
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
 								House
 							</td>
@@ -164,15 +238,15 @@ function City(props) {
 								{score.numHouses}
 							</td>
 							<td>
-								{score.nonHouseTypes > 0 ? `Non-Houses: ${score.nonHouseTypes}` : ""}
-								{score.housesNextToFactories > 0 ? `Houses next to Factory: ${score.housesNextToFactories}` : ""}
+								{score.nonHouseTypes.length > 0 ? renderNonHouseTypes(score.nonHouseTypes) : ""}
+								{score.housesNextToFactories > 0 ? renderHouseFactoryAdjacencies(score.housesNextToFactories) : ""}
 							</td>
 							<td>
 								{score.totalScoreHouses}
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
 								Park
 							</td>
@@ -180,14 +254,14 @@ function City(props) {
 								{score.numParks}
 							</td>
 							<td>
-								{score.parkGroups.length > 0 ? renderParkGroups(score.parkGroups) : "" }
+								{score.numParks > 0 ? renderParkGroups(score.parkGroups) : "" }
 							</td>
 							<td>
 								{score.totalScoreParks}
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
 								Shop
 							</td>
@@ -202,7 +276,7 @@ function City(props) {
 							</td>
 						</tr>
 						<tr>
-							<td>
+							<td className='nowrap'>
 								<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
 								Tavern
 							</td>

@@ -25,10 +25,15 @@
 }
 
 .city-score-table table {
+    table-layout: fixed;
     width: 100%;
 }
 
 .city-score-table table td {
 	border-top: none;
 	padding: 0;
+}
+
+.city-score-table table td:last-child {
+	width: 3em;
 }
