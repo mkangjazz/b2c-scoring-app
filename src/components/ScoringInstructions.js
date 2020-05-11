@@ -8,7 +8,7 @@ function ScoringInstructions(props){
 					<button onClick={(e) => props.hideScoringInstructionsModal(e)} className='close-modal' type='button'>Close</button>
 					<header>
 						<h1>
-							Scoring Instructions
+							Calculating a City's Score
 						</h1>
 					</header>
 					<section>
@@ -17,7 +17,7 @@ function ScoringInstructions(props){
 						</h2>
 						<ol>
 							<li>
-								Count number of factories in each city
+								<p>Count number of factories in each city</p>
 							</li>
 							<li>
 								<p>Figure out which city has the most factories</p>
@@ -45,7 +45,7 @@ function ScoringInstructions(props){
 						<ol>
 							<li>
 								<p>
-									Group offices into sets of six for each city, regardless of whether they touch one another
+									Group offices into sets of six, regardless of location or adjacency
 								</p>
 							</li>
 							<li>
@@ -77,88 +77,98 @@ function ScoringInstructions(props){
 						</h2>
 						<ol>
 							<li>
-								Count number of houses
+								<p>
+									Count number of houses that touch a factory
+								</p>
+								<p>
+									Score 1 point for each house that touches a factory
+								</p>
 							</li>
 							<li>
-								Count number of non-house tiles in the city
+								<p>Count number of non-house types in the city</p>
+								<p>All taverns count as a single building type.</p>
 							</li>
 							<li>
-								Count number of houses that touch a factory
+								<p>Count number of houses that do not touch a factory</p>
+								<p>Score 1 point for each non-house types for each house that does not touch a factory</p>
 							</li>
 						</ol>
-						{/* <!-- TO DO --> */}
-						<p>a tile is worth 1 per other building type (excluding houses) in the city, but a tile next to a factory is only worth 1</p>
-						<p>
-						Each house tile is worth 1 point for
-each other building type (excluding
-houses) in the city (regardless of
-location or adjacency). If there is one
-other building type in the city, each
-house is worth 1 point. If there are
-five other building types in the city, each house is worth
-5 points. All taverns count as a single building type.
-If a house tile is adjacent to a factory tile, that house tile
-instead scores 1 point (people don’t want to live right
-next to a factory).
-						</p>
 					</section>
 					<section>
 						<h2>
 							<img alt="Park icon" class="image-tile-icon" src="/img/tile-park.gif" />Park
 						</h2>
-						<p>
-						Parks score in groups of one or
-more connected parks. A single
-unconnected park is worth 2 points.
-Two connected parks are worth 8.
-Three connected parks are worth
-12. Every additional connected park
-after the third increases the score by 1.
-You may have more than one unconnected park group
-in your city. Score each park group separately.
-To be in a connected group, a park must share a
-border with another park. The group does not have to
-form a straight line.
-						</p>
+						<ol>
+							<li>
+								<p>Count parks that do not touch other parks</p>
+								<p>Score 2 points for each of these parks</p>
+							</li>
+							<li>
+								<p>
+									Group parks that touch another park, they do not need to form a straight line.
+								</p>
+								<p>
+									Score each group separately:
+								</p>
+								<ul>
+									<li>
+										<p>Score 8 points for two connected parks</p>
+									</li>
+									<li>
+										<p>
+											Score 12 points for three connected parks
+										</p>
+									</li>
+									<li>
+										<p>
+											Score 1 additional point for each connected park after the third
+										</p>
+									</li>
+								</ul>
+							</li>
+						</ol>
 					</section>
 					<section>
 						<h2>
 							<img alt="Shop icon" class="image-tile-icon" src="/img/tile-shop.gif" />Shop
 						</h2>
-						<p>a set is worth 2|5|10|16</p>
-						<p>
-							Shops score when connected in a straight line (row or column):
-						</p>
-						<ul>
-							<li>2 points for one shop tile</li>
-							<li>5 points for two connected shop tiles</li>
-							<li>10 points for three connected shop tiles</li>
-							<li>16 points for four connected shop tiles</li>
-						</ul>
-						<p>
-							If lines of shops cross (in an L or T or + shape), each tile can only be counted for one of the sets.
-						</p>
+						<ol>
+							<li>
+								<p>Count shops that do not touch another shop</p>
+								<p>Score 2 points for each of these shops</p>
+							</li>
+							<li>
+								<p>Group shops that touch in a straight line (row or column)</p>
+								<p>Shops may not be counted in more than one group, for example in an L/T/+ shape</p>
+							</li>
+							<li>
+								<p>Score each group separately:</p>
+								<ul>
+									<li>Score 5 points for two connected shops</li>
+									<li>Score 10 points for three connected shops</li>
+									<li>Score 16 points for four connected shops</li>
+								</ul>
+							</li>
+						</ol>
 					</section>
 					<section>
 						<h2>
 							<img alt="Tavern icon" class="image-tile-icon" src="/img/tile-tavern-drink.gif" />Tavern
 						</h2>
-						<p>a set is worth 1|4|9|17</p>
-						<p>
-							There are four different tavern types: bed, drink, food, and music. A city can contain duplicate taverns of any type.
-						</p>
-						<p>
-							Regardless of tavern location or adjacency, a tavern set consists of different tavern types.
-						</p>
-						<p>
-							Each set of taverns is scored separately, based on how many different types it consists of:
-						</p>
-						<ul>
-							<li>1 point for one tavern type</li>
-							<li>4 points for two different tavern types</li>
-							<li>9 points for three different tavern types</li>
-							<li>17 points for all four different tavern types</li>
-						</ul>
+						<ol>
+							<li>
+								<p>Group taverns, including only one tavern type (bed, drink, food, music) per group</p>
+							</li>
+							<li>
+								<p>Score groups separately, based on how many different types it includes:</p>
+								<ul>
+									<li>Score 1 point for one tavern type</li>
+									<li>Score 4 points for two different tavern types</li>
+									<li>Score 9 points for three different tavern types</li>
+									<li>Score 17 points for all four different tavern types</li>
+								</ul>
+							</li>
+						</ol>
 					</section>
 				</div>
 			</div>
