@@ -11,13 +11,16 @@ import CitySummary from "./components/CitySummary";
 import Home from "./components/Home";
 
 import './css/App.css';
+import './css/app-login.css';
 import './css/city-grid.css';
 import './css/city-score-table.css';
 import './css/css-icons.css';
+import './css/footer.css';
 import './css/header.css';
 import './css/images.css';
 import './css/list-panel.css';
 import './css/modal.css';
+import './css/social-links.css';
 import './css/typography.css';
 
 class App extends Component {
@@ -30,6 +33,7 @@ class App extends Component {
 			tavernTypes: betweenTwoCitiesSetup.tavernTypes,
       tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
+      version: '',
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -40,8 +44,16 @@ class App extends Component {
 
     this.showScoringInstructionsModal = this.showScoringInstructionsModal.bind(this);
     this.hideScoringInstructionsModal = this.hideScoringInstructionsModal.bind(this);
+
+    this.handleVersionSelection = this.handleVersionSelection.bind(this);
 	}
   
+  handleVersionSelection(e){
+    this.setState({
+      version: e.target.value
+    });
+  }
+
   showSelectTileModal(e){
     var number = e.currentTarget.getAttribute("data-number");
     var city = e.currentTarget.getAttribute("data-city");
@@ -112,11 +124,16 @@ class App extends Component {
       <div className="wrapper">
         <Router>
             <Route
-              path="/"
-              exact component={Home} 
+              exact path="/" 
+              render={props=>
+                <Home 
+                  handleVersionSelection={this.handleVersionSelection}
+                  version={this.state.version}
+                />
+              }
             />
             <Route
-              path="/original/"
+              path="/original"
               render={props => 
                 <BetweenTwoCities 
                   renderCitySummaries={this.renderCitySummaries} 

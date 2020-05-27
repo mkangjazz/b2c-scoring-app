@@ -1,0 +1,26 @@
+.social-links {
+	align-items: center;
+	display: flex;
+	list-style: none;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.social-links li {
+	margin: 0 1em;
+}
+
+.social-links li a {
+	background-color: #333;
+	border-radius: 100%;
+	display: block;
+	height: 2em;
+	width: 2em;
+}
+
+.social-links img {
+	height: auto;
+	width: 2em;
+}

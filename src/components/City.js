@@ -191,8 +191,8 @@ function City(props) {
 				<table className="city-score-table">
 					<thead>
 						<tr>
-							<th>Tile</th>
 							<th>#</th>
+							<th>Tile</th>
 							<th>Modifiers</th>
 							<th>Total</th>
 						</tr>
@@ -200,13 +200,13 @@ function City(props) {
 					<tbody>
 						<tr>
 							<td>
+								{score.numFactories}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
 									Factory
 								</button>
-							</td>
-							<td>
-								{score.numFactories}
 							</td>
 							<td>
 								{score.factoryMultiplier === 4 ? <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> : ''}
@@ -219,13 +219,13 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
+								{score.numOffices}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
 									Office
 								</button>
-							</td>
-							<td>
-								{score.numOffices}
 							</td>
 							<td>
 								{score.officesNextToTaverns > 0 ? renderOfficesByTaverns(score.officesNextToTaverns) : ""}
@@ -236,13 +236,13 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
+								{score.numHouses}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
 									House
 								</button>
-							</td>
-							<td>
-								{score.numHouses}
 							</td>
 							<td>
 								{score.nonHouseTypes.length > 0 ? renderNonHouseTypes(score.nonHouseTypes) : ""}
@@ -254,13 +254,13 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
+								{score.numParks}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
 									Park
 								</button>
-							</td>
-							<td>
-								{score.numParks}
 							</td>
 							<td>
 								{score.numParks > 0 ? renderParkGroups(score.parkGroups) : "" }
@@ -271,13 +271,13 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
+								{score.numShops}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
 									Shop
 								</button>
-							</td>
-							<td>
-								{score.numShops}
 							</td>
 							<td>
 								{score.shopGroups.length > 0 ? renderShopGroups(score.shopGroups) : "" }
@@ -288,13 +288,13 @@ function City(props) {
 						</tr>
 						<tr>
 							<td>
+								{score.numTaverns}
+							</td>
+							<td>
 								<button onClick={(e) => props.showScoringInstructionsModal(e)} type='button'>
 									<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
 									Tavern
 								</button>
-							</td>
-							<td>
-								{score.numTaverns}
 							</td>
 							<td>
 								{renderTavernIcons(score.uniqueTaverns)}

@@ -22,20 +22,20 @@ h3 {
 }
 
 h1 {
-	font-size: 36px;
+	font-size: 2em;
 }
 
 h2 {
-	font-size: 24px;
+	font-size: 1.25em;
 }
 
 h3 {
-	font-size: 18px;
+	font-size: 1em;
 }
 
 p,
 li {
-	font-size: 18px;
+	font-size: 1em;
 }
 
 .total-score {
