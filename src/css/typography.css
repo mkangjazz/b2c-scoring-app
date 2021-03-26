@@ -4,9 +4,12 @@ body {
 	font-size: 18px;
 }
 
-
 strong {
 	font-weight: bold;
+}
+
+small {
+	font-size: .8em;
 }
 
 ul {
@@ -43,4 +46,12 @@ li {
     margin-left: auto;
     margin-right: 2em;
     text-align: right;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.text-center {
+	text-align: center;
 }

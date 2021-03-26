@@ -7,6 +7,7 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	font-weight: lighter;
+	margin-bottom: 1.5em;
 	overflow:hidden;
 	/* text-indent: -999em; */
 }
@@ -16,93 +17,13 @@
 }
 
 .app-login h1 strong {
-	background: #333;
-	color: #fff;
+	color: #333;
 	display: block;
+	font-size: .75em;
 	font-weight: lighter;
 	padding: .25em;
 }
 
 .app-login p {
 	text-align: center;
-}
-
-.app-login form {
-    align-items: center;
-    display: flex;
-	height: 100vh;
-}
-
-.app-login form > div {
-	background-color: white;
-	margin: auto;
-    padding: 0 .5em;
-	text-align: center;
-}
-
-.app-login .input-group {
-	align-items: flex-end;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	box-sizing: border-box;
-	display: flex;
-	flex-wrap: nowrap;
-	margin: .25em 0;
-	position: relative;
-}
-
-.app-login .input-group:before {
-	animation-duration: 1s;
-	animation-name: oscillate;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-	border-bottom: 6px solid transparent;
-	border-top: 6px solid transparent;
-	border-left: 12px solid #ccc;
-	content: '';
-	margin: -12px 0 0 0;
-	position: absolute;
-	right: 102%;
-}
-
-.app-login select {
-	background-color: #fff;
-	border: none;
-	box-sizing: border-box;
-	display: block;
-	font-size: 1em;
-	height: 2.25em;
-	text-shadow: none;
-	width: 75%;
-}
-
-.app-login input[type='submit'][disabled] {
-	background-color: #ccc;
-	color: #777;
-	opacity: .75;
-}
-
-.app-login input[type='submit'] {
-	background-color:#40784a;
-	border: none;
-	box-shadow: none;
-	box-sizing: border-box;
-	color: #fff;
-	font-size: 1.125em;
-	font-weight: bold;
-	height: 2.25em;
-	margin-left: auto;
-	padding: 0;
-	text-shadow: none;
-	width: 25%;
-}
-
-@keyframes oscillate {
-	0% {
-		opacity: 0;
-	}
-	
-	100% {
-		opacity: 1;
-	}
 }

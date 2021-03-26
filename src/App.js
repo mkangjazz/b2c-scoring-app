@@ -1,3 +1,19 @@
+import './css/App.css';
+import './css/app-login.css';
+import './css/city-buttons.css';
+import './css/city-grid.css';
+import './css/city-heading.css';
+import './css/city-score-table.css';
+import './css/css-icons.css';
+import './css/footer.css';
+import './css/header.css';
+import './css/images.css';
+import './css/list-panel.css';
+import './css/link-back.css';
+import './css/modal.css';
+import './css/social-links.css';
+import './css/typography.css';
+
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
@@ -10,19 +26,6 @@ import City from "./components/City";
 import CitySummary from "./components/CitySummary";
 import Home from "./components/Home";
 
-import './css/App.css';
-import './css/app-login.css';
-import './css/city-grid.css';
-import './css/city-score-table.css';
-import './css/css-icons.css';
-import './css/footer.css';
-import './css/header.css';
-import './css/images.css';
-import './css/list-panel.css';
-import './css/modal.css';
-import './css/social-links.css';
-import './css/typography.css';
-
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -30,6 +33,7 @@ class App extends Component {
 			cities: betweenTwoCitiesSetup.cities,
       isSelectTileModalVisible: false,
       isScoringInstructionsModalVisible: false,
+      showCityTiles: true,
 			tavernTypes: betweenTwoCitiesSetup.tavernTypes,
       tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
@@ -45,9 +49,24 @@ class App extends Component {
     this.showScoringInstructionsModal = this.showScoringInstructionsModal.bind(this);
     this.hideScoringInstructionsModal = this.hideScoringInstructionsModal.bind(this);
 
+    this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
+    this.handleShowCityScores = this.handleShowCityScores.bind(this);
+
     this.handleVersionSelection = this.handleVersionSelection.bind(this);
 	}
-  
+
+  handleShowCityTiles(){
+    this.setState({
+      showCityTiles: true,
+    });
+  }
+
+  handleShowCityScores(){
+    this.setState({
+      showCityTiles: false,
+    });
+  }
+
   handleVersionSelection(e){
     this.setState({
       version: e.target.value
@@ -150,7 +169,10 @@ class App extends Component {
                   chooseTile={this.chooseTile} 
                   isSelectTileModalVisible={this.state.isSelectTileModalVisible}
                   isScoringInstructionsModalVisible={this.state.isScoringInstructionsModalVisible}
-                  cities={this.state.cities} 
+                  cities={this.state.cities}
+                  showCityTiles={this.state.showCityTiles}
+                  handleShowCityScores={this.handleShowCityScores}
+                  handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal} 
                   hideSelectTileModal={this.hideSelectTileModal}
                   showScoringInstructionsModal={this.showScoringInstructionsModal}

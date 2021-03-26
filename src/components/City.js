@@ -11,7 +11,15 @@ function City(props) {
 	var game = urlParams.get('game');
 	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
 	var gridSize = game === "original" ? "four-by-four" : "five-by-five";
-	
+
+  function handleTileButton(e) {
+    console.log('show tiles');
+  }
+
+  function handleScoresButton() {
+    console.log('show scores');
+  }
+
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
 			return <CityGridSquare type={tile.type} typeSpecial={tile.typeSpecial} showSelectTileModal={props.showSelectTileModal} number={index} city={token} key={index} />
@@ -311,26 +319,48 @@ function City(props) {
 
 	return (
 		<div>
-			<header>
-				<Link 
-					to="/original/" 
-					className="link-back"
-				>
-					Back
-				</Link>
-				<h1>
-					<img 
-						alt={`${cityData.token} icon`} 
-						className="image-city-token" 
-						src={`/img/token-${cityData.token}.gif`}
-					/>
-					{cityData.name}: {cityData.score.totalScore} pts
-				</h1>
-			</header>
-			
-			{drawCityGrid(cityData.tiles)}
+      <Link 
+        to="/original/" 
+        className="link-back"
+      >
+        Back
+      </Link>
 
-			{drawScores(cityData.score)}
+      <h1 className='city-heading'>
+        <img 
+          alt={`${cityData.token} icon`} 
+          className="image-city-token" 
+          src={`/img/token-${cityData.token}.gif`}
+        />
+
+        {cityData.name}
+
+        <span className='city-score'>
+          {cityData.score.totalScore}
+        </span>
+      </h1>
+
+      <div className='city-buttons'>
+        <button
+          className={props.showCityTiles ? 'active' : null}
+          onClick={props.handleShowCityTiles}
+          type='button'
+        >
+          Tiles
+        </button>
+        <button
+          className={props.showCityTiles ? null: 'active'}
+          onClick={props.handleShowCityScores}
+          type='button'
+        >
+          Scores
+        </button>
+      </div>
+			
+      {props.showCityTiles
+        ? drawCityGrid(cityData.tiles)
+        : drawScores(cityData.score)
+      }
 
 			{props.isSelectTileModalVisible === false ? null : 
 				<TileSelect 

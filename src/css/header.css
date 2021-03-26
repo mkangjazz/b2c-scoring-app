@@ -1,47 +1,34 @@
-header {
-	background-color: #fff;
-	margin: 0;
-	padding: 0;
-	position: relative;
+.city-heading {
+  align-items: center;
+  display: flex;
+  font-size:1em;
+  padding: 1em 0;
+  text-align: center;
+  width: 100%;
 }
 
-header h1 {
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    font-size:1em;
-    height: 6em;
-    justify-content: center;
-    padding: 0;
-    text-align: center;
-    width: 100%;
-}
-
-header .image-city-token {
-    display: block;
-    margin: 0 auto;
+.city-heading .image-city-token {
+  display: block;
+  margin-left: 0;
 }
 
 .link-back {
-    color: inherit;
-    font-size: .75em;
-	left: .5em;
-	margin: 0;
-	position: absolute;
-	top: .5em;
-    text-decoration: none;
-    z-index: 2;
+  color: inherit;
+  display: block;
+  font-size: .75em;
+  margin: 0 0 1.6em;
+  text-decoration: none;
 }
 
 .link-back:before {
-	content:"";
-	display: inline-block;
-	border-left: 2px solid #666;
-	border-top: 2px solid #666;
-	height: 7px;
-    margin-right: .25em;
-    margin-top: -3px;
-    transform: rotate(-45deg);
-    vertical-align: middle;
-	width: 7px;
+  content:"";
+  display: inline-block;
+  border-left: 2px solid #666;
+  border-top: 2px solid #666;
+  height: 7px;
+  margin-right: .25em;
+  margin-top: -3px;
+  transform: rotate(-45deg);
+  vertical-align: middle;
+  width: 7px;
 }

@@ -1,0 +1,27 @@
+.city-buttons {
+  align-items: center;
+  display: flex;
+  padding: 1em 0;
+}
+
+.city-buttons button {
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: 0;
+  padding: .5em 3em;
+  transition: all ease .25s;
+}
+
+.city-buttons button + button {
+  margin-left: 1em;
+}
+
+.city-buttons button:focus {
+  border-color: #333;
+}
+
+.city-buttons .active {
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}

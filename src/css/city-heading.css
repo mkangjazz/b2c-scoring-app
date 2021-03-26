@@ -1,0 +1,18 @@
+.city-heading {
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  font-size:1em;
+  padding: 1em 0;
+  text-align: center;
+  width: 100%;
+}
+
+.city-heading .image-city-token {
+  display: block;
+  margin-left: 0;
+}
+
+.city-heading .city-score {
+  margin-left: auto;
+}
