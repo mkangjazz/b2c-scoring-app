@@ -11,7 +11,7 @@ Between Two Cities and its expansion, Capitals, have complex, error-prone, manua
 
 **Proposed Solutions:**
 
-- MVP (80% complete): user enters city tile information manually and the app calculates scores.
+- MVP: user enters city tile information manually and the app calculates scores.
 - Ideal: user takes a photo of each city and the app calculates scores.
 
 ### Local Development
