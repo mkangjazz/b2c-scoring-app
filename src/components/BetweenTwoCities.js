@@ -7,10 +7,7 @@ function BetweenTwoCities(props){
 			<Link to="/" className="link-back">
 				Back
 			</Link>
-			<h1 className='game-title'>
-       {/* <img 
-          alt=""
-          src="/img/original.jpg" /> */}
+			<h1 className='game-title text-center'>
         Original
 			</h1>
 			<ul className="list-panel list-cities">

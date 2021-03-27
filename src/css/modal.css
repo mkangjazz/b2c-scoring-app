@@ -1,13 +1,13 @@
 .modal-wrapper {
-    background-color: rgba(0,0,0, .8);
-	bottom: 0;
-	display: block;
-	left: 0;
-    padding: 1em;
-	position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 999;
+  background-color: rgba(0,0,0, .8);
+  bottom: 0;
+  display: block;
+  left: 0;
+  padding: 1em;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
 }
 
 .modal {
@@ -21,29 +21,33 @@
 	position: relative;
 }
 
+.modal-content {
+	padding: 1em;
+}
+
 .close-modal {
-	height: 4em;
-	overflow: hidden;
-	padding: 0;
-    position: absolute;
-	right: 0;
-	text-align: left;
-	text-indent: -999em;
-    top: 0;
-    width: 4em;
-    z-index: 1;
+  height: 4em;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: left;
+  text-indent: -999em;
+  top: 0;
+  width: 4em;
+  z-index: 1;
 }
 
 .close-modal:before,
 .close-modal:after {
-	border-top: 2px solid #666;
-    content: '';
-    display: block;
-	position: absolute;
-	left: 50%;
-    margin: -1px 0 0 -1em;
-    top: 50%;
-    width: 2em;
+  border-top: 2px solid #666;
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  margin: -1px 0 0 -1em;
+  top: 50%;
+  width: 2em;
 }
 
 .close-modal:before {
@@ -54,18 +58,60 @@
 	transform: rotate(-45deg);
 }
 
-.modal section {
-    border-top: 1px solid #ccc;
-    margin: 0;
-    padding: 1em .25em;
+.modal-title {
+  padding: 1em 0 1em;
 }
 
-.modal section h2 {
-	font-size: 18px;
+.modal-tr td {
+  border: 1px solid #ccc;
+  vertical-align: middle;
 }
 
-.modal section ol, 
-.modal section ul {
-	margin: 0;
+.modal-tr td:nth-child(odd) {
+  padding: 1em;
+}
+
+.modal-tr td:nth-child(even) {
+  background: #f3f3f3;
+  border-radius: 4px;
+  padding: 1em;
+}
+
+.modal-tr h2 {
+  align-items: center;
+  display: flex;
+  font-size: 1em;
+  padding: 0;
+  width: 6em;
+}
+
+.modal-tr ol, 
+.modal-tr ul {
 	padding: 0 0 0 1em;
+}
+
+.modal-tr ol ul, 
+.modal-tr ul ul {
+	padding: 0 0 0 1em;
+}
+
+.modal-tr ul {
+  list-style: disc;
+}
+
+.modal-tr ol {
+  list-style: decimal;
+}
+
+.modal-tr li {
+  line-height: 1.5;
+  margin-bottom: 1em;
+}
+
+.modal-tr li:last-child {
+  margin-bottom: 0;
+}
+
+.modal-tr li li {
+  margin-bottom: 0;
 }

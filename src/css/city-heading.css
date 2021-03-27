@@ -2,8 +2,8 @@
   align-items: center;
   border-bottom: 1px solid #ccc;
   display: flex;
-  font-size:1em;
-  padding: 1em 0;
+  font-size: 1.25em;
+  padding: .5em 0 1em;
   text-align: center;
   width: 100%;
 }

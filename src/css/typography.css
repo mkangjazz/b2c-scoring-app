@@ -1,7 +1,7 @@
 html,
 body {
 	font-family: 'PT Sans', sans-serif;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 strong {
@@ -41,17 +41,25 @@ li {
 	font-size: 1em;
 }
 
-.total-score {
-    font-size: 1.5em;
-    margin-left: auto;
-    margin-right: 2em;
-    text-align: right;
-}
-
 .text-right {
 	text-align: right;
 }
 
 .text-center {
 	text-align: center;
+}
+
+.total-score {
+  font-size: 1.5em;
+  margin-left: auto;
+  margin-right: 2em;
+  text-align: right;
+}
+
+.app-title {
+	padding: 1em 0 1.5em;
+}
+
+.game-title {
+	margin-bottom: 1.5em;
 }

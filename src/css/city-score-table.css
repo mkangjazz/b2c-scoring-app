@@ -16,6 +16,7 @@
 }
 
 .city-score-table th {
+	font-weight: bold;
 	text-align: left;
 	vertical-align: bottom;
 }
@@ -38,9 +39,11 @@
 	width: 3em;
 }
 
-.city-score-table button {
-	font-size: .85em;
+.city-score-table .city-score-legend {
+	font-size: 1em;
 	margin: 0;
-	padding: 0;
+	padding: 0;	
+    text-align: left;
 	white-space: nowrap;
+    width: 6em;
 }

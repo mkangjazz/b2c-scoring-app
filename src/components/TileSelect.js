@@ -20,11 +20,9 @@ function TileSelect(props){
 			<div className="modal">
 				<div className="modal-content">
 					<button onClick={(e) => props.hideSelectTileModal(e)} className='close-modal' type='button'>Close</button>
-					<header>
-						<h1>
+          <h1 className='modal-title'>
 							Choose Tile
-						</h1>
-					</header>
+          </h1>
 					{renderTiles(props.tiles)}
 				</div>
 			</div>
