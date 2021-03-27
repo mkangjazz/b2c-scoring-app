@@ -12,14 +12,6 @@ function City(props) {
 	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
 	var gridSize = game === "original" ? "four-by-four" : "five-by-five";
 
-  function handleTileButton(e) {
-    console.log('show tiles');
-  }
-
-  function handleScoresButton() {
-    console.log('show scores');
-  }
-
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
 			return <CityGridSquare type={tile.type} typeSpecial={tile.typeSpecial} showSelectTileModal={props.showSelectTileModal} number={index} city={token} key={index} />
