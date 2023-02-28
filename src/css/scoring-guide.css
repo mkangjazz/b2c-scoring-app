@@ -1,0 +1,36 @@
+.scoring-guide section {
+	padding: 1em 0;
+}
+.scoring-guide h1 {
+
+}
+
+.scoring-guide h2 {
+    border-top: 1px solid;
+	margin-bottom: 1em;
+    padding: 1.25em 0 0 0;
+} 
+.scoring-guide ol, 
+.scoring-guide ul {
+	padding: 0 0 0 1em;
+}
+.scoring-guide ol ul, 
+.scoring-guide ul ul {
+	padding: 0 0 0 1em;
+}
+.scoring-guide ul {
+	list-style: disc;
+}
+.scoring-guide ol {
+	list-style: decimal;
+}
+.scoring-guide li {
+	line-height: 1.5;
+	margin-bottom: 0;
+}
+.scoring-guide li:last-child {
+	margin-bottom: 0;
+}
+.scoring-guide li li {
+	margin-bottom: 0;
+}

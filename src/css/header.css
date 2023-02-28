@@ -1,17 +1,3 @@
-.city-heading {
-  align-items: center;
-  display: flex;
-  font-size:1em;
-  padding: 1em 0;
-  text-align: center;
-  width: 100%;
-}
-
-.city-heading .image-city-token {
-  display: block;
-  margin-left: 0;
-}
-
 .link-back {
   color: inherit;
   display: block;

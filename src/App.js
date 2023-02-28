@@ -11,6 +11,7 @@ import './css/list-panel.css';
 import './css/link-back.css';
 import './css/modal.css';
 import './css/social-links.css';
+import './css/scoring-guide.css';
 import './css/typography.css';
 
 import React, {Component} from 'react';
@@ -26,17 +27,19 @@ import CitySummary from "./components/CitySummary";
 import Home from "./components/Home";
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			cities: betweenTwoCitiesSetup.cities,
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cities: betweenTwoCitiesSetup.cities,
       isSelectTileModalVisible: false,
       isScoringInstructionsModalVisible: false,
       showCityTiles: true,
-			tavernTypes: betweenTwoCitiesSetup.tavernTypes,
+      tavernTypes: betweenTwoCitiesSetup.tavernTypes,
       tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
       version: '',
+      whichScoringInstructionTypeToShow: '',
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -52,7 +55,7 @@ class App extends Component {
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
 
     this.handleVersionSelection = this.handleVersionSelection.bind(this);
-	}
+  }
 
   handleShowCityTiles(){
     this.setState({
@@ -104,7 +107,7 @@ class App extends Component {
   updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber){
     var targetCity = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken);
     var targetTile = targetCity[0].tiles[tileNumber];
-    
+
     targetTile["type"] = tileType;
     targetTile["typeSpecial"] = tileTypeSpecial;
 
@@ -117,17 +120,18 @@ class App extends Component {
     });
   }
 
-	renderCitySummaries(cities){
-		var cityListItems = cities.map((city)=>{
-			return <CitySummary score={city.score} token={city.token} name={city.name} key={city.token} />
-		});
+  renderCitySummaries(cities){
+    var cityListItems = cities.map((city)=>{
+      return <CitySummary score={city.score} token={city.token} name={city.name} key={city.token} />
+    });
 
-		return cityListItems;
+    return cityListItems;
   };
 
-  showScoringInstructionsModal(e){
+  showScoringInstructionsModal = (param) => (e) => {
     this.setState({
-      isScoringInstructionsModalVisible: true
+      whichScoringInstructionTypeToShow: param,
+      isScoringInstructionsModalVisible: true,
     });
   }
 
@@ -137,14 +141,14 @@ class App extends Component {
     });
   }
 
-	render() {
-		return (
+  render() {
+    return (
       <div className="wrapper">
         <Router>
             <Route
-              exact path="/" 
+              exact path="/"
               render={props=>
-                <Home 
+                <Home
                   handleVersionSelection={this.handleVersionSelection}
                   version={this.state.version}
                 />
@@ -152,27 +156,28 @@ class App extends Component {
             />
             <Route
               path="/original"
-              render={props => 
-                <BetweenTwoCities 
-                  renderCitySummaries={this.renderCitySummaries} 
-                  cities={this.state.cities} 
-                  {...props} 
+              render={props =>
+                <BetweenTwoCities
+                  renderCitySummaries={this.renderCitySummaries}
+                  cities={this.state.cities}
+                  {...props}
                 />
               }
             />
             <Route
               path="/city"
-              render={props => 
+              render={props =>
                 <City
                   tiles={this.state.tiles}
-                  chooseTile={this.chooseTile} 
+                  chooseTile={this.chooseTile}
                   isSelectTileModalVisible={this.state.isSelectTileModalVisible}
                   isScoringInstructionsModalVisible={this.state.isScoringInstructionsModalVisible}
+                  whichScoringInstructionTypeToShow={this.state.whichScoringInstructionTypeToShow}
                   cities={this.state.cities}
                   showCityTiles={this.state.showCityTiles}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
-                  showSelectTileModal={this.showSelectTileModal} 
+                  showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
                   showScoringInstructionsModal={this.showScoringInstructionsModal}
                   hideScoringInstructionsModal={this.hideScoringInstructionsModal}
@@ -186,8 +191,8 @@ class App extends Component {
             />
         </Router>
     </div>
-		);
-	}
+    );
+  }
 }
 
 export default App;

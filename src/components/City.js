@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
- 
+
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
 import ScoringInstructions from "./ScoringInstructions";
@@ -69,8 +69,6 @@ function City(props) {
 			</table>
 		);
 	}
-
-
 	function renderOfficesByTaverns(offices) {
 		return (
 			<table>
@@ -124,11 +122,11 @@ function City(props) {
 	}
 
 	function renderTavernIcons(groups) {
-		const icons = groups.map((group, index) => 
+		const icons = groups.map((group, index) =>
 			<tr key={`group-${index}`}>
 				<td>
 					{group.map((str,index) => (
-						<img 
+						<img
 							alt={`${str} icon`}
 							className="image-special-tavern-icon"
 							key={`${str}-${index}`}
@@ -191,137 +189,162 @@ function City(props) {
 				<table className="city-score-table">
 					<thead>
 						<tr>
+							<th className="city-score-table-number">#</th>
 							<th>Tile</th>
-							<th>#</th>
 							<th>Modifiers</th>
-							<th>Total</th>
+							<th className="city-score-table-number">Total</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
-									Factory
-                </div>
+              <td className="city-score-table-number">
+								{score.numFactories}
 							</td>
 							<td>
-								{score.numFactories}
+								<button
+									className='city-score-legend'
+									onClick={props.showScoringInstructionsModal('factory')}
+									type='button'
+								>
+									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
+									<span>Factory</span>
+								</button>
 							</td>
 							<td>
 								{score.factoryMultiplier === 4 ? <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> : ''}
 								{score.factoryMultiplier === 3 ? <img className='image-medal-icon' alt='Silver medal' src='/img/icon-silver.gif' /> : ''}
 								{score.factoryMultiplier > 2 ? <span>x {score.factoryMultiplier} </span>: ''}
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreFactories}
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
-									Office
-								</div>
+              <td className="city-score-table-number">
+								{score.numOffices}
 							</td>
 							<td>
-								{score.numOffices}
+                <button
+                  className='city-score-legend'
+                  onClick={props.showScoringInstructionsModal('office')}
+                  type='button'
+                >
+                  <img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
+                  <span>Office</span>
+                </button>
 							</td>
 							<td>
 								{score.officesNextToTaverns > 0 ? renderOfficesByTaverns(score.officesNextToTaverns) : ""}
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreOffices}
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
-									House
-								</div>
+              <td className="city-score-table-number">
+								{score.numHouses}
 							</td>
 							<td>
-								{score.numHouses}
+                <button
+                  className='city-score-legend'
+                  onClick={props.showScoringInstructionsModal('house')}
+                  type='button'
+                >
+                  <img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
+                  <span>House</span>
+                </button>
 							</td>
 							<td>
 								{score.nonHouseTypes.length > 0 ? renderNonHouseTypes(score.nonHouseTypes) : ""}
 								{score.housesNextToFactories > 0 ? renderHouseFactoryAdjacencies(score.housesNextToFactories) : ""}
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreHouses}
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
-									Park
-								</div>
+              <td className="city-score-table-number">
+								{score.numParks}
 							</td>
 							<td>
-								{score.numParks}
+                <button
+                  className='city-score-legend'
+                  onClick={props.showScoringInstructionsModal('park')}
+                  type='button'
+                >
+                  <img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
+                  <span>Park</span>
+                </button>
 							</td>
 							<td>
 								{score.numParks > 0 ? renderParkGroups(score.parkGroups) : "" }
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreParks}
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
-									Shop
-								</div>
+              <td className="city-score-table-number">
+								{score.numShops}
 							</td>
 							<td>
-								{score.numShops}
+                <button
+                  className='city-score-legend'
+                  onClick={props.showScoringInstructionsModal('shop')}
+                  type='button'
+                >
+                  <img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
+                  <span>Shop</span>
+                </button>
 							</td>
 							<td>
 								{score.shopGroups.length > 0 ? renderShopGroups(score.shopGroups) : "" }
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreShops}
 							</td>
 						</tr>
 						<tr>
-							<td>
-								<div className='city-score-legend'>
-									<img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
-									Tavern
-								</div>
+              <td className="city-score-table-number">
+								{score.numTaverns}
 							</td>
 							<td>
-								{score.numTaverns}
+                <button
+                  className='city-score-legend'
+                  onClick={props.showScoringInstructionsModal('tavern')}
+                  type='button'
+                >
+                  <img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
+                  <span>Tavern</span>
+                </button>
 							</td>
 							<td>
 								{renderTavernIcons(score.uniqueTaverns)}
 							</td>
-							<td>
+							<td className="city-score-table-number">
 								{score.totalScoreTaverns}
 							</td>
 						</tr>
 					</tbody>
 				</table>
+        <ScoringInstructions />
 			</div>
 		);
 	}
 
 	return (
 		<div>
-      <Link 
-        to="/original/" 
+      <Link
+        to="/original/"
         className="link-back"
       >
         Back
       </Link>
 
       <h1 className='city-heading'>
-        <img 
-          alt={`${cityData.token} icon`} 
-          className="image-city-token" 
+        <img
+          alt={`${cityData.token} icon`}
+          className="image-city-token"
           src={`/img/token-${cityData.token}.gif`}
         />
 
@@ -347,30 +370,19 @@ function City(props) {
         >
           Scores
         </button>
-        <button
-          className='button-scoring-guide'
-          onClick={(e) => props.showScoringInstructionsModal(e)}
-          type='button'
-        >
-          Guide
-        </button>
       </div>
-			
+
       {props.showCityTiles
         ? drawCityGrid(cityData.tiles)
         : drawScores(cityData.score)
       }
 
-			{props.isSelectTileModalVisible === false ? null : 
-				<TileSelect 
+			{props.isSelectTileModalVisible === false ? null :
+				<TileSelect
 					hideSelectTileModal={props.hideSelectTileModal}
 					tavernTypes={props.tavernTypes}
 					chooseTile={props.chooseTile}
 					tiles={props.tiles} />
-			}
-
-			{props.isScoringInstructionsModalVisible === false ? null : 
-				<ScoringInstructions hideScoringInstructionsModal={props.hideScoringInstructionsModal}/>
 			}
 		</div>
 	);
