@@ -207,7 +207,7 @@ function City(props) {
 						<tr>
 							<th className="city-score-table-number">#</th>
 							<th>Tile</th>
-							<th>Modifiers</th>
+							<th>Sets and Modifiers</th>
 							<th className="city-score-table-number">Total</th>
 						</tr>
 					</thead>
