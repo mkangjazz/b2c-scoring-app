@@ -30,16 +30,15 @@ function City(props) {
 				<span className={`${type}`}></span>
 			</div>
 		);
-
 		return (
 			<table>
 				<tbody>
 					<tr>
 						<td>
 							{icons}
-						</td>
-						<td>
-							{`x${nonHouseTypes.length}`}
+              <span class="city-score-modifier">
+                {`x${nonHouseTypes.length} per`}
+              </span>
 						</td>
 					</tr>
 				</tbody>
@@ -48,74 +47,85 @@ function City(props) {
 	}
 
 	function renderHouseFactoryAdjacencies(housesNextToFactories) {
+    const rows = [];
+    for (let i = 0; i < housesNextToFactories; i += 1) {
+      rows.push(
+        <tr key={`row-${i}`}>
+          <td>
+            <div className="css-icon-container">
+              <span className='house'></span>
+            </div>
+            <div className="css-icon-container">
+              <span className='factory'></span>
+            </div>
+            <span class="city-score-modifier">
+              {`x1 per`}
+            </span>
+            &nbsp;
+          </td>
+        </tr>
+      );
+    }
 		return (
 			<table>
 				<tbody>
-					<tr>
-						<td>
-							<div className="css-icon-container">
-								<span className='house'></span>
-							</div>
-							<div className="css-icon-container">
-								<span className='factory'></span>
-							</div>
-							&nbsp;{`x ${housesNextToFactories}`}
-						</td>
-						<td>
-							~1
-						</td>
-					</tr>
+          {rows}
 				</tbody>
 			</table>
 		);
 	}
 	function renderOfficesByTaverns(offices) {
+    const rows = [];
+    for (let i = 0; i < offices; i += 1) {
+      rows.push(
+        <tr>
+          <td>
+            <div className="css-icon-container">
+              <span className="office"></span>
+            </div>
+            <div className="css-icon-container">
+              <span className="tavern"></span>
+            </div>
+            <span class="city-score-modifier">+1</span>
+          </td>
+        </tr>
+      );
+    }
 		return (
 			<table>
 				<tbody>
-					<tr>
-						<td>
-							<div className="css-icon-container">
-								<span className="office"></span>
-							</div>
-							<div className="css-icon-container">
-								<span className="tavern"></span>
-							</div>
-							&nbsp;{`x ${offices}`}
-						</td>
-						<td>
-							{`+${offices}`}
-						</td>
-					</tr>
+          { rows }
 				</tbody>
 			</table>
 		);
 	}
 
 	function renderParkGroups(groups) {
-		const icons = groups.map((group, index) =>
-			<tr key={`group-${index}`}>
-				<td>
-					<div className="css-icon-container">
-						<span className="park"></span>
-					</div>
-					<div className="css-icon-container">
-						<span className="park"></span>
-					</div>
-					&nbsp;{`... ${group.length}`}
-				</td>
-				<td>
-					{group.length === 2 ? '+8' : ''}
-					{group.length === 3 ? '+12' : ''}
-					{group.length > 3 ? `+${String(12 + group.length - 3)}` : ''}
-				</td>
-			</tr>
+		const rows = groups.map((group, index) => {
+      const icons = [];
+      for (let i = 0; i < group.length; i += 1) {
+        icons.push(
+          <div className="css-icon-container">
+            <span className="park"></span>
+          </div>
+        );
+      }
+      return (
+        <tr key={`group-${index}`}>
+          <td>
+            { icons }
+            {group.length === 2 ? <span class="city-score-modifier">+8</span> : null }
+            {group.length === 3 ? <span class="city-score-modifier">+12</span> : null }
+            {group.length > 3 ? <span class="city-score-modifier">{`+${String(12 + group.length - 3)}`}</span> : null }
+          </td>
+        </tr>
+      );
+    }
 		);
-
 		return (
 			<table>
 				<tbody>
-					{icons}
+					{rows}
 				</tbody>
 			</table>
 		);
@@ -123,24 +133,28 @@ function City(props) {
 
 	function renderTavernIcons(groups) {
 		const icons = groups.map((group, index) =>
-			<tr key={`group-${index}`}>
-				<td>
-					{group.map((str,index) => (
-						<img
-							alt={`${str} icon`}
-							className="image-special-tavern-icon"
-							key={`${str}-${index}`}
-							src={`/img/icon-tavern-${str}.png`}
-						/>
-					))}
-				</td>
-				<td>
-					{group.length === 1 ? '+1' : ''}
-					{group.length === 2 ? '+4' : ''}
-					{group.length === 3 ? '+9' : ''}
-					{group.length === 4 ? '+17' : ''}
-				</td>
-			</tr>
+      { return group.length > 0
+        ? <tr key={`group-${index}`}>
+            <td class="tavern-icon-score-group">
+              {group.map((str,index) => (
+                <div className="image-special-tavern-icon">
+                  <img
+                    alt={`${str} icon`}
+                    key={`${str}-${index}`}
+                    src={`/img/icon-tavern-${str}.png`}
+                  />
+                </div>
+              ))}
+              <span class="city-score-modifier">
+                {group.length === 1 ? '+1' : ''}
+                {group.length === 2 ? '+4' : ''}
+                {group.length === 3 ? '+9' : ''}
+                {group.length === 4 ? '+17' : ''}
+              </span>
+            </td>
+          </tr> 
+        : null 
+      }
 		);
 
 		return (
@@ -153,31 +167,33 @@ function City(props) {
 	}
 
 	function renderShopGroups(arr){
-		var groups = arr.map((group, index) => {
+		var rows = arr.map((group, index) => {
+      const shopIcons = [];
+      for (let i = 0; i < group.length; i += 1) {
+        shopIcons.push(
+          <div 
+            className="css-icon-container"
+            key={`shop-{i}`}
+          >
+            <span className="shop"></span>
+          </div>
+        );
+      }
 			return (
 				<tr key={`${group}-${index}`}>
 					<td>
-						<div className="css-icon-container">
-							<span className="shop"></span>
-						</div>
-						<div className="css-icon-container">
-							<span className="shop"></span>
-						</div>
-						&nbsp;{`... ${group.length}`}
-					</td>
-					<td>
-						{group.length === 2 ? '+5' : ''}
-						{group.length === 3 ? '+10' : ''}
-						{group.length === 4 ? '+16' : ''}
+            { shopIcons }
+            {group.length === 2 ? <span class="city-score-modifier">+5</span> : null }
+            {group.length === 3 ? <span class="city-score-modifier">+10</span> : null }
+            {group.length === 4 ? <span class="city-score-modifier">+16</span> : null }
 					</td>
 				</tr>
 			);
 		});
-
 		return (
 			<table>
 				<tbody>
-					{groups}
+					{rows}
 				</tbody>
 			</table>
 		);
@@ -197,7 +213,7 @@ function City(props) {
 					</thead>
 					<tbody>
 						<tr>
-              <td className="city-score-table-number">
+             				<td className="city-score-table-number">
 								{score.numFactories}
 							</td>
 							<td>
@@ -211,9 +227,27 @@ function City(props) {
 								</button>
 							</td>
 							<td>
-								{score.factoryMultiplier === 4 ? <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> : ''}
-								{score.factoryMultiplier === 3 ? <img className='image-medal-icon' alt='Silver medal' src='/img/icon-silver.gif' /> : ''}
-								{score.factoryMultiplier > 2 ? <span>x {score.factoryMultiplier} </span>: ''}
+								<table>
+									<tbody>
+										<tr>
+                      <td>
+                        {score.factoryMultiplier === 4 
+                          ? <React.Fragment>
+                              <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> Most
+                          </React.Fragment>
+                          : null
+                        }
+                        {score.factoryMultiplier === 3 
+                          ? <React.Fragment>
+                              <img className='image-medal-icon' alt='Silver medal' src='/img/icon-silver.gif' /> Second-Most
+                          </React.Fragment>
+                          : null
+                        }
+                        {score.factoryMultiplier > 2 ? <span className='city-score-modifier'>x{score.factoryMultiplier} per</span>: null}
+                      </td>
+										</tr>
+									</tbody>
+								</table>
 							</td>
 							<td className="city-score-table-number">
 								{score.totalScoreFactories}
@@ -327,7 +361,7 @@ function City(props) {
 						</tr>
 					</tbody>
 				</table>
-        <ScoringInstructions />
+        {/* <ScoringInstructions /> */}
 			</div>
 		);
 	}

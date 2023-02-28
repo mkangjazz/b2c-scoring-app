@@ -4,11 +4,20 @@
 	margin: 0 auto 2em;
     width: 100%;
 }
-
 .city-score-table .city-score-table-number {
 	text-align: right;
 }
-
+.city-score-table .city-score-modifier {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+.city-score-table .city-score-modifier:before {
+	content:'(';
+	margin-left:.5em;
+}
+.city-score-table .city-score-modifier:after {
+	content:')';
+}
 .city-score-table th,
 .city-score-table td {
 	padding: .5em .25em;
@@ -33,10 +42,6 @@
 .city-score-table table td {
 	border-top: none;
 	padding: 0;
-}
-
-.city-score-table table td:last-child {
-	width: 3em;
 }
 
 .city-score-table .city-score-legend {
