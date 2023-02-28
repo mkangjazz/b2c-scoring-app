@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
-import ScoringInstructions from "./ScoringInstructions";
+// import ScoringInstructions from "./ScoringInstructions";
 
 function City(props) {
 	var urlParams = new URLSearchParams(window.location.search);
@@ -36,7 +36,7 @@ function City(props) {
 					<tr>
 						<td>
 							{icons}
-              <span class="city-score-modifier">
+              <span className="city-score-modifier">
                 {`x${nonHouseTypes.length} per`}
               </span>
 						</td>
@@ -58,7 +58,7 @@ function City(props) {
             <div className="css-icon-container">
               <span className='factory'></span>
             </div>
-            <span class="city-score-modifier">
+            <span className="city-score-modifier">
               {`x1 per`}
             </span>
             &nbsp;
@@ -86,7 +86,7 @@ function City(props) {
             <div className="css-icon-container">
               <span className="tavern"></span>
             </div>
-            <span class="city-score-modifier">+1</span>
+            <span className="city-score-modifier">+1</span>
           </td>
         </tr>
       );
@@ -114,9 +114,9 @@ function City(props) {
         <tr key={`group-${index}`}>
           <td>
             { icons }
-            {group.length === 2 ? <span class="city-score-modifier">+8</span> : null }
-            {group.length === 3 ? <span class="city-score-modifier">+12</span> : null }
-            {group.length > 3 ? <span class="city-score-modifier">{`+${String(12 + group.length - 3)}`}</span> : null }
+            {group.length === 2 ? <span className="city-score-modifier">+8</span> : null }
+            {group.length === 3 ? <span className="city-score-modifier">+12</span> : null }
+            {group.length > 3 ? <span className="city-score-modifier">{`+${String(12 + group.length - 3)}`}</span> : null }
           </td>
         </tr>
       );
@@ -135,7 +135,7 @@ function City(props) {
 		const icons = groups.map((group, index) =>
       { return group.length > 0
         ? <tr key={`group-${index}`}>
-            <td class="tavern-icon-score-group">
+            <td className="tavern-icon-score-group">
               {group.map((str,index) => (
                 <div className="image-special-tavern-icon">
                   <img
@@ -145,7 +145,7 @@ function City(props) {
                   />
                 </div>
               ))}
-              <span class="city-score-modifier">
+              <span className="city-score-modifier">
                 {group.length === 1 ? '+1' : ''}
                 {group.length === 2 ? '+4' : ''}
                 {group.length === 3 ? '+9' : ''}
@@ -183,9 +183,9 @@ function City(props) {
 				<tr key={`${group}-${index}`}>
 					<td>
             { shopIcons }
-            {group.length === 2 ? <span class="city-score-modifier">+5</span> : null }
-            {group.length === 3 ? <span class="city-score-modifier">+10</span> : null }
-            {group.length === 4 ? <span class="city-score-modifier">+16</span> : null }
+            {group.length === 2 ? <span className="city-score-modifier">+5</span> : null }
+            {group.length === 3 ? <span className="city-score-modifier">+10</span> : null }
+            {group.length === 4 ? <span className="city-score-modifier">+16</span> : null }
 					</td>
 				</tr>
 			);
