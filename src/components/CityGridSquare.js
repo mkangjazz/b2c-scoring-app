@@ -31,4 +31,3 @@ function CityGridSquare(props) {
 }
 
 export default CityGridSquare;
-

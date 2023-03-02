@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
-// import ScoringInstructions from "./ScoringInstructions";
 
 function City(props) {
 	var urlParams = new URLSearchParams(window.location.search);
 	var token = urlParams.get('token');
-	var game = urlParams.get('game');
 	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
-	var gridSize = game === "original" ? "four-by-four" : "five-by-five";
 
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
@@ -18,7 +14,7 @@ function City(props) {
 		});
 
 		return (
-			<ol className={`city-grid ${gridSize}`}>
+			<ol className={`city-grid ${props.game.grid}`}>
 				{grid}
 			</ol>
 		);
@@ -199,7 +195,7 @@ function City(props) {
 		);
 	}
 
-	function drawScores(score, game){
+	function drawScores(score){
 		return (
 			<div>
 				<table className="city-score-table">
@@ -213,13 +209,12 @@ function City(props) {
 					</thead>
 					<tbody>
 						<tr>
-             				<td className="city-score-table-number">
+             	<td className="city-score-table-number">
 								{score.numFactories}
 							</td>
 							<td>
 								<button
 									className='city-score-legend'
-									onClick={props.showScoringInstructionsModal('factory')}
 									type='button'
 								>
 									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
@@ -260,7 +255,6 @@ function City(props) {
 							<td>
                 <button
                   className='city-score-legend'
-                  onClick={props.showScoringInstructionsModal('office')}
                   type='button'
                 >
                   <img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
@@ -281,7 +275,6 @@ function City(props) {
 							<td>
                 <button
                   className='city-score-legend'
-                  onClick={props.showScoringInstructionsModal('house')}
                   type='button'
                 >
                   <img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
@@ -303,7 +296,6 @@ function City(props) {
 							<td>
                 <button
                   className='city-score-legend'
-                  onClick={props.showScoringInstructionsModal('park')}
                   type='button'
                 >
                   <img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
@@ -324,7 +316,6 @@ function City(props) {
 							<td>
                 <button
                   className='city-score-legend'
-                  onClick={props.showScoringInstructionsModal('shop')}
                   type='button'
                 >
                   <img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
@@ -345,7 +336,6 @@ function City(props) {
 							<td>
                 <button
                   className='city-score-legend'
-                  onClick={props.showScoringInstructionsModal('tavern')}
                   type='button'
                 >
                   <img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
@@ -360,8 +350,7 @@ function City(props) {
 							</td>
 						</tr>
 					</tbody>
-				</table>
-        {/* <ScoringInstructions /> */}
+				</table> 
 			</div>
 		);
 	}

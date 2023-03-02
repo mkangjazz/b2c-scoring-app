@@ -29,13 +29,11 @@ class App extends Component {
     this.state = {
       cities: betweenTwoCitiesSetup.cities,
       isSelectTileModalVisible: false,
-      isScoringInstructionsModalVisible: false,
       showCityTiles: true,
       tavernTypes: betweenTwoCitiesSetup.tavernTypes,
       tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
-      version: '',
-      whichScoringInstructionTypeToShow: '',
+      game: betweenTwoCitiesSetup.game[0],
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -43,14 +41,8 @@ class App extends Component {
     this.hideSelectTileModal = this.hideSelectTileModal.bind(this);
     this.chooseTile = this.chooseTile.bind(this);
     this.updateSetupData = this.updateSetupData.bind(this);
-
-    this.showScoringInstructionsModal = this.showScoringInstructionsModal.bind(this);
-    this.hideScoringInstructionsModal = this.hideScoringInstructionsModal.bind(this);
-
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
-
-    this.handleVersionSelection = this.handleVersionSelection.bind(this);
   }
 
   handleShowCityTiles(){
@@ -62,12 +54,6 @@ class App extends Component {
   handleShowCityScores(){
     this.setState({
       showCityTiles: false,
-    });
-  }
-
-  handleVersionSelection(e){
-    this.setState({
-      version: e.target.value
     });
   }
 
@@ -124,19 +110,6 @@ class App extends Component {
     return cityListItems;
   };
 
-  showScoringInstructionsModal = (param) => (e) => {
-    this.setState({
-      whichScoringInstructionTypeToShow: param,
-      isScoringInstructionsModalVisible: true,
-    });
-  }
-
-  hideScoringInstructionsModal(){
-    this.setState({
-      isScoringInstructionsModalVisible: false
-    });
-  }
-
   render() {
     return (
       <div className="wrapper">
@@ -155,19 +128,17 @@ class App extends Component {
               path="/city"
               render={props =>
                 <City
+                  game={this.state.game}
                   tiles={this.state.tiles}
-                  chooseTile={this.chooseTile}
                   isSelectTileModalVisible={this.state.isSelectTileModalVisible}
-                  isScoringInstructionsModalVisible={this.state.isScoringInstructionsModalVisible}
-                  whichScoringInstructionTypeToShow={this.state.whichScoringInstructionTypeToShow}
                   cities={this.state.cities}
                   showCityTiles={this.state.showCityTiles}
+                  chooseTile={this.chooseTile}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
-                  showScoringInstructionsModal={this.showScoringInstructionsModal}
-                  hideScoringInstructionsModal={this.hideScoringInstructionsModal}
+                  {...props}
                 />
               }
             />

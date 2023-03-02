@@ -2,6 +2,17 @@
 import utility from '../js/utility';
 
 var betweenTwoCitiesSetup = (function(){
+	var game = [
+		{
+			name: 'original',
+			grid: 'four-by-four'
+		},
+		{
+			name: 'essentials (capitals)',
+			grid: 'five-by-five'
+		},
+	];
+
 	var tokens = [
 		'st-louis-arch',
 		'taj-mahal',
@@ -97,6 +108,7 @@ var betweenTwoCitiesSetup = (function(){
 	});
 
 	return {
+    game: game,
 		cities: cities,
 		tileTypes: tileTypes,
 	}
