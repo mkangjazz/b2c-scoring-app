@@ -16,15 +16,11 @@ import './css/typography.css';
 
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
 import betweenTwoCitiesSetup from "./data/between-two-cities-setup";
 import calculateScore from "./js/calculateScore";
-
 import BetweenTwoCities from "./components/BetweenTwoCities";
-import Capitals from "./components/Capitals";
 import City from "./components/City";
 import CitySummary from "./components/CitySummary";
-import Home from "./components/Home";
 
 class App extends Component {
   constructor(props) {
@@ -148,15 +144,6 @@ class App extends Component {
             <Route
               exact path="/"
               render={props=>
-                <Home
-                  handleVersionSelection={this.handleVersionSelection}
-                  version={this.state.version}
-                />
-              }
-            />
-            <Route
-              path="/original"
-              render={props =>
                 <BetweenTwoCities
                   renderCitySummaries={this.renderCitySummaries}
                   cities={this.state.cities}
@@ -181,13 +168,8 @@ class App extends Component {
                   hideSelectTileModal={this.hideSelectTileModal}
                   showScoringInstructionsModal={this.showScoringInstructionsModal}
                   hideScoringInstructionsModal={this.hideScoringInstructionsModal}
-                  // {...props}
                 />
               }
-            />
-            <Route
-              path="/capitals"
-              component={Capitals}
             />
         </Router>
     </div>

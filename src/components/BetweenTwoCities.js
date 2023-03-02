@@ -1,14 +1,10 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 
 function BetweenTwoCities(props){
 	return (
 		<div>
-			<Link to="/" className="link-back">
-				Back
-			</Link>
 			<h1 className='game-title text-center'>
-        Original
+        		Cities
 			</h1>
 			<ul className="list-panel list-cities">
 				{props.renderCitySummaries(props.cities)}

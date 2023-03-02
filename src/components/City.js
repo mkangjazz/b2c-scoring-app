@@ -369,7 +369,7 @@ function City(props) {
 	return (
 		<div>
       <Link
-        to="/original/"
+        to="/"
         className="link-back"
       >
         Back
