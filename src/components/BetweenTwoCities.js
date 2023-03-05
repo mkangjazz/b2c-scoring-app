@@ -4,7 +4,7 @@ function BetweenTwoCities(props){
 	return (
 		<div>
 			<h1 className='game-title text-center'>
-        		Cities
+        		{props.game.name}
 			</h1>
 			<ul className="list-panel list-cities">
 				{props.renderCitySummaries(props.cities)}

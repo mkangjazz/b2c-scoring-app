@@ -1,4 +1,55 @@
 var utility = (function(){
+	function convertNumberTo5x5Coordinates(number){
+		var o = {
+			x: number%5
+		};
+
+		if(number < 5){
+			o["y"] = 0;
+		}
+
+		if(number >= 5 && number < 10){
+			o["y"] = 1;
+		}
+
+		if(number >= 10 && number < 15){
+			o["y"] = 2;
+		}
+
+		if(number >= 15 && number < 20){
+			o["y"] = 3;
+		}
+
+		if(number >= 20 && number < 25){
+			o["y"] = 4;
+		}
+
+		return o;
+	}
+
+	function convertNumberTo4x4Coordinates(number){
+		var o = {
+			x: number%4
+		};
+
+		if(number < 4){
+			o["y"] = 0;
+		}
+
+		if(number >= 4 && number < 8){
+			o["y"] = 1;
+		}
+
+		if(number >= 8 && number < 12){
+			o["y"] = 2;
+		}
+
+		if(number >= 12 && number < 16){
+			o["y"] = 3;
+		}
+
+		return o;
+	}
 
   function getTypeSpecial(token){
     if(token){
@@ -88,6 +139,8 @@ var utility = (function(){
   }
 
   return {
+    convertNumberTo5x5Coordinates,
+    convertNumberTo4x4Coordinates,
     getAdjacentTiles: getAdjacentTiles,
     getNameFromToken: getNameFromToken,
     getTypeSpecial: getTypeSpecial,

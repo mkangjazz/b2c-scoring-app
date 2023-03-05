@@ -101,7 +101,7 @@ function City(props) {
       const icons = [];
       for (let i = 0; i < group.length; i += 1) {
         icons.push(
-          <div className="css-icon-container">
+          <div key={`park-icon-${index}`} className="css-icon-container">
             <span className="park"></span>
           </div>
         );
@@ -116,8 +116,7 @@ function City(props) {
           </td>
         </tr>
       );
-    }
-		);
+    });
 		return (
 			<table>
 				<tbody>
@@ -133,7 +132,7 @@ function City(props) {
         ? <tr key={`group-${index}`}>
             <td className="tavern-icon-score-group">
               {group.map((str,index) => (
-                <div className="image-special-tavern-icon">
+                <div key={`img-${str}-${index}`} className="image-special-tavern-icon">
                   <img
                     alt={`${str} icon`}
                     key={`${str}-${index}`}
@@ -403,7 +402,6 @@ function City(props) {
 			{props.isSelectTileModalVisible === false ? null :
 				<TileSelect
 					hideSelectTileModal={props.hideSelectTileModal}
-					tavernTypes={props.tavernTypes}
 					chooseTile={props.chooseTile}
 					tiles={props.tiles} />
 			}

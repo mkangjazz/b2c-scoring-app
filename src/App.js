@@ -28,12 +28,11 @@ class App extends Component {
 
     this.state = {
       cities: betweenTwoCitiesSetup.cities,
+      tiles: betweenTwoCitiesSetup.tileTypes,
+      game: betweenTwoCitiesSetup.game,
       isSelectTileModalVisible: false,
       showCityTiles: true,
-      tavernTypes: betweenTwoCitiesSetup.tavernTypes,
-      tiles: betweenTwoCitiesSetup.tileTypes,
       tileToUpdate: null,
-      game: betweenTwoCitiesSetup.game[0],
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -118,8 +117,9 @@ class App extends Component {
               exact path="/"
               render={props=>
                 <BetweenTwoCities
-                  renderCitySummaries={this.renderCitySummaries}
+                  game={this.state.game}
                   cities={this.state.cities}
+                  renderCitySummaries={this.renderCitySummaries}
                   {...props}
                 />
               }

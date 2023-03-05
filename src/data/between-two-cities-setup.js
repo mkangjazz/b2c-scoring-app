@@ -1,66 +1,22 @@
-// Arc de Triomphe, US Capitol, Brandenburg Gate, St Basil's, Big Ben, the White House, and the Forbidden City 
 import utility from '../js/utility';
+import gameTypes from './types/game';
+import tokens from './types/tokens';
+import tileTypes from './types/tiles';
+// import tokensCapitals from './types/tokens';
+// import tileTypesCapitals from './types/tiles_capitals';
 
-var betweenTwoCitiesSetup = (function(){
-	var game = [
-		{
-			name: 'original',
-			grid: 'four-by-four'
-		},
-		{
-			name: 'essentials (capitals)',
-			grid: 'five-by-five'
-		},
-	];
+const betweenTwoCitiesSetup = (function(){
+	const game = gameTypes[0];
+  let gameTiles;
+  let gameTokens;
 
-	var tokens = [
-		'st-louis-arch',
-		'taj-mahal',
-		'colosseum',
-		'golden-pavilion',
-		'eiffel-tower',
-		'pyramids',
-		'sydney-harbour-bridge',
-	];
+  if (game.id === 'original') {
+    gameTiles = tileTypes;
+	  gameTokens = tokens;
+  }
 
-	var tileTypes = [
-		'factory',
-		'house',
-		'office',
-		'park',
-		'shop',
-		'tavern-bed',
-		'tavern-drink',
-		'tavern-food',
-		'tavern-music',
-	];
-	
-	function convertNumberToCoordinates(number){
-		var o = {
-			x: number%4
-		};
-
-		if(number < 4){
-			o["y"] = 0;
-		}
-
-		if(number >= 4 && number < 8){
-			o["y"] = 1;
-		}
-
-		if(number >= 8 && number < 12){
-			o["y"] = 2;
-		}
-
-		if(number >= 12 && number < 16){
-			o["y"] = 3;
-		}
-
-		return o;
-	}
-
-	var cities = tokens.map(token => {
-		var city = {};
+	const cities = gameTokens.map(token => {
+		const city = {};
 		
 		city["token"] = token;
 		city["name"] = utility.getNameFromToken(token);
@@ -90,8 +46,16 @@ var betweenTwoCitiesSetup = (function(){
 
 		for(var i = 0; i < 16; i++){
 			(function(index){
-				var tile = {};
-				var coordinates = convertNumberToCoordinates(index);
+				let tile = {};
+        let coordinates;
+				
+        if (game.id === 'original') {
+          coordinates = utility.convertNumberTo4x4Coordinates(index);  
+        }
+        
+        if (game.id === 'capitals') {
+          coordinates = utility.convertNumberTo5x5Coordinates(index);  
+        }
 
 				tile["city"] = token;
 				tile["number"] = index;
@@ -110,7 +74,7 @@ var betweenTwoCitiesSetup = (function(){
 	return {
     game: game,
 		cities: cities,
-		tileTypes: tileTypes,
+		tileTypes: gameTiles,
 	}
 }());
 

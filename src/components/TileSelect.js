@@ -2,12 +2,10 @@ import React from 'react';
 import Tile from './Tile';
 
 function TileSelect(props){
-
 	function renderTiles(tiles){
 		var tileListItems = tiles.map((tile, index)=>{
-			return <Tile chooseTile={props.chooseTile} tileToken={tile} key={index} />
+			return <Tile chooseTile={props.chooseTile} tileToken={tile} key={`${tile}-${index}`} />
 		});
-
 		return (
 			<ul className='list-panel list-tiles'>
 				{tileListItems}
