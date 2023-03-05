@@ -8,6 +8,8 @@ function City(props) {
 	var token = urlParams.get('token');
 	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
 
+	console.log('this.props.location.query', this.props.location.query);
+
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
 			return <CityGridSquare type={tile.type} typeSpecial={tile.typeSpecial} showSelectTileModal={props.showSelectTileModal} number={index} city={token} key={index} />
@@ -216,7 +218,7 @@ function City(props) {
 									className='city-score-legend'
 									type='button'
 								>
-									<img alt="Factory icon" className="image-tile-icon" src="/img/tile-factory.gif" />
+									<img alt="Factory icon" className="image-tile-icon" src='img/tile-factory.gif' />
 									<span>Factory</span>
 								</button>
 							</td>
@@ -227,13 +229,13 @@ function City(props) {
                       <td>
                         {score.factoryMultiplier === 4 
                           ? <React.Fragment>
-                              <img className='image-medal-icon' alt='Gold medal' src='/img/icon-gold.gif' /> Most
+                              <img className='image-medal-icon' alt='Gold medal' src='img/icon-gold.gif' /> Most
                           </React.Fragment>
                           : null
                         }
                         {score.factoryMultiplier === 3 
                           ? <React.Fragment>
-                              <img className='image-medal-icon' alt='Silver medal' src='/img/icon-silver.gif' /> Second-Most
+                              <img className='image-medal-icon' alt='Silver medal' src='img/icon-silver.gif' /> Second-Most
                           </React.Fragment>
                           : null
                         }
@@ -256,7 +258,7 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Office icon" className="image-tile-icon" src="/img/tile-office.gif" />
+                  <img alt="Office icon" className="image-tile-icon" src='img/tile-office.gif' />
                   <span>Office</span>
                 </button>
 							</td>
@@ -276,7 +278,7 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="House icon" className="image-tile-icon" src="/img/tile-house.gif" />
+                  <img alt="House icon" className="image-tile-icon" src='img/tile-house.gif' />
                   <span>House</span>
                 </button>
 							</td>
@@ -297,7 +299,7 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Park icon" className="image-tile-icon" src="/img/tile-park.gif" />
+                  <img alt="Park icon" className="image-tile-icon" src='img/tile-park.gif' />
                   <span>Park</span>
                 </button>
 							</td>
@@ -317,7 +319,7 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Shop icon" className="image-tile-icon" src="/img/tile-shop.gif" />
+                  <img alt="Shop icon" className="image-tile-icon" src='img/tile-shop.gif' />
                   <span>Shop</span>
                 </button>
 							</td>
@@ -337,7 +339,7 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Tavern icon" className="image-tile-icon" src="/img/tile-tavern-drink.gif" />
+                  <img alt="Tavern icon" className="image-tile-icon" src='img/tile-tavern-drink.gif' />
                   <span>Tavern</span>
                 </button>
 							</td>
