@@ -15,7 +15,7 @@ import './css/scoring-guide.css';
 import './css/typography.css';
 
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import betweenTwoCitiesSetup from "./data/between-two-cities-setup";
 import calculateScore from "./js/calculateScore";
 import BetweenTwoCities from "./components/BetweenTwoCities";
