@@ -4,11 +4,10 @@ import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
 
 function City(props) {
-	var urlParams = new URLSearchParams(window.location.search);
-	var token = urlParams.get('token');
-	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
+	var urlParams = new URLSearchParams(props.location.search);
 
-	console.log('this.props.location.query', this.props.location.query);
+  var token = urlParams.get('token');
+	var cityData = (props.cities.filter(obj => obj["token"] === token))[0];
 
 	function drawCityGrid(tiles){
 		var grid = tiles.map((tile, index) => {
@@ -103,7 +102,7 @@ function City(props) {
       const icons = [];
       for (let i = 0; i < group.length; i += 1) {
         icons.push(
-          <div key={`park-icon-${index}`} className="css-icon-container">
+          <div key={`group-${index}-park-icon-${i}`} className="css-icon-container">
             <span className="park"></span>
           </div>
         );
