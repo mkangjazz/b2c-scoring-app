@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/b2c-scoring-app/precache-manifest.232defdebae99bf72b3377e58ed8a4ec.js"
+  "/b2c-scoring-app/precache-manifest.dfe078f910df2317c66965cab7871ea9.js"
 );
 
 self.addEventListener('message', (event) => {

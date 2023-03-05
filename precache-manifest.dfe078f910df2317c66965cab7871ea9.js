@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf568a50db72d39f959953218b9a82d5",
+    "revision": "1684ee4f51e105542268a5ddc4029aa7",
     "url": "/b2c-scoring-app/index.html"
   },
   {
-    "revision": "5d7a0977b3074b3ed81a",
+    "revision": "d34204ebf4b8d42e3e7c",
     "url": "/b2c-scoring-app/static/css/main.237695af.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/b2c-scoring-app/static/js/2.beb624b8.chunk.js"
   },
   {
-    "revision": "5d7a0977b3074b3ed81a",
-    "url": "/b2c-scoring-app/static/js/main.3fa377fc.chunk.js"
+    "revision": "d34204ebf4b8d42e3e7c",
+    "url": "/b2c-scoring-app/static/js/main.4ea27999.chunk.js"
   },
   {
     "revision": "4c510cdaf42cb5e26508",
