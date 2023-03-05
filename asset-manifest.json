@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/b2c-scoring-app/static/css/main.237695af.chunk.css",
-    "main.js": "/b2c-scoring-app/static/js/main.22ff4e8b.chunk.js",
-    "main.js.map": "/b2c-scoring-app/static/js/main.22ff4e8b.chunk.js.map",
+    "main.js": "/b2c-scoring-app/static/js/main.1c404e57.chunk.js",
+    "main.js.map": "/b2c-scoring-app/static/js/main.1c404e57.chunk.js.map",
     "runtime~main.js": "/b2c-scoring-app/static/js/runtime~main.325a5b79.js",
     "runtime~main.js.map": "/b2c-scoring-app/static/js/runtime~main.325a5b79.js.map",
-    "static/js/2.8ed12980.chunk.js": "/b2c-scoring-app/static/js/2.8ed12980.chunk.js",
-    "static/js/2.8ed12980.chunk.js.map": "/b2c-scoring-app/static/js/2.8ed12980.chunk.js.map",
+    "static/js/2.beb624b8.chunk.js": "/b2c-scoring-app/static/js/2.beb624b8.chunk.js",
+    "static/js/2.beb624b8.chunk.js.map": "/b2c-scoring-app/static/js/2.beb624b8.chunk.js.map",
     "index.html": "/b2c-scoring-app/index.html",
-    "precache-manifest.3a2e477d83a4681bdeb3dfa49577a23e.js": "/b2c-scoring-app/precache-manifest.3a2e477d83a4681bdeb3dfa49577a23e.js",
+    "precache-manifest.cc2ecabfeefa0f1fd0cbdf0650807a6d.js": "/b2c-scoring-app/precache-manifest.cc2ecabfeefa0f1fd0cbdf0650807a6d.js",
     "service-worker.js": "/b2c-scoring-app/service-worker.js",
     "static/css/main.237695af.chunk.css.map": "/b2c-scoring-app/static/css/main.237695af.chunk.css.map"
   }
