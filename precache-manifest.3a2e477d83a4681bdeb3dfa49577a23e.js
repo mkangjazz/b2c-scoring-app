@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "639a22a1a187d65cf66d44d792759a7b",
+    "revision": "09e57404bae4768068094aebd0e57c6f",
     "url": "/b2c-scoring-app/index.html"
   },
   {
