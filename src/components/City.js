@@ -170,7 +170,7 @@ function City(props) {
         shopIcons.push(
           <div 
             className="css-icon-container"
-            key={`shop-{i}`}
+            key={`group-${index}-shop-${i}`}
           >
             <span className="shop"></span>
           </div>
