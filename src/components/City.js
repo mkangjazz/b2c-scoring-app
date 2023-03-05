@@ -138,7 +138,7 @@ function City(props) {
                   <img
                     alt={`${str} icon`}
                     key={`${str}-${index}`}
-                    src={utility.prependWithPublicUrl(`/img/icon-tavern-${str}.png`)}
+                    src={utility.prependWithPublicUrl(`./img/icon-tavern-${str}.png`)}
                   />
                 </div>
               ))}
@@ -221,7 +221,7 @@ function City(props) {
 									<img 
                     alt="Factory icon" 
                     className="image-tile-icon" 
-                    src={utility.prependWithPublicUrl('/img/tile-factory.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-factory.gif')} 
                   />
 									<span>Factory</span>
 								</button>
@@ -236,7 +236,7 @@ function City(props) {
                               <img 
                                 className='image-medal-icon' 
                                 alt='Gold medal' 
-                                src={utility.prependWithPublicUrl('/img/icon-gold.gif')} 
+                                src={utility.prependWithPublicUrl('./img/icon-gold.gif')} 
                               />
                                 Most
                           </React.Fragment>
@@ -247,7 +247,7 @@ function City(props) {
                               <img 
                                 className='image-medal-icon' 
                                 alt='Silver medal' 
-                                src={utility.prependWithPublicUrl('/img/icon-silver.gif')} 
+                                src={utility.prependWithPublicUrl('./img/icon-silver.gif')} 
                               />
                                 Second-Most
                           </React.Fragment>
@@ -275,7 +275,7 @@ function City(props) {
                   <img 
                     alt="Office icon" 
                     className="image-tile-icon" 
-                    src={utility.prependWithPublicUrl('/img/tile-office.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-office.gif')} 
                   />
                   <span>Office</span>
                 </button>
@@ -299,7 +299,7 @@ function City(props) {
                   <img 
                     alt="House icon"
                     className="image-tile-icon"
-                    src={utility.prependWithPublicUrl('/img/tile-house.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-house.gif')} 
                   />
                   <span>House</span>
                 </button>
@@ -324,7 +324,7 @@ function City(props) {
                   <img 
                     alt="Park icon" 
                     className="image-tile-icon" 
-                    src={utility.prependWithPublicUrl('/img/tile-park.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-park.gif')} 
                   />
                   <span>Park</span>
                 </button>
@@ -348,7 +348,7 @@ function City(props) {
                   <img 
                     alt="Shop icon" 
                     className="image-tile-icon" 
-                    src={utility.prependWithPublicUrl('/img/tile-shop.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-shop.gif')} 
                   />
                   <span>Shop</span>
                 </button>
@@ -372,7 +372,7 @@ function City(props) {
                   <img 
                     alt="Tavern icon" 
                     className="image-tile-icon" 
-                    src={utility.prependWithPublicUrl('/img/tile-tavern-drink.gif')} 
+                    src={utility.prependWithPublicUrl('./img/tile-tavern-drink.gif')} 
                   />
                   <span>Tavern</span>
                 </button>
@@ -403,7 +403,7 @@ function City(props) {
         <img
           alt={`${cityData.token} icon`}
           className="image-city-token"
-          src={`/img/token-${cityData.token}.gif`}
+          src={`./img/token-${cityData.token}.gif`}
         />
 
         {cityData.name}
