@@ -13,7 +13,7 @@ function Tile(props){
 				<img 
 					alt={`${props.tileToken} icon`} 
 					className="image-tile-icon" 
-					src={utility.prependWithPublicUrl(`./img/tile-${props.tileToken}.gif`)}
+					src={utility.prependWithPublicUrl(`/img/tile-${props.tileToken}.gif`)}
 				/>
 				{utility.getNameFromToken(props.tileToken)}
 			</button>

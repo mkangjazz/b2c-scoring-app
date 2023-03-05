@@ -9,7 +9,7 @@ function CitySummary(props){
 				<img 
 					alt={`${props.token} icon`} 
 					className="image-city-token"
-					src={utility.prependWithPublicUrl(`./img/token-${props.token}.gif`)}
+					src={utility.prependWithPublicUrl(`/img/token-${props.token}.gif`)}
 				/>
 				<h3>
 					{props.name}
