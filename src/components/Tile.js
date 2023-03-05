@@ -10,7 +10,11 @@ function Tile(props){
 				data-tile-token={utility.specificToGenericToken(props.tileToken)}
 				type="button"
 			>
-				<img alt={`${props.tileToken} icon`} className="image-tile-icon" src={`/img/tile-${props.tileToken}.gif`} />
+				<img 
+					alt={`${props.tileToken} icon`} 
+					className="image-tile-icon" 
+					src={utility.prependWithPublicUrl(`./img/tile-${props.tileToken}.gif`)}
+				/>
 				{utility.getNameFromToken(props.tileToken)}
 			</button>
 		</li>

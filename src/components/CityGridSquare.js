@@ -22,7 +22,10 @@ function CityGridSquare(props) {
 				data-tile-token={props.type}
 				data-number={props.number} data-city={props.city}
 			>
-				{imgSrc !== '' ? <img alt={`icon`} className="image-tile-icon" src={`/img/icon-${imgSrc}-white.png`} /> : ''}
+				{imgSrc !== '' 
+					? <img alt={`icon`} className="image-tile-icon" src={utility.prependWithPublicUrl(`/img/icon-${imgSrc}-white.png`)} /> 
+					: null
+				}
 
 				{props.type ? <span>{utility.getNameFromToken(props.type)}</span> : "—"} {props.typeSpecial ? `${utility.getNameFromToken(props.typeSpecial)}` : "" }
 			</button>

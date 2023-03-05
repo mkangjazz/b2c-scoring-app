@@ -403,7 +403,7 @@ function City(props) {
         <img
           alt={`${cityData.token} icon`}
           className="image-city-token"
-          src={`./img/token-${cityData.token}.gif`}
+          src={utility.prependWithPublicUrl(`./img/token-${cityData.token}.gif`)}
         />
 
         {cityData.name}
