@@ -76,7 +76,7 @@ function City(props) {
     const rows = [];
     for (let i = 0; i < offices; i += 1) {
       rows.push(
-        <tr>
+        <tr key={`office-${i}`}>
           <td>
             <div className="css-icon-container">
               <span className="office"></span>
