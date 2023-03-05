@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
+import utility from '../js/utility';
 
 function City(props) {
 	var urlParams = new URLSearchParams(props.location.search);
@@ -137,7 +138,7 @@ function City(props) {
                   <img
                     alt={`${str} icon`}
                     key={`${str}-${index}`}
-                    src={`/img/icon-tavern-${str}.png`}
+                    src={utility.prependWithPublicUrl(`/img/icon-tavern-${str}.png`)}
                   />
                 </div>
               ))}
@@ -217,7 +218,11 @@ function City(props) {
 									className='city-score-legend'
 									type='button'
 								>
-									<img alt="Factory icon" className="image-tile-icon" src='img/tile-factory.gif' />
+									<img 
+                    alt="Factory icon" 
+                    className="image-tile-icon" 
+                    src={utility.prependWithPublicUrl('/img/tile-factory.gif')} 
+                  />
 									<span>Factory</span>
 								</button>
 							</td>
@@ -228,13 +233,23 @@ function City(props) {
                       <td>
                         {score.factoryMultiplier === 4 
                           ? <React.Fragment>
-                              <img className='image-medal-icon' alt='Gold medal' src='img/icon-gold.gif' /> Most
+                              <img 
+                                className='image-medal-icon' 
+                                alt='Gold medal' 
+                                src={utility.prependWithPublicUrl('/img/icon-gold.gif')} 
+                              />
+                                Most
                           </React.Fragment>
                           : null
                         }
                         {score.factoryMultiplier === 3 
                           ? <React.Fragment>
-                              <img className='image-medal-icon' alt='Silver medal' src='img/icon-silver.gif' /> Second-Most
+                              <img 
+                                className='image-medal-icon' 
+                                alt='Silver medal' 
+                                src={utility.prependWithPublicUrl('/img/icon-silver.gif')} 
+                              />
+                                Second-Most
                           </React.Fragment>
                           : null
                         }
@@ -257,7 +272,11 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Office icon" className="image-tile-icon" src='img/tile-office.gif' />
+                  <img 
+                    alt="Office icon" 
+                    className="image-tile-icon" 
+                    src={utility.prependWithPublicUrl('/img/tile-office.gif')} 
+                  />
                   <span>Office</span>
                 </button>
 							</td>
@@ -277,7 +296,11 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="House icon" className="image-tile-icon" src='img/tile-house.gif' />
+                  <img 
+                    alt="House icon"
+                    className="image-tile-icon"
+                    src={utility.prependWithPublicUrl('/img/tile-house.gif')} 
+                  />
                   <span>House</span>
                 </button>
 							</td>
@@ -298,7 +321,11 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Park icon" className="image-tile-icon" src='img/tile-park.gif' />
+                  <img 
+                    alt="Park icon" 
+                    className="image-tile-icon" 
+                    src={utility.prependWithPublicUrl('/img/tile-park.gif')} 
+                  />
                   <span>Park</span>
                 </button>
 							</td>
@@ -318,7 +345,11 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Shop icon" className="image-tile-icon" src='img/tile-shop.gif' />
+                  <img 
+                    alt="Shop icon" 
+                    className="image-tile-icon" 
+                    src={utility.prependWithPublicUrl('/img/tile-shop.gif')} 
+                  />
                   <span>Shop</span>
                 </button>
 							</td>
@@ -338,7 +369,11 @@ function City(props) {
                   className='city-score-legend'
                   type='button'
                 >
-                  <img alt="Tavern icon" className="image-tile-icon" src='img/tile-tavern-drink.gif' />
+                  <img 
+                    alt="Tavern icon" 
+                    className="image-tile-icon" 
+                    src={utility.prependWithPublicUrl('/img/tile-tavern-drink.gif')} 
+                  />
                   <span>Tavern</span>
                 </button>
 							</td>

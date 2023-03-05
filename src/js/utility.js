@@ -1,4 +1,8 @@
 var utility = (function(){
+  function prependWithPublicUrl(src){
+    return process.env.PUBLIC_URL + src;
+  }
+
 	function convertNumberTo5x5Coordinates(number){
 		var o = {
 			x: number%5
@@ -139,6 +143,7 @@ var utility = (function(){
   }
 
   return {
+    prependWithPublicUrl,
     convertNumberTo5x5Coordinates,
     convertNumberTo4x4Coordinates,
     getAdjacentTiles: getAdjacentTiles,
