@@ -5,7 +5,7 @@ function officesNextToTaverns(tiles){
     var count = [];
 
     for(let i = 0; i < offices.length; i++) {
-        var adjacentTiles = utility.getAdjacentTiles(tiles, offices[i], true);
+        var adjacentTiles = utility.getAdjacentTiles(tiles, offices[i], false);
         
         if(adjacentTiles.length > 0){
             var adjacentFactories = adjacentTiles.filter(obj => obj["type"] === 'tavern');
