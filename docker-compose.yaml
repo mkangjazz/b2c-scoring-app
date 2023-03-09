@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+    b2c:
+        build:
+            context: ./
+            dockerfile: b2c.dockerfile
+        ports: 
+            - "3000:3000"
+     
