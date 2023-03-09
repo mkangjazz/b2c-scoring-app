@@ -7,4 +7,5 @@ services:
             dockerfile: b2c.dockerfile
         ports: 
             - "3000:3000"
-     
+        volumes:
+            - ./src:/src
