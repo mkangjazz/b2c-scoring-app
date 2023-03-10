@@ -13,6 +13,7 @@ import './css/modal.css';
 import './css/social-links.css';
 import './css/scoring-guide.css';
 import './css/typography.css';
+import './css/webcam.css';
 
 import React, {Component} from 'react';
 import { HashRouter as Router, Route } from "react-router-dom";
@@ -31,6 +32,7 @@ class App extends Component {
       tiles: betweenTwoCitiesSetup.tileTypes,
       game: betweenTwoCitiesSetup.game,
       isSelectTileModalVisible: false,
+      isWebcamVisible: false,
       showCityTiles: true,
       tileToUpdate: null,
     };
@@ -42,6 +44,7 @@ class App extends Component {
     this.updateSetupData = this.updateSetupData.bind(this);
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
+    this.toggleWebcam = this.toggleWebcam.bind(this);
   }
 
   handleShowCityTiles(){
@@ -66,6 +69,13 @@ class App extends Component {
         number: number,
       },
       isSelectTileModalVisible: true
+    });
+  }
+
+  toggleWebcam(isVisible) {
+    console.log("toggling")
+    this.setState({
+      isWebcamVisible: isVisible
     });
   }
 
@@ -134,10 +144,12 @@ class App extends Component {
                   cities={this.state.cities}
                   showCityTiles={this.state.showCityTiles}
                   chooseTile={this.chooseTile}
+                  isWebcamVisible={this.state.isWebcamVisible}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
+                  toggleWebcam={this.toggleWebcam}
                   {...props}
                 />
               }
