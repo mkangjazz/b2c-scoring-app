@@ -23,7 +23,8 @@ function WebcamView(props) {
     const capture = React.useCallback(
         (props) => {
           const imageSrc = videoElement.current.getScreenshot();
-          console.log(imageSrc)
+          const splitImg = imageSrc.split(",");
+          props.handleCameraClick(splitImg[1]);
           stopCam();
           props.toggleWebcam(false)
         },
@@ -40,6 +41,7 @@ function WebcamView(props) {
         <div className='modal-wrapper'>
             <div className='webcam'>
                 <Webcam
+                    screenshotQuality={0.5}
                     audio={false}
                     height={windowDimensions.height}
                     ref={videoElement}

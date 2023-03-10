@@ -22,6 +22,7 @@ import calculateScore from "./js/calculateScore";
 import BetweenTwoCities from "./components/BetweenTwoCities";
 import City from "./components/City";
 import CitySummary from "./components/CitySummary";
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -48,11 +49,13 @@ class App extends Component {
     this.handleCameraClick = this.handleCameraClick.bind(this);
   }
 
-  handleCameraClick() {
+  async handleCameraClick(image) {
+    console.log(image);
     var list = document.getElementsByClassName('city-grid')[0];
     var items = list.getElementsByTagName('li')
 
-    var rows = {"gridRows":[{"rowIndex":0,"columnIndex":0,"itemName":"Office"},{"rowIndex":0,"columnIndex":1,"itemName":"Park"},{"rowIndex":0,"columnIndex":2,"itemName":"House"},{"rowIndex":0,"columnIndex":3,"itemName":"Tavern-Bed"},{"rowIndex":1,"columnIndex":0,"itemName":"Shop"},{"rowIndex":1,"columnIndex":1,"itemName":"Tavern-Drink"},{"rowIndex":1,"columnIndex":2,"itemName":"Shop"},{"rowIndex":1,"columnIndex":3,"itemName":"Factory"},{"rowIndex":2,"columnIndex":0,"itemName":"Tavern-Food"},{"rowIndex":2,"columnIndex":1,"itemName":"Park"},{"rowIndex":2,"columnIndex":2,"itemName":"Shop"},{"rowIndex":2,"columnIndex":3,"itemName":"House"},{"rowIndex":3,"columnIndex":0,"itemName":"Factory"},{"rowIndex":3,"columnIndex":1,"itemName":"Office"},{"rowIndex":3,"columnIndex":2,"itemName":"Office"},{"rowIndex":3,"columnIndex":3,"itemName":"Park"}]}
+    var rows = await this.roboflowPredict(image);
+    // var rows = {"gridRows":[{"rowIndex":0,"columnIndex":0,"itemName":"Office"},{"rowIndex":0,"columnIndex":1,"itemName":"Park"},{"rowIndex":0,"columnIndex":2,"itemName":"House"},{"rowIndex":0,"columnIndex":3,"itemName":"Tavern-Bed"},{"rowIndex":1,"columnIndex":0,"itemName":"Shop"},{"rowIndex":1,"columnIndex":1,"itemName":"Tavern-Drink"},{"rowIndex":1,"columnIndex":2,"itemName":"Shop"},{"rowIndex":1,"columnIndex":3,"itemName":"Factory"},{"rowIndex":2,"columnIndex":0,"itemName":"Tavern-Food"},{"rowIndex":2,"columnIndex":1,"itemName":"Park"},{"rowIndex":2,"columnIndex":2,"itemName":"Shop"},{"rowIndex":2,"columnIndex":3,"itemName":"House"},{"rowIndex":3,"columnIndex":0,"itemName":"Factory"},{"rowIndex":3,"columnIndex":1,"itemName":"Office"},{"rowIndex":3,"columnIndex":2,"itemName":"Office"},{"rowIndex":3,"columnIndex":3,"itemName":"Park"}]}
 
     for(var i = 0; i < items.length; i++)
     {
@@ -63,6 +66,19 @@ class App extends Component {
       this.updateSetupData(cameraResponse.itemName.toLowerCase().split('-')[0], cameraResponse.itemName.toLowerCase().split('-')[1], city, number);
     }
   }
+
+  async roboflowPredict(image) {
+    const payload = {image}
+    return await axios({
+        method: "POST",
+        url: "http://localhost:9000/2015-03-31/functions/function/invocations",
+        data: payload,
+        headers: { 
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        }
+    });
+}
 
   handleShowCityTiles(){
     this.setState({

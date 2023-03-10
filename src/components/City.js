@@ -443,7 +443,9 @@ function City(props) {
       }
 
       {props.isWebcamVisible === false ? 
-        null : <WebcamView toggleWebcam={props.toggleWebcam}/>
+        null : <WebcamView 
+          toggleWebcam={props.toggleWebcam}
+          handleCameraClick={props.handleCameraClick}/>
       }
 
 			{props.isSelectTileModalVisible === false ? null :
