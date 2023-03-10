@@ -3,19 +3,29 @@ import Webcam from 'react-webcam';
 
 function WebcamView(props) {
     const videoElement = useRef(null);
+    
+    const getWindowDimensions = () => {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+          width,
+          height
+        };
+    }
+
+    const windowDimensions = getWindowDimensions()
 
     const videoConstraints = {
-        width: 640,
-        height: 480,
+        width: windowDimensions.width,
+        height: windowDimensions.height,
         facingMode: "user"
     }
 
     const capture = React.useCallback(
-        (params) => {
+        (props) => {
           const imageSrc = videoElement.current.getScreenshot();
           console.log(imageSrc)
           stopCam();
-          params.toggleWebcam(false)
+          props.toggleWebcam(false)
         },
         [videoElement]
       );
@@ -25,15 +35,6 @@ function WebcamView(props) {
         const tracks = stream.getTracks();
         tracks.forEach(track => track.stop());
     }
-
-    const getWindowDimensions = () => {
-        const { innerWidth: width, innerHeight: height } = window;
-        return {
-          width,
-          height
-        };
-    }
-    const windowDimensions = getWindowDimensions()
 
     return (
         <div className='modal-wrapper'>
