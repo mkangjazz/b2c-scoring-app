@@ -428,6 +428,11 @@ function City(props) {
         >
           Scores
         </button>
+        <button
+          className='camera'
+          onClick={props.handleCameraClick}
+          type='button'
+        >Capture Board</button>
       </div>
 
       {props.showCityTiles

@@ -42,6 +42,23 @@ class App extends Component {
     this.updateSetupData = this.updateSetupData.bind(this);
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
+    this.handleCameraClick = this.handleCameraClick.bind(this);
+  }
+
+  handleCameraClick() {
+    var list = document.getElementsByClassName('city-grid')[0];
+    var items = list.getElementsByTagName('li')
+
+    var rows = {"gridRows":[{"rowIndex":0,"columnIndex":0,"itemName":"Office"},{"rowIndex":0,"columnIndex":1,"itemName":"Park"},{"rowIndex":0,"columnIndex":2,"itemName":"House"},{"rowIndex":0,"columnIndex":3,"itemName":"Tavern-Bed"},{"rowIndex":1,"columnIndex":0,"itemName":"Shop"},{"rowIndex":1,"columnIndex":1,"itemName":"Tavern-Drink"},{"rowIndex":1,"columnIndex":2,"itemName":"Shop"},{"rowIndex":1,"columnIndex":3,"itemName":"Factory"},{"rowIndex":2,"columnIndex":0,"itemName":"Tavern-Food"},{"rowIndex":2,"columnIndex":1,"itemName":"Park"},{"rowIndex":2,"columnIndex":2,"itemName":"Shop"},{"rowIndex":2,"columnIndex":3,"itemName":"House"},{"rowIndex":3,"columnIndex":0,"itemName":"Factory"},{"rowIndex":3,"columnIndex":1,"itemName":"Office"},{"rowIndex":3,"columnIndex":2,"itemName":"Office"},{"rowIndex":3,"columnIndex":3,"itemName":"Park"}]}
+
+    for(var i = 0; i < items.length; i++)
+    {
+      var button = items[i].getElementsByTagName('button')[0];
+      var number = button.getAttribute('data-number');
+      var city = button.getAttribute('data-city');
+      var cameraResponse = rows.gridRows[number];
+      this.updateSetupData(cameraResponse.itemName.toLowerCase().split('-')[0], cameraResponse.itemName.toLowerCase().split('-')[1], city, number);
+    }
   }
 
   handleShowCityTiles(){
@@ -88,7 +105,6 @@ class App extends Component {
   updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber){
     var targetCity = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken);
     var targetTile = targetCity[0].tiles[tileNumber];
-
     targetTile["type"] = tileType;
     targetTile["typeSpecial"] = tileTypeSpecial;
 
@@ -138,6 +154,7 @@ class App extends Component {
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
+                  handleCameraClick={this.handleCameraClick}
                   {...props}
                 />
               }
