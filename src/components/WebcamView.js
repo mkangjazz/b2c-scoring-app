@@ -17,7 +17,7 @@ function WebcamView(props) {
     const videoConstraints = {
         width: windowDimensions.width,
         height: windowDimensions.height,
-        facingMode: "user"
+        facingMode: "environment"
     }
 
     const capture = React.useCallback(
@@ -43,14 +43,12 @@ function WebcamView(props) {
                 <Webcam
                     screenshotQuality={0.8}
                     audio={false}
-                    height={windowDimensions.height}
                     ref={videoElement}
                     screenshotFormat="image/jpeg"
-                    width={windowDimensions.width}
                     videoConstraints={videoConstraints}
                 />
-                <div className='city-buttons'>
-                    <button type="button" onClick={() => capture(props)}>Capture Photo</button>
+                <div className='webcam-button-container'>
+                    <button className="webcam-capture" type="button" onClick={() => capture(props)}>Capture Photo</button>
                 </div>
             </div>
         </div>
