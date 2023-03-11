@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
 import utility from '../js/utility';
+import WebcamView from './WebcamView';
 
 function City(props) {
 	var urlParams = new URLSearchParams(props.location.search);
@@ -428,11 +429,23 @@ function City(props) {
         >
           Scores
         </button>
+        <button
+          onClick={() => props.toggleWebcam(true)}
+          type='button'
+        >
+          Take Photo
+        </button>
       </div>
 
       {props.showCityTiles
         ? drawCityGrid(cityData.tiles)
         : drawScores(cityData.score)
+      }
+
+      {props.isWebcamVisible === false ? 
+        null : <WebcamView 
+          toggleWebcam={props.toggleWebcam}
+          handleCameraClick={props.handleCameraClick}/>
       }
 
 			{props.isSelectTileModalVisible === false ? null :

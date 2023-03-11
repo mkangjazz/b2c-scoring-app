@@ -13,6 +13,7 @@ import './css/modal.css';
 import './css/social-links.css';
 import './css/scoring-guide.css';
 import './css/typography.css';
+import './css/webcam.css';
 
 import React, {Component} from 'react';
 import { HashRouter as Router, Route } from "react-router-dom";
@@ -21,6 +22,7 @@ import calculateScore from "./js/calculateScore";
 import BetweenTwoCities from "./components/BetweenTwoCities";
 import City from "./components/City";
 import CitySummary from "./components/CitySummary";
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -31,6 +33,7 @@ class App extends Component {
       tiles: betweenTwoCitiesSetup.tileTypes,
       game: betweenTwoCitiesSetup.game,
       isSelectTileModalVisible: false,
+      isWebcamVisible: false,
       showCityTiles: true,
       tileToUpdate: null,
     };
@@ -42,7 +45,38 @@ class App extends Component {
     this.updateSetupData = this.updateSetupData.bind(this);
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
+    this.toggleWebcam = this.toggleWebcam.bind(this);
+    this.handleCameraClick = this.handleCameraClick.bind(this);
   }
+
+  async handleCameraClick(image) {
+    
+    var list = document.getElementsByClassName('city-grid')[0];
+    var items = list.getElementsByTagName('li')
+
+    var rows = await this.roboflowPredict(image);
+    
+    for(var i = 0; i < items.length; i++)
+    {
+      var button = items[i].getElementsByTagName('button')[0];
+      var number = button.getAttribute('data-number');
+      var city = button.getAttribute('data-city');
+      var cameraResponse = rows.data.gridRows[number];
+      var itemName = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[0] : null;
+      var itemSpecial = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[1] : null;
+
+      this.updateSetupData(itemName,itemSpecial, city, number);
+    }
+  }
+
+  async roboflowPredict(image) {
+    const payload = {image}
+    return await axios({
+        method: "POST",
+        url: "https://aqco4tv2c5.execute-api.us-east-1.amazonaws.com/staging",
+        data: payload
+    });
+}
 
   handleShowCityTiles(){
     this.setState({
@@ -69,6 +103,12 @@ class App extends Component {
     });
   }
 
+  toggleWebcam(isVisible) {
+    this.setState({
+      isWebcamVisible: isVisible
+    });
+  }
+
   hideSelectTileModal(){
     this.setState({
       tileToUpdate: null,
@@ -88,7 +128,6 @@ class App extends Component {
   updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber){
     var targetCity = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken);
     var targetTile = targetCity[0].tiles[tileNumber];
-
     targetTile["type"] = tileType;
     targetTile["typeSpecial"] = tileTypeSpecial;
 
@@ -134,10 +173,13 @@ class App extends Component {
                   cities={this.state.cities}
                   showCityTiles={this.state.showCityTiles}
                   chooseTile={this.chooseTile}
+                  isWebcamVisible={this.state.isWebcamVisible}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
+                  toggleWebcam={this.toggleWebcam}
+                  handleCameraClick={this.handleCameraClick}
                   {...props}
                 />
               }

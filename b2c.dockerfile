@@ -1,6 +1,6 @@
-FROM node:12.10.0
+FROM node:16.19.1
 
 COPY . .
-RUN npm install
+RUN npm install --save --legacy-peer-deps
 
 ENTRYPOINT [ "npm", "start" ]
