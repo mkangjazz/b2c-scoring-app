@@ -50,20 +50,22 @@ class App extends Component {
   }
 
   async handleCameraClick(image) {
-    console.log(image);
+    
     var list = document.getElementsByClassName('city-grid')[0];
     var items = list.getElementsByTagName('li')
 
     var rows = await this.roboflowPredict(image);
-    // var rows = {"gridRows":[{"rowIndex":0,"columnIndex":0,"itemName":"Office"},{"rowIndex":0,"columnIndex":1,"itemName":"Park"},{"rowIndex":0,"columnIndex":2,"itemName":"House"},{"rowIndex":0,"columnIndex":3,"itemName":"Tavern-Bed"},{"rowIndex":1,"columnIndex":0,"itemName":"Shop"},{"rowIndex":1,"columnIndex":1,"itemName":"Tavern-Drink"},{"rowIndex":1,"columnIndex":2,"itemName":"Shop"},{"rowIndex":1,"columnIndex":3,"itemName":"Factory"},{"rowIndex":2,"columnIndex":0,"itemName":"Tavern-Food"},{"rowIndex":2,"columnIndex":1,"itemName":"Park"},{"rowIndex":2,"columnIndex":2,"itemName":"Shop"},{"rowIndex":2,"columnIndex":3,"itemName":"House"},{"rowIndex":3,"columnIndex":0,"itemName":"Factory"},{"rowIndex":3,"columnIndex":1,"itemName":"Office"},{"rowIndex":3,"columnIndex":2,"itemName":"Office"},{"rowIndex":3,"columnIndex":3,"itemName":"Park"}]}
-
+    
     for(var i = 0; i < items.length; i++)
     {
       var button = items[i].getElementsByTagName('button')[0];
       var number = button.getAttribute('data-number');
       var city = button.getAttribute('data-city');
-      var cameraResponse = rows.gridRows[number];
-      this.updateSetupData(cameraResponse.itemName.toLowerCase().split('-')[0], cameraResponse.itemName.toLowerCase().split('-')[1], city, number);
+      var cameraResponse = rows.data.gridRows[number];
+      var itemName = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[0] : null;
+      var itemSpecial = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[1] : null;
+
+      this.updateSetupData(itemName,itemSpecial, city, number);
     }
   }
 
@@ -71,12 +73,8 @@ class App extends Component {
     const payload = {image}
     return await axios({
         method: "POST",
-        url: "http://localhost:9000/2015-03-31/functions/function/invocations",
-        data: payload,
-        headers: { 
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        }
+        url: "https://aqco4tv2c5.execute-api.us-east-1.amazonaws.com/staging",
+        data: payload
     });
 }
 
@@ -106,7 +104,6 @@ class App extends Component {
   }
 
   toggleWebcam(isVisible) {
-    console.log("toggling")
     this.setState({
       isWebcamVisible: isVisible
     });

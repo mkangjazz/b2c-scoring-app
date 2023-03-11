@@ -41,7 +41,7 @@ function WebcamView(props) {
         <div className='modal-wrapper'>
             <div className='webcam'>
                 <Webcam
-                    screenshotQuality={0.5}
+                    screenshotQuality={0.8}
                     audio={false}
                     height={windowDimensions.height}
                     ref={videoElement}
