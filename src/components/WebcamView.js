@@ -26,7 +26,8 @@ function WebcamView(props) {
           const splitImg = imageSrc.split(",");
           props.handleCameraClick(splitImg[1]);
           stopCam();
-          props.toggleWebcam(false)
+          props.toggleWebcam(false);
+          props.toggleLoading(true);
         },
         [videoElement]
       );

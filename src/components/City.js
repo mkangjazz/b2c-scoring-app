@@ -4,6 +4,8 @@ import CityGridSquare from "./CityGridSquare";
 import TileSelect from "./TileSelect";
 import utility from '../js/utility';
 import WebcamView from './WebcamView';
+import LoadingOverlay from 'react-loading-overlay';
+
 
 function City(props) {
 	var urlParams = new URLSearchParams(props.location.search);
@@ -437,13 +439,20 @@ function City(props) {
         </button>
       </div>
 
-      {props.showCityTiles
-        ? drawCityGrid(cityData.tiles)
-        : drawScores(cityData.score)
-      }
+      <LoadingOverlay
+        active={props.isLoading}
+        spinner
+        text='Processing image ...'
+      >
+        {props.showCityTiles
+          ? drawCityGrid(cityData.tiles)
+          : drawScores(cityData.score)
+        }
+      </LoadingOverlay>
 
       {props.isWebcamVisible === false ? 
         null : <WebcamView 
+          toggleLoading={props.toggleLoading}
           toggleWebcam={props.toggleWebcam}
           handleCameraClick={props.handleCameraClick}/>
       }

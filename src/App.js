@@ -36,6 +36,7 @@ class App extends Component {
       isWebcamVisible: false,
       showCityTiles: true,
       tileToUpdate: null,
+      isLoading: false
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -46,6 +47,7 @@ class App extends Component {
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
     this.toggleWebcam = this.toggleWebcam.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
     this.handleCameraClick = this.handleCameraClick.bind(this);
   }
 
@@ -55,6 +57,7 @@ class App extends Component {
     var items = list.getElementsByTagName('li')
 
     var rows = await this.roboflowPredict(image);
+    this.toggleLoading(false);
     
     for(var i = 0; i < items.length; i++)
     {
@@ -64,7 +67,7 @@ class App extends Component {
       var cameraResponse = rows.data.gridRows[number];
       var itemName = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[0] : null;
       var itemSpecial = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[1] : null;
-
+    
       this.updateSetupData(itemName,itemSpecial, city, number);
     }
   }
@@ -107,6 +110,12 @@ class App extends Component {
     this.setState({
       isWebcamVisible: isVisible
     });
+  }
+
+  toggleLoading(isLoading) {
+    this.setState({
+      isLoading
+    })
   }
 
   hideSelectTileModal(){
@@ -174,11 +183,13 @@ class App extends Component {
                   showCityTiles={this.state.showCityTiles}
                   chooseTile={this.chooseTile}
                   isWebcamVisible={this.state.isWebcamVisible}
+                  isLoading={this.state.isLoading}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
                   toggleWebcam={this.toggleWebcam}
+                  toggleLoading={this.toggleLoading}
                   handleCameraClick={this.handleCameraClick}
                   {...props}
                 />
