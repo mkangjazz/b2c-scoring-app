@@ -81,3 +81,14 @@ button {
 .nowrap {
 	white-space: nowrap;
 }
+
+.message-area {
+	color: #ffffff;
+	background-color: #17A2B8;
+	text-align: center;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px;
+	margin-bottom: 1em;
+}
