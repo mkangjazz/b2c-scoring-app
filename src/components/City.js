@@ -437,6 +437,8 @@ function City(props) {
         </button>
       </div>
 
+      {props.unidentifiedTiles > 0 ? <div className='message-area'>Identified {props.identifiedTiles} of 16 tiles.</div> : null }
+
       {props.showCityTiles
         ? drawCityGrid(cityData.tiles)
         : drawScores(cityData.score)
