@@ -37,7 +37,8 @@ class App extends Component {
       showCityTiles: true,
       tileToUpdate: null,
       unidentifiedTiles: 0,
-      identifiedTiles: 0
+      identifiedTiles: 0,
+      isLoading: false
     };
 
     this.renderCitySummaries = this.renderCitySummaries.bind(this);
@@ -48,6 +49,7 @@ class App extends Component {
     this.handleShowCityTiles = this.handleShowCityTiles.bind(this);
     this.handleShowCityScores = this.handleShowCityScores.bind(this);
     this.toggleWebcam = this.toggleWebcam.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
     this.handleCameraClick = this.handleCameraClick.bind(this);
   }
 
@@ -58,7 +60,8 @@ class App extends Component {
     var rows = await this.roboflowPredict(image);
     var unidentified = 0;
     var identified = 0;
-
+    this.toggleLoading(false);
+    
     for(var i = 0; i < items.length; i++)
     {
       var button = items[i].getElementsByTagName('button')[0];
@@ -127,6 +130,12 @@ class App extends Component {
     });
   }
 
+  toggleLoading(isLoading) {
+    this.setState({
+      isLoading
+    })
+  }
+
   hideSelectTileModal(){
     this.setState({
       tileToUpdate: null,
@@ -192,11 +201,13 @@ class App extends Component {
                   showCityTiles={this.state.showCityTiles}
                   chooseTile={this.chooseTile}
                   isWebcamVisible={this.state.isWebcamVisible}
+                  isLoading={this.state.isLoading}
                   handleShowCityScores={this.handleShowCityScores}
                   handleShowCityTiles={this.handleShowCityTiles}
                   showSelectTileModal={this.showSelectTileModal}
                   hideSelectTileModal={this.hideSelectTileModal}
                   toggleWebcam={this.toggleWebcam}
+                  toggleLoading={this.toggleLoading}
                   handleCameraClick={this.handleCameraClick}
                   unidentifiedTiles={this.state.unidentifiedTiles}
                   identifiedTiles={this.state.identifiedTiles}
