@@ -439,11 +439,15 @@ function City(props) {
         </button>
       </div>
 
+
+      {props.unidentifiedTiles > 0 && !props.isLoading ? <div className='message-area'>Identified {props.identifiedTiles} of 16 tiles.</div> : null }
+
       <LoadingOverlay
         active={props.isLoading}
         spinner
         text='Processing image ...'
       >
+
         {props.showCityTiles
           ? drawCityGrid(cityData.tiles)
           : drawScores(cityData.score)

@@ -64,3 +64,7 @@
 .city-grid .tavern {
 	background-color: #962e31;
 }
+
+.city-grid .unidentified-tile {
+	background: repeating-linear-gradient(45deg,#FF7900,#FF7900 10px,#8B4000 10px,#8B4000 20px);
+}

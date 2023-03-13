@@ -36,6 +36,8 @@ class App extends Component {
       isWebcamVisible: false,
       showCityTiles: true,
       tileToUpdate: null,
+      unidentifiedTiles: 0,
+      identifiedTiles: 0,
       isLoading: false
     };
 
@@ -55,7 +57,6 @@ class App extends Component {
     
     var list = document.getElementsByClassName('city-grid')[0];
     var items = list.getElementsByTagName('li')
-
     var rows = await this.roboflowPredict(image);
     this.toggleLoading(false);
     
@@ -67,9 +68,14 @@ class App extends Component {
       var cameraResponse = rows.data.gridRows[number];
       var itemName = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[0] : null;
       var itemSpecial = cameraResponse.itemName ? cameraResponse.itemName.toLowerCase().split('-')[1] : null;
-    
+
       this.updateSetupData(itemName,itemSpecial, city, number);
     }
+
+    this.setState({
+      unidentifiedTiles: rows.data.gridRows.filter(x => x.itemName == null).length,
+      identifiedTiles:  rows.data.gridRows.filter(x => x.itemName != null).length
+    });
   }
 
   async roboflowPredict(image) {
@@ -137,7 +143,7 @@ class App extends Component {
   updateSetupData(tileType, tileTypeSpecial, tileCityToken, tileNumber){
     var targetCity = betweenTwoCitiesSetup.cities.filter(obj => obj["token"] === tileCityToken);
     var targetTile = targetCity[0].tiles[tileNumber];
-    targetTile["type"] = tileType;
+    targetTile["type"] = tileType ? tileType : 'unidentified-tile';
     targetTile["typeSpecial"] = tileTypeSpecial;
 
     calculateScore(betweenTwoCitiesSetup.cities);
@@ -191,6 +197,8 @@ class App extends Component {
                   toggleWebcam={this.toggleWebcam}
                   toggleLoading={this.toggleLoading}
                   handleCameraClick={this.handleCameraClick}
+                  unidentifiedTiles={this.state.unidentifiedTiles}
+                  identifiedTiles={this.state.identifiedTiles}
                   {...props}
                 />
               }
