@@ -24,3 +24,45 @@
 	padding: 2em;
 	border-radius: 5px;
 }
+
+.webcam-view-box-container {
+	position: absolute;
+	z-index: 1000;
+	left: 0;
+	right: 0;
+	bottom: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 300px;
+	border: 3px solid red;
+}
+
+.video {
+	object-fit: cover;	
+	height: 100%;
+	width: 100%;
+}
+
+
+@media(max-width: 1800px) {
+	.webcam-view-box-container {
+		height: 650px;
+		width: 650px;
+	}
+}
+
+@media(max-width: 415px) {
+	.webcam-view-box-container {
+		height: 300px;
+		width: 300px;
+		bottom: 300px;
+	}
+}
+
+@media(min-width: 2000px) {
+	.webcam-view-box-container {
+		height: 1000px;
+		width: 1000px;
+	}
+}

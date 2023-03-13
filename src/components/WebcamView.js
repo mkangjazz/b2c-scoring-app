@@ -47,7 +47,9 @@ function WebcamView(props) {
                     ref={videoElement}
                     screenshotFormat="image/jpeg"
                     videoConstraints={videoConstraints}
+                    className="video"
                 />
+                <div className="webcam-view-box-container"></div>
                 <div className='webcam-button-container'>
                     <button className="webcam-capture" type="button" onClick={() => capture(props)}>Capture Photo</button>
                 </div>
