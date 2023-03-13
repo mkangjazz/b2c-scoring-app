@@ -52,7 +52,7 @@
 	}
 }
 
-@media(max-width: 415px) {
+@media(max-width: 600px) {
 	.webcam-view-box-container {
 		height: 300px;
 		width: 300px;
